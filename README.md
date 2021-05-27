@@ -9,7 +9,7 @@ Passky-Website is a client that communicate with Passky-Server. It works the sam
 
 ## Installation
 #### Passky.org
-1. You can just visit https://passky.org
+1. You can manage passwords right thru https://passky.org website
 #### Self-hosted
 1. Drag and drop all files to public_html folder (Root folder of your domain or sub-domain) on your hosting provider
 2. Now you can visit your domain and you would see Passky login page
