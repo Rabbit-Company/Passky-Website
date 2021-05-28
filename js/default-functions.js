@@ -22,6 +22,13 @@ function validEmail(mail){
     return new RegExp(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/).test(mail);
 }
 
+function check_login(){
+    if(sessionStorage.url == null && typeof(sessionStorage.url) == 'undefined') window.location.href = 'index.html';
+    if(sessionStorage.username == null && typeof(sessionStorage.username) == 'undefined') window.location.href = 'index.html';
+    if(sessionStorage.password == null && typeof(sessionStorage.password) == 'undefined') window.location.href = 'index.html';
+    if(sessionStorage.passwords == null && typeof(sessionStorage.passwords) == 'undefined') window.location.href = 'index.html';
+}
+
 function animateButton(id, enabled){
     if(enabled){
         document.getElementById(id + "-color").className = "bg-indigo-600 pointer-events-none absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200";
@@ -45,7 +52,7 @@ function toggleMenu(){
 function copyToClipboard(text){
     let textArea = document.createElement("textarea");
     textArea.value = text;
-    
+
     textArea.style.top = 0;
     textArea.style.left = 0;
     textArea.style.position = "fixed";
@@ -167,12 +174,12 @@ function refreshPasswords(){
 
         if(xhr.readyState === 4){
             if(xhr.status != 200) return;
-            
+
             const json = JSON.parse(xhr.responseText);
 
             if(typeof json['error'] === 'undefined') return;
             if(json['error'] != 0 && json['error'] != 8) return;
-            
+
             if(json['error'] == 0){
                 sessionStorage.passwords = JSON.stringify(json['passwords']);
             }else{
@@ -184,13 +191,6 @@ function refreshPasswords(){
 
     };
     xhr.send("");
-}
-
-function check_login(){
-    if(sessionStorage.url == null && typeof(sessionStorage.url) == 'undefined') window.location.href = 'index.html';
-    if(sessionStorage.username == null && typeof(sessionStorage.username) == 'undefined') window.location.href = 'index.html';
-    if(sessionStorage.password == null && typeof(sessionStorage.password) == 'undefined') window.location.href = 'index.html';
-    if(sessionStorage.passwords == null && typeof(sessionStorage.passwords) == 'undefined') window.location.href = 'index.html';
 }
 
 function logout(){
