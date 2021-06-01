@@ -176,6 +176,22 @@ function isPasswordPasswordValid(password){
     return true;
 }
 
+function randRange(min, max) {
+    var range = max - min;
+    var requestBytes = Math.ceil(Math.log2(range) / 8);
+    if (!requestBytes) return min;
+    
+    var maxNum = Math.pow(256, requestBytes);
+    var ar = new Uint8Array(requestBytes);
+
+    while (true) {
+        window.crypto.getRandomValues(ar);
+        var val = 0;
+        for (var i = 0;i < requestBytes;i++) val = (val << 8) + ar[i];
+        if (val < maxNum - maxNum % range) return min + (val % range);
+    }
+}
+
 function refreshPasswords(){
     var xhr = new XMLHttpRequest();
     xhr.open("POST", localStorage.url + "/?action=getPasswords");
