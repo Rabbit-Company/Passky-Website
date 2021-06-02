@@ -50,17 +50,32 @@ function toggleMenu(){
 }
 
 function changeTheme(){
-    if(localStorage.theme == 0){
-        document.getElementById("css-theme").href = "css/themes/light.css";
-        document.getElementById("theme-link").innerText = "Theme (Light)";
-        document.getElementById("theme-link-mobile").innerText = "Theme (Light)";
-        localStorage.theme = 1;
-    }else{
-        document.getElementById("css-theme").href = "css/themes/dark.css";
-        document.getElementById("theme-link").innerText = "Theme (Dark)";
-        document.getElementById("theme-link-mobile").innerText = "Theme (Dark)";
-        localStorage.theme = 0;
+    switch(localStorage.theme){
+        case "dark":
+            document.getElementById("css-theme").href = "css/themes/light.css";
+            document.getElementById("theme-link").innerText = lang[localStorage.lang]["theme"] + " (Light)";
+            document.getElementById("theme-link-mobile").innerText = lang[localStorage.lang]["theme"] + " (Light)";
+            localStorage.theme = "light";
+        break;
+        default:
+            document.getElementById("css-theme").href = "css/themes/dark.css";
+            document.getElementById("theme-link").innerText = lang[localStorage.lang]["theme"] + " (Dark)";
+            document.getElementById("theme-link-mobile").innerText = lang[localStorage.lang]["theme"] + " (Dark)";
+            localStorage.theme = "dark";
+        break;
     }
+}
+
+function changeLanguage(){
+    switch(localStorage.lang){
+        case "en":
+            localStorage.lang = "sl";
+        break;
+        default:
+            localStorage.lang = "en";
+        break;
+    }
+    location.reload();
 }
 
 function copyToClipboard(text){
@@ -78,33 +93,6 @@ function copyToClipboard(text){
     document.execCommand('copy');
 
     document.body.removeChild(textArea);
-}
-
-const errors = {
-    "0": "Successful",
-    "1": "Username is invalid!",
-    "2": "Password is incorrect!",
-    "3": "Something went wrong while inserting data to database!",
-    "4": "Username is already registered!",
-    "5": "Password must be between 8 and 255 characters long and have at least one letter, one number and one special character!",
-    "6": "Email is invalid!",
-    "7": "Username doesn't exist!",
-    "8": "You don't have any saved password.",
-    "9": "Domain is invalid!",
-    "10": "User does not own this password!",
-    "11": "Something went wrong while deleting data from database!",
-    "12": "Username must be between 6 and 30 characters long and can only contains letters, numbers and dots!",
-    "13": "Something went wrong while updating data in database!",
-    "14": "Json is invalid!",
-    "15": "This server can't accept more users!",
-    "16": "You have reached maximum amount of stored passwords!",
-    "400": "Action was not provided in POST!",
-    "401": "Action is invalid!",
-    "403": "You didn't provide all required values in POST.",
-    "404": "Can't connect into API.",
-    "429": "You are sending too many requests! Please wait some time before executing this action.",
-    "505": "Something went wrong while connecting to database!",
-    "999": "You don't have permission to use this endpoint."
 }
 
 function downloadTxt(exportTxt, exportName){
