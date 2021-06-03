@@ -22,13 +22,6 @@ function validEmail(mail){
     return new RegExp(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/).test(mail);
 }
 
-function check_login(){
-    if(localStorage.url == null || typeof(localStorage.url) == 'undefined') window.location.href = 'index.html';
-    if(localStorage.username == null || typeof(localStorage.username) == 'undefined') window.location.href = 'index.html';
-    if(localStorage.password == null || typeof(localStorage.password) == 'undefined') window.location.href = 'index.html';
-    if(localStorage.passwords == null || typeof(localStorage.passwords) == 'undefined') window.location.href = 'index.html';
-}
-
 function animateButton(id, enabled){
     if(enabled){
         document.getElementById(id + "-color").className = "quaternaryBackgroundColor pointer-events-none absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200";
@@ -69,6 +62,9 @@ function changeTheme(){
 function changeLanguage(){
     switch(localStorage.lang){
         case "en":
+            localStorage.lang = "nl";
+        break;
+        case "nl":
             localStorage.lang = "sl";
         break;
         default:
@@ -199,7 +195,9 @@ function refreshPasswords(){
             if(json['error'] != 0 && json['error'] != 8) return;
 
             if(json['error'] == 0){
-                localStorage.passwords = JSON.stringify(json['passwords']);
+                let passwords = json['passwords'];
+                for(let i = 0; i < passwords.length; i++) passwords[i].password = CryptoJS.AES.decrypt(passwords[i].password, localStorage.password).toString(CryptoJS.enc.Utf8);
+                localStorage.passwords = JSON.stringify(passwords);
             }else{
                 localStorage.passwords = "{}";
             }
@@ -211,8 +209,21 @@ function refreshPasswords(){
     xhr.send("");
 }
 
-function logout(){
+function clearStorage(){
     delete localStorage.password;
     delete localStorage.passwords;
+    delete localStorage.loginTime;
+}
+
+function isSessionValid(){
+    if(localStorage.url == null || typeof(localStorage.url) == 'undefined' || localStorage.username == null || typeof(localStorage.username) == 'undefined' || localStorage.password == null || typeof(localStorage.password) == 'undefined' || localStorage.passwords == null || typeof(localStorage.passwords) == 'undefined' || localStorage.loginTime == null || typeof(localStorage.loginTime) == 'undefined' || ((parseFloat(localStorage.loginTime) + 1200000)) < new Date().getTime()){
+        clearStorage();
+        return false;
+    }
+    return true;
+}
+
+function logout(){
+    clearStorage();
     window.location.href = 'index.html';
 }

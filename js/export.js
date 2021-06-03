@@ -1,4 +1,4 @@
-check_login();
+if(!isSessionValid()) window.location.href = 'index.html';
 
 document.getElementById("passwords-link").innerText = lang[localStorage.lang]["passwords"];
 document.getElementById("import-export-link").innerText = lang[localStorage.lang]["import_export"];
@@ -20,6 +20,10 @@ switch(localStorage.theme){
 }
 
 switch(localStorage.lang){
+    case "nl":
+        document.getElementById("lang-link").innerText = "Language (Dutch)";
+        document.getElementById("lang-link-mobile").innerText = "Language (Dutch)";
+    break;
     case "sl":
         document.getElementById("lang-link").innerText = "Language (Slovenian)";
         document.getElementById("lang-link-mobile").innerText = "Language (Slovenian)";
@@ -51,15 +55,15 @@ document.getElementById("dialog-button-cancel").innerText = lang[localStorage.la
 
 function import_passky(){
 
-    check_login();
+    if(!isSessionValid()) window.location.href = 'index.html';
 
-    let import_data = document.getElementById("import-data").value;
-    if(!isJsonValid(import_data)){
+    let imported_data = document.getElementById("import-data").value;
+    if(!isJsonValid(imported_data)){
         changeDialog(2, 1, 0);
         return;
     }
 
-    let ido = JSON.parse(import_data);
+    let ido = JSON.parse(imported_data);
 
     if(ido["encrypted"] == null || typeof(ido["encrypted"]) == 'undefined'){
         changeDialog(2, 1, 0);
@@ -83,7 +87,7 @@ function import_passky(){
         let duplicated = false;
         const current_passwords = JSON.parse(localStorage.passwords);
         for(let k = 0; k < current_passwords.length; k++){
-            if(current_passwords[k]["website"] == website && current_passwords[k]["username"] == username && CryptoJS.AES.decrypt(current_passwords[k]["password"], localStorage.password).toString(CryptoJS.enc.Utf8) == password){
+            if(current_passwords[k]["website"] == website && current_passwords[k]["username"] == username && current_passwords[k]["password"] == password){
                 duplicated = true;
                 break;
             }
@@ -102,10 +106,13 @@ function import_passky(){
 
 function backup_passky(){
 
-    check_login();
+    if(!isSessionValid()) window.location.href = 'index.html';
 
     let passwords = JSON.parse(localStorage.passwords);
-    for(let i = 0; i < passwords.length; i++) delete passwords[i]['id'];
+    for(let i = 0; i < passwords.length; i++){
+        delete passwords[i]['id'];
+        passwords[i]['password'] = CryptoJS.AES.encrypt(passwords[i]['password'], localStorage.password).toString();
+    }
 
     let backup_passky = { encrypted : true, passwords : passwords };
 
@@ -114,13 +121,10 @@ function backup_passky(){
 
 function export_passky(){
 
-    check_login();
+    if(!isSessionValid()) window.location.href = 'index.html';
 
     let passwords = JSON.parse(localStorage.passwords);
-    for(let i = 0; i < passwords.length; i++){
-        delete passwords[i]['id'];
-        passwords[i]['password'] = CryptoJS.AES.decrypt(passwords[i]['password'], localStorage.password).toString(CryptoJS.enc.Utf8);
-    }
+    for(let i = 0; i < passwords.length; i++) delete passwords[i]['id'];
 
     let export_passky = { encrypted : false, passwords : passwords };
 
@@ -129,7 +133,7 @@ function export_passky(){
 
 function import_lastpass(){
 
-    check_login();
+    if(!isSessionValid()) window.location.href = 'index.html';
 
     let ido = document.getElementById("import-data").value.split('\n');
 
@@ -149,7 +153,7 @@ function import_lastpass(){
         let duplicated = false;
         const current_passwords = JSON.parse(localStorage.passwords);
         for(let k = 0; k < current_passwords.length; k++){
-            if(current_passwords[k]["website"] == website && current_passwords[k]["username"] == username && CryptoJS.AES.decrypt(current_passwords[k]["password"], localStorage.password).toString(CryptoJS.enc.Utf8) == password){
+            if(current_passwords[k]["website"] == website && current_passwords[k]["username"] == username && current_passwords[k]["password"] == password){
                 duplicated = true;
                 break;
             }
@@ -168,12 +172,12 @@ function import_lastpass(){
 
 function export_lastpass(){
 
-    check_login();
+    if(!isSessionValid()) window.location.href = 'index.html';
 
     let export_data = "url,username,password,totp,extra,name,grouping,fav";
     let passwords = JSON.parse(localStorage.passwords);
     for(let i = 0; i < passwords.length; i++){
-        export_data += "\n" + passwords[i]["website"] + "," + passwords[i]["username"] + "," + CryptoJS.AES.decrypt(passwords[i]["password"], localStorage.password).toString(CryptoJS.enc.Utf8) + ",,," + passwords[i]["website"] + ",,0";
+        export_data += "\n" + passwords[i]["website"] + "," + passwords[i]["username"] + "," + passwords[i]["password"] + ",,," + passwords[i]["website"] + ",,0";
     }
 
     downloadTxt(export_data, "lastpass_" + getDate(new Date()));
@@ -181,7 +185,7 @@ function export_lastpass(){
 
 function import_bitwarden(){
 
-    check_login();
+    if(!isSessionValid()) window.location.href = 'index.html';
 
     let imported_data = document.getElementById("import-data").value;
     if(!isJsonValid(imported_data)){
@@ -217,7 +221,7 @@ function import_bitwarden(){
         let duplicated = false;
         const current_passwords = JSON.parse(localStorage.passwords);
         for(let k = 0; k < current_passwords.length; k++){
-            if(current_passwords[k]["website"] == website && current_passwords[k]["username"] == username && CryptoJS.AES.decrypt(current_passwords[k]["password"], localStorage.password).toString(CryptoJS.enc.Utf8) == password){
+            if(current_passwords[k]["website"] == website && current_passwords[k]["username"] == username && current_passwords[k]["password"] == password){
                 duplicated = true;
                 break;
             }

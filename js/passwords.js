@@ -1,3 +1,5 @@
+if(!isSessionValid()) window.location.href = 'index.html';
+
 document.getElementById("passwords-link").innerText = lang[localStorage.lang]["passwords"];
 document.getElementById("import-export-link").innerText = lang[localStorage.lang]["import_export"];
 document.getElementById("signout-link").innerText = lang[localStorage.lang]["signout"];
@@ -18,6 +20,10 @@ switch(localStorage.theme){
 }
 
 switch(localStorage.lang){
+    case "nl":
+        document.getElementById("lang-link").innerText = "Language (Dutch)";
+        document.getElementById("lang-link-mobile").innerText = "Language (Dutch)";
+    break;
     case "sl":
         document.getElementById("lang-link").innerText = "Language (Slovenian)";
         document.getElementById("lang-link-mobile").innerText = "Language (Slovenian)";
@@ -70,16 +76,14 @@ function displayPasswords(){
         document.getElementById("table-data").innerHTML = html_passwords;
 
         for(let i = 0; i < passwords.length; i++){
-
-            const decrypted_password = CryptoJS.AES.decrypt(passwords[i].password, localStorage.password).toString(CryptoJS.enc.Utf8);
-            const data = passwords[i].id + " " + passwords[i].website + " " + passwords[i].username + " " + decrypted_password;
+            const data = passwords[i].id + " " + passwords[i].website + " " + passwords[i].username + " " + passwords[i].password;
 
             document.getElementById("copy-username-" + passwords[i].id).addEventListener("click", () => {
                 copyToClipboard(passwords[i].username);
             });
 
             document.getElementById("copy-password-" + passwords[i].id).addEventListener("click", () => {
-                copyToClipboard(decrypted_password);
+                copyToClipboard(passwords[i].password);
             });
 
             document.getElementById("edit-password-" + passwords[i].id).addEventListener("click", () => {
@@ -362,7 +366,7 @@ function changeDialog(style, text){
 }
 
 function addPassword(){
-    check_login();
+    if(!isSessionValid()) window.location.href = 'index.html';
 
     const website = document.getElementById("website").value;
     const username = document.getElementById("username").value;
@@ -437,7 +441,7 @@ function addPassword(){
 }
 
 function editPassword(password_id){
-    check_login();
+    if(!isSessionValid()) window.location.href = 'index.html';
 
     const website = document.getElementById("website").value;
     const username = document.getElementById("username").value;

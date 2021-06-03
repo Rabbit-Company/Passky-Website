@@ -1,4 +1,4 @@
-if(localStorage.url !== null && typeof(localStorage.url) !== 'undefined' && localStorage.username !== null && typeof(localStorage.username) !== 'undefined' && localStorage.password !== null && typeof(localStorage.password) !== 'undefined' && localStorage.passwords !== null && typeof(localStorage.passwords) !== 'undefined') window.location.href = 'passwords.html';
+if(isSessionValid()) window.location.href = 'passwords.html';
 
 if(localStorage.url !== null && typeof(localStorage.url) !== 'undefined') document.getElementById('passky-server').value = localStorage.url;
 if(localStorage.username !== null && typeof(localStorage.username) !== 'undefined') document.getElementById('username').value = localStorage.username;
@@ -77,7 +77,9 @@ function onBtnClick(){
             }
 
             if(json['error'] == 0){
-                localStorage.passwords = JSON.stringify(json['passwords']);
+                let passwords = json['passwords'];
+                for(let i = 0; i < passwords.length; i++) passwords[i].password = CryptoJS.AES.decrypt(passwords[i].password, password).toString(CryptoJS.enc.Utf8);
+                localStorage.passwords = JSON.stringify(passwords);
             }else{
                 localStorage.passwords = "{}";
             }
@@ -85,6 +87,7 @@ function onBtnClick(){
             localStorage.url = url;
             localStorage.username = username;
             localStorage.password = password;
+            localStorage.loginTime = new Date().getTime();
 
             window.location.href = 'passwords.html';
         }
