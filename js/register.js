@@ -4,10 +4,11 @@ document.getElementById("passky-server").placeholder = lang[localStorage.lang]["
 document.getElementById("username").placeholder = lang[localStorage.lang]["username"];
 document.getElementById("email").placeholder = lang[localStorage.lang]["email"];
 document.getElementById("password").placeholder = lang[localStorage.lang]["password"];
+document.getElementById("tos").innerText = lang[localStorage.lang]["terms_of_service"];
 document.getElementById("btn-dialog").innerText = lang[localStorage.lang]["okay"];
 document.getElementById("error-dialog-modal-title").innerText = lang[localStorage.lang]["error"];
 document.getElementById("btn_signup").innerText = lang[localStorage.lang]["signup"];
-document.getElementById("already_have_account_link").innerText = lang[localStorage.lang]["already_have_account_link"];
+document.getElementById("btn_signin").innerText = lang[localStorage.lang]["signin"];
 
 document.getElementById("signup-form").addEventListener("submit", e => {
     e.preventDefault();
@@ -16,6 +17,10 @@ document.getElementById("signup-form").addEventListener("submit", e => {
 
 document.getElementById("btn-dialog").addEventListener("click", () => {
     hide('error-dialog');
+});
+
+document.getElementById("btn_signin").addEventListener("click", () => {
+    window.location.href = "index.html";
 });
 
 function onBtnClick(){
