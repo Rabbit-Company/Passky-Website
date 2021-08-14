@@ -156,13 +156,14 @@ function login_check(){
             localStorage.url = url;
             localStorage.username = username;
             localStorage.password = password;
+            localStorage.secret = json['secret'];
             localStorage.loginTime = new Date().getTime();
 
             window.location.href = 'passwords.html';
         }
 
     };
-    xhr.send("otp=" + otp);
+    xhr.send("otp=" + encodeURIComponent(otp));
 }
 
 function forget_username(){
@@ -217,5 +218,5 @@ function forget_username(){
         }
 
     };
-    xhr.send("email=" + email);
+    xhr.send("email=" + encodeURIComponent(email));
 }

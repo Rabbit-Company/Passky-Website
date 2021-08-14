@@ -425,7 +425,7 @@ function addPassword(){
         }
 
     };
-    xhr.send("website=" + encodeURIComponent(website) + "&username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password) + "&message=" + encodeURIComponent(message));
+    xhr.send("website=" + encodeURIComponent(website) + "&username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password) + "&message=" + encodeURIComponent(message) + "&otp=" + encodeURIComponent(localStorage.secret));
 }
 
 function editPassword(password_id){
@@ -504,7 +504,7 @@ function editPassword(password_id){
         }
 
     };
-    xhr.send("password_id=" + encodeURIComponent(password_id) + "&website=" + encodeURIComponent(website) + "&username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password) + "&message=" + encodeURIComponent(message));
+    xhr.send("password_id=" + encodeURIComponent(password_id) + "&website=" + encodeURIComponent(website) + "&username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password) + "&message=" + encodeURIComponent(message) + "&otp=" + encodeURIComponent(localStorage.secret));
 }
 
 function deletePassword(password_id){
@@ -539,7 +539,7 @@ function deletePassword(password_id){
         }
 
     };
-    xhr.send("password_id=" + encodeURIComponent(password_id));
+    xhr.send("password_id=" + encodeURIComponent(password_id) + "&otp=" + encodeURIComponent(localStorage.secret));
 }
 
 function filterPasswords(){

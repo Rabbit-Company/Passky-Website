@@ -23,12 +23,48 @@ document.getElementById("settings-lang").value = localStorage.lang;
 document.getElementById("settings-theme").value = localStorage.theme;
 document.getElementById("settings-session").value = localStorage.sessionDuration;
 
+if(localStorage.secret.length > 10){
+    document.getElementById("toggle-2fa-btn").innerText = "Disable";
+    document.getElementById("toggle-2fa-btn").className = "dangerButton font-bold inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md focus:outline-none sm:text-sm";
+}else{
+    document.getElementById("toggle-2fa-btn").innerText = "Enable";
+    document.getElementById("toggle-2fa-btn").className = "successButton font-bold inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md focus:outline-none sm:text-sm";
+}
+
 let minutes = document.getElementsByClassName("addMinutes");
 for(let i = 0; i < minutes.length; i++) minutes[i].innerText = minutes[i].innerText + " " + lang[localStorage.lang]["minutes"];
 
 function deleteAccount(){
     var xhr = new XMLHttpRequest();
     xhr.open("POST", localStorage.url + "/?action=deleteAccount");
+
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.setRequestHeader("Authorization", "Basic " + btoa(localStorage.username + ":" + sha512(localStorage.password)));
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange = function () {
+
+        if(xhr.readyState === 4){
+            if(xhr.status != 200) return;
+            
+            const json = JSON.parse(xhr.responseText);
+
+            if(json['error'] != 0){
+                changeDialog(2, errors[localStorage.lang][json['error']]);
+                show('dialog');
+                return;
+            }
+            
+            logout();
+        }
+
+    };
+    xhr.send("otp=" + encodeURIComponent(localStorage.secret));
+}
+
+function enable2fa(){
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", localStorage.url + "/?action=enable2fa");
 
     xhr.setRequestHeader("Accept", "application/json");
     xhr.setRequestHeader("Authorization", "Basic " + btoa(localStorage.username + ":" + sha512(localStorage.password)));
@@ -40,15 +76,58 @@ function deleteAccount(){
             if(xhr.status != 200) return;
             
             const json = JSON.parse(xhr.responseText);
-
-            if(typeof json['error'] === 'undefined') return;
-            if(json['error'] != 0) return;
             
-            logout();
+            if(json['error'] != 0){
+                changeDialog(2, errors[localStorage.lang][json['error']]);
+                show('dialog');
+                return;
+            }
+
+            let codes = json['codes'].split(';');
+            let backupCodes = "<ul>";
+            for(let i = 0; i < codes.length; i += 2){
+                backupCodes += "<li>" + codes[i] + " " + codes[i+1] + "</li>";
+            }
+            backupCodes += "</ul>";
+
+            let html = "Scan QR Code: <div style='padding: 20px; background-color: white;'><div id='qrcode'></div></div> or enter secret code manually: <b>" + json['secret'] + "</b></br>Backup codes: <b>" + backupCodes + "</b>";
+
+            changeDialog(3, html);
+            new QRCode(document.getElementById("qrcode"), json['qrcode']);
+            show('dialog');
         }
 
     };
-    xhr.send("");
+    xhr.send();
+}
+
+function disable2fa(){
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", localStorage.url + "/?action=disable2fa");
+
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.setRequestHeader("Authorization", "Basic " + btoa(localStorage.username + ":" + sha512(localStorage.password)));
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange = function () {
+
+        if(xhr.readyState === 4){
+            if(xhr.status != 200) return;
+            
+            const json = JSON.parse(xhr.responseText);
+            
+            if(json['error'] != 0){
+                changeDialog(2, errors[localStorage.lang][json['error']]);
+                show('dialog');
+                return;
+            }
+
+            localStorage.secret = false;
+            location.reload();
+        }
+
+    };
+    xhr.send("otp=" + encodeURIComponent(localStorage.secret));
 }
 
 function changeDialog(style, text){
@@ -66,6 +145,34 @@ function changeDialog(style, text){
             document.getElementById('dialog-button').className = "dangerButton inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium focus:outline-none sm:w-auto sm:text-sm";
             document.getElementById('dialog-button').innerText = lang[localStorage.lang]["delete"];
             document.getElementById('dialog-button').onclick = () => deleteAccount();
+        break;
+        case 2:
+            //Error dialog
+            document.getElementById('dialog-icon').className = "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10";
+            document.getElementById('dialog-icon').innerHTML = "<svg class='h-6 w-6 text-red-600' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' aria-hidden='true'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z' /></svg>";
+    
+            document.getElementById('dialog-title').innerText = lang[localStorage.lang]["error"];
+            document.getElementById('dialog-text').innerText = text;
+    
+            document.getElementById('dialog-button-cancel').style.display = 'none';
+
+            document.getElementById('dialog-button').className = "dangerButton inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium focus:outline-none sm:w-auto sm:text-sm";
+            document.getElementById('dialog-button').innerText = lang[localStorage.lang]["okay"];
+            document.getElementById('dialog-button').onclick = () => hide("dialog");
+        break;
+        case 3:
+            //Enable 2fa dialog
+            document.getElementById('dialog-icon').className = "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10";
+            document.getElementById('dialog-icon').innerHTML = "<svg class='h-6 w-6 text-blue-600' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' aria-hidden='true'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><rect x='3' y='3' width='6' height='6' rx='1' /><rect x='15' y='15' width='6' height='6' rx='1' /><path d='M21 11v-3a2 2 0 0 0 -2 -2h-6l3 3m0 -6l-3 3' /><path d='M3 13v3a2 2 0 0 0 2 2h6l-3 -3m0 6l3 -3' /></svg>";
+
+            document.getElementById('dialog-title').innerText = "Two-Factor Authentication (2FA)";
+            document.getElementById('dialog-text').innerHTML = text;
+
+            document.getElementById('dialog-button-cancel').style.display = 'none';
+
+            document.getElementById('dialog-button').className = "dangerButton inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium focus:outline-none sm:w-auto sm:text-sm";
+            document.getElementById('dialog-button').innerText = lang[localStorage.lang]["signout"];
+            document.getElementById('dialog-button').onclick = () => logout();
         break;
     }
 }
@@ -104,4 +211,12 @@ document.getElementById("main-menu-toggle-btn").addEventListener("click", () => 
 
 document.getElementById("dialog-button-cancel").addEventListener("click", () => {
     hide('dialog');
+});
+
+document.getElementById("toggle-2fa-btn").addEventListener("click", () => {
+    if(localStorage.secret.length > 10){
+        disable2fa();
+    }else{
+        enable2fa();
+    }
 });

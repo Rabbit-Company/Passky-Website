@@ -155,7 +155,7 @@ function refreshPasswords(){
 
     xhr.setRequestHeader("Accept", "application/json");
     xhr.setRequestHeader("Authorization", "Basic " + btoa(localStorage.username + ":" + sha512(localStorage.password)));
-    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onreadystatechange = function () {
 
@@ -182,12 +182,13 @@ function refreshPasswords(){
         }
 
     };
-    xhr.send("");
+    xhr.send("otp=" + encodeURIComponent(localStorage.secret));
 }
 
 function clearStorage(){
     delete localStorage.password;
     delete localStorage.passwords;
+    delete localStorage.secret;
     delete localStorage.loginTime;
 }
 

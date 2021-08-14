@@ -194,10 +194,13 @@ function import_bitwarden(){
         if(website.slice(-1) == '/') website = website.slice(0, -1);
         let username = ido["items"][i]["login"]["username"];
         let password = ido["items"][i]["login"]["password"];
+        let message = ido["items"][i]["login"]["notes"];
+        if(message == null) message = "";
 
         if(!isPasswordWebsiteValid(website)) continue;
         if(!isPasswordUsernameValid(username)) continue;
         if(!isPasswordPasswordValid(password)) continue;
+        if(!isPasswordMessageValid(message)) continue;
 
         let duplicated = false;
         const current_passwords = JSON.parse(localStorage.passwords);
@@ -213,6 +216,7 @@ function import_bitwarden(){
         passwords[j]["website"] = website;
         passwords[j]["username"] = username;
         passwords[j]["password"] = CryptoJS.AES.encrypt(password, localStorage.password).toString();
+        passwords[j]["message"] = CryptoJS.AES.encrypt(message, localStorage.password).toString();
         j++;
     }
     import_data(passwords);
