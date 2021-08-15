@@ -190,7 +190,7 @@ function import_bitwarden(){
     for(let i = 0, j = 0; i < ido["items"].length; i++){
         if(ido["items"][i]["type"] != 1) continue;
 
-        let website = ido["items"][i]["name"];
+        let website = ido["items"][i]["name"].replace(" ", "-");
         if(typeof(ido["items"][i]["login"]["uris"]) != 'undefined' && typeof(ido["items"][i]["login"]["uris"][0]) != 'undefined' && typeof(ido["items"][i]["login"]["uris"][0]["uri"]) != 'undefined'){
             website = ido["items"][i]["login"]["uris"][0]["uri"];
         }
