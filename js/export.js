@@ -189,7 +189,7 @@ function import_bitwarden(){
     let passwords = [];
     for(let i = 0, j = 0; i < ido["items"].length; i++){
         if(ido["items"][i]["type"] != 1) continue;
-        if(typeof(ido["items"][i]["login"]["uris"]) == 'undefined') continue;
+        if(typeof(ido["items"][i]["login"]["uris"][0]["uri"]) == 'undefined') continue;
         
         let website = ido["items"][i]["login"]["uris"][0]["uri"].replace("http://", "").replace("https://", "").replace("www.", "");
         if(website.slice(-1) == '/') website = website.slice(0, -1);
