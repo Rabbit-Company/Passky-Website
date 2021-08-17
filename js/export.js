@@ -202,22 +202,10 @@ function import_bitwarden(){
         let message = ido["items"][i]["login"]["notes"];
         if(message == null) message = "";
 
-        if(!isPasswordWebsiteValid(website)){
-            console.log(i + ". Website: " + website);
-            continue;
-        }
-        if(!isPasswordUsernameValid(username)){
-            console.log(i + ". Username: " + username);
-            continue;
-        }
-        if(!isPasswordPasswordValid(password)){
-            console.log(i + ". Password: " + password);
-            continue;
-        }
-        if(!isPasswordMessageValid(message)){
-            console.log(i + ". Message: " + message);
-            continue;
-        }
+        if(!isPasswordWebsiteValid(website)) continue;
+        if(!isPasswordUsernameValid(username)) continue;
+        if(!isPasswordPasswordValid(password)) continue;
+        if(!isPasswordMessageValid(message)) continue;
 
         let duplicated = false;
         const current_passwords = JSON.parse(localStorage.passwords);
