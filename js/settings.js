@@ -24,10 +24,10 @@ document.getElementById("settings-theme").value = localStorage.theme;
 document.getElementById("settings-session").value = localStorage.sessionDuration;
 
 if(localStorage.secret.length > 10){
-    document.getElementById("toggle-2fa-btn").innerText = "Disable";
+    document.getElementById("toggle-2fa-btn").innerText = lang[localStorage.lang]["disable"];
     document.getElementById("toggle-2fa-btn").className = "dangerButton font-bold inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md focus:outline-none sm:text-sm";
 }else{
-    document.getElementById("toggle-2fa-btn").innerText = "Enable";
+    document.getElementById("toggle-2fa-btn").innerText = lang[localStorage.lang]["enable"];
     document.getElementById("toggle-2fa-btn").className = "successButton font-bold inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md focus:outline-none sm:text-sm";
 }
 
@@ -90,7 +90,7 @@ function enable2fa(){
             }
             backupCodes += "</ul>";
 
-            let html = "Scan QR Code: <div style='padding: 20px; background-color: white;'><div id='qrcode'></div></div> or enter secret code manually: <b>" + json['secret'] + "</b></br>Backup codes: <b>" + backupCodes + "</b>";
+            let html = "Scan QR Code: <div style='padding: 20px; background-color: white;'><div id='qrcode'></div></div> or enter key manually: <b>" + json['secret'] + "</b></br></br>Backup codes: <b>" + backupCodes + "</b>";
 
             changeDialog(3, html);
             new QRCode(document.getElementById("qrcode"), json['qrcode']);
