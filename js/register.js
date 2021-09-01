@@ -38,7 +38,7 @@ function onBtnClick(){
         return;
     }
 
-    if(!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,255}$/i.test(password)){
+    if(!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&,_\(\)\=\-\.])[A-Za-z\d@$!%*#?&,_\(\)\=\-\.]{8,255}$/i.test(password)){
         setText('error-dialog-modal-text', errors[localStorage.lang]["5"]);
         show('error-dialog');
         return;
@@ -101,5 +101,5 @@ function onBtnClick(){
         }
 
     };
-    xhr.send("email=" + email);
+    xhr.send("email=" + encodeURIComponent(email));
 }

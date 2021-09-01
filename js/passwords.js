@@ -48,7 +48,7 @@ function displayPasswords(){
         document.getElementById("table-data").innerHTML = html_passwords;
 
         for(let i = 0; i < passwords.length; i++){
-            const data = passwords[i].id + ";;" + passwords[i].website + ";;" + passwords[i].username + ";;" + passwords[i].password + ";;" + passwords[i].message;
+            const data = passwords[i].id + ";;;" + passwords[i].website + ";;;" + passwords[i].username + ";;;" + passwords[i].password + ";;;" + passwords[i].message;
 
             document.getElementById("copy-username-" + passwords[i].id).addEventListener("click", () => {
                 copyToClipboard(passwords[i].username);
@@ -191,7 +191,7 @@ function changeDialog(style, text){
         break;
         case 4:
             //Edit password dialog
-            const e_data = text.split(";;");
+            const e_data = text.split(";;;");
 
             document.getElementById('dialog-icon').className = "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10";
             document.getElementById('dialog-icon').innerHTML = "<svg class='h-6 w-6 text-blue-600' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' aria-hidden='true'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><circle cx='8' cy='15' r='4' /><line x1='10.85' y1='12.15' x2='19' y2='4' /><line x1='18' y1='5' x2='20' y2='7' /><line x1='15' y1='8' x2='17' y2='10' /></svg>";
@@ -211,7 +211,7 @@ function changeDialog(style, text){
         break;
         case 5:
             //Password Generator dialog
-            const pg_data = text.split(";;");
+            const pg_data = text.split(";;;");
 
             let btn_upper_enabled = true;
             let btn_numbers_enabled = true;
@@ -253,13 +253,13 @@ function changeDialog(style, text){
             }else if(pg_data[0] == "-1"){
                 document.getElementById('dialog-button').innerText = lang[localStorage.lang]["use"];
                 document.getElementById('dialog-button').onclick = () => {
-                    text = pg_data[0] + ";;" + pg_data[1] + ";;" + pg_data[2] + ";;" + document.getElementById('generated-password').innerText + ";;" + pg_data[4];
+                    text = pg_data[0] + ";;;" + pg_data[1] + ";;;" + pg_data[2] + ";;;" + document.getElementById('generated-password').innerText + ";;;" + pg_data[4];
                     changeDialog(0, text);
                 }
             }else{
                 document.getElementById('dialog-button').innerText = lang[localStorage.lang]["use"];
                 document.getElementById('dialog-button').onclick = () => {
-                    text = pg_data[0] + ";;" + pg_data[1] + ";;" + pg_data[2] + ";;" + document.getElementById('generated-password').innerText + ";;" + pg_data[4];
+                    text = pg_data[0] + ";;;" + pg_data[1] + ";;;" + pg_data[2] + ";;;" + document.getElementById('generated-password').innerText + ";;;" + pg_data[4];
                     changeDialog(4, text);
                 }
             }
@@ -322,7 +322,7 @@ function changeDialog(style, text){
             document.getElementById('dialog-button').onclick = () => addPassword();
 
             if(text != null){
-                const data = text.split(";;");
+                const data = text.split(";;;");
                 document.getElementById("website").value = data[1];
                 document.getElementById("username").value = data[2];
                 document.getElementById("password").value = data[3];
@@ -339,7 +339,7 @@ function changeDialog(style, text){
             
             document.getElementById('dialog-button-cancel').style.display = 'initial';
 
-            document.getElementById('btn-password-generator').onclick = () => changeDialog(5, "-1" + ";;" + document.getElementById("website").value + ";;" + document.getElementById("username").value + ";;" + document.getElementById("password").value + ";;" + document.getElementById("message").value);
+            document.getElementById('btn-password-generator').onclick = () => changeDialog(5, "-1" + ";;;" + document.getElementById("website").value + ";;;" + document.getElementById("username").value + ";;;" + document.getElementById("password").value + ";;;" + document.getElementById("message").value);
         break;
     }
 }
@@ -354,33 +354,18 @@ function addPassword(){
 
     if(website.length == 0 || username.length == 0 || password.length == 0) return;
 
-    if(!(username.length >= 3 && username.length <= 255) || username.includes(" ")){
+    if(!(username.length >= 3 && username.length <= 255)){
         changeDialog(2, lang[localStorage.lang]["username_validation"]);
         return;
     }
 
-    if(username.includes("'") || username.includes('"') || username.includes("\\")){
-        changeDialog(2, lang[localStorage.lang]["username_validation2"]);
-        return;
-    }
-
-    if(!(password.length >= 8 && password.length <= 255) || password.includes(" ")){
+    if(!(password.length >= 5 && password.length <= 255)){
         changeDialog(2, lang[localStorage.lang]["password_validation"]);
-        return;
-    }
-
-    if(password.includes("'") || password.includes('"') || password.includes("\\")){
-        changeDialog(2, lang[localStorage.lang]["password_validation2"]);
         return;
     }
 
     if(!(website.length >= 5 && website.length <= 255) || website.includes(" ")){
         changeDialog(2, lang[localStorage.lang]["website_validation"]);
-        return;
-    }
-
-    if(website.includes("'") || website.includes('"') || website.includes("\\")){
-        changeDialog(2, lang[localStorage.lang]["website_validation2"]);
         return;
     }
 
@@ -443,28 +428,13 @@ function editPassword(password_id){
         return;
     }
 
-    if(username.includes("'") || username.includes('"') || username.includes("\\")){
-        changeDialog(2, lang[localStorage.lang]["username_validation2"]);
-        return;
-    }
-
-    if(!(password.length >= 8 && password.length <= 255) || password.includes(" ")){
+    if(!(password.length >= 5 && password.length <= 255) || password.includes(" ")){
         changeDialog(2, lang[localStorage.lang]["password_validation"]);
-        return;
-    }
-
-    if(password.includes("'") || password.includes('"') || password.includes("\\")){
-        changeDialog(2, lang[localStorage.lang]["password_validation2"]);
         return;
     }
 
     if(!(website.length >= 5 && website.length <= 255) || website.includes(" ")){
         changeDialog(2, lang[localStorage.lang]["website_validation"]);
-        return;
-    }
-
-    if(website.includes("'") || website.includes('"') || website.includes("\\")){
-        changeDialog(2, lang[localStorage.lang]["website_validation2"]);
         return;
     }
 

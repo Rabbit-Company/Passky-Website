@@ -95,7 +95,7 @@ function login_check(){
         return;
     }
 
-    if(!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,255}$/i.test(password)){
+    if(!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&,_\(\)\=\-\.])[A-Za-z\d@$!%*#?&,_\(\)\=\-\.]{8,255}$/i.test(password)){
         changeDialog(1, errors[localStorage.lang]["5"]);
         show('dialog');
         return;
@@ -107,8 +107,8 @@ function login_check(){
         return;
     }
 
-    if(otp.length != 0 && otp.length != 6 && otp.length != 7){
-        changeDialog(1, "OTP contains 6 numbers.\nIf you did not setup 2FA on your account leave this field empty.");
+    if(otp.length != 0 && otp.length != 6){
+        changeDialog(1, lang[localStorage.lang]["otp_contains"] + "\n" + lang[localStorage.lang]["otp_not_setup"]);
         show('dialog');
         return;
     }

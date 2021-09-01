@@ -15,14 +15,14 @@ document.getElementById("passky-backup-btn-text").innerText = lang[localStorage.
 document.getElementById("passky-import-btn-text").innerText = lang[localStorage.lang]["import"];
 document.getElementById("lastpass-import-btn-text").innerText = lang[localStorage.lang]["import"];
 document.getElementById("bitwarden-import-btn-text").innerText = lang[localStorage.lang]["import"];
-document.getElementById("dashline-import-btn-text").innerText = lang[localStorage.lang]["import"];
+document.getElementById("dashlane-import-btn-text").innerText = lang[localStorage.lang]["import"];
 document.getElementById("onepassword-import-btn-text").innerText = lang[localStorage.lang]["import"];
 document.getElementById("keeper-import-btn-text").innerText = lang[localStorage.lang]["import"];
 document.getElementById("nordpass-import-btn-text").innerText = lang[localStorage.lang]["import"];
 
 document.getElementById("passky-export-btn-text").innerText = lang[localStorage.lang]["export"];
 document.getElementById("lastpass-export-btn-text").innerText = lang[localStorage.lang]["export"];
-document.getElementById("dashline-export-btn-text").innerText = lang[localStorage.lang]["export"];
+document.getElementById("dashlane-export-btn-text").innerText = lang[localStorage.lang]["export"];
 document.getElementById("onepassword-export-btn-text").innerText = lang[localStorage.lang]["export"];
 document.getElementById("keeper-export-btn-text").innerText = lang[localStorage.lang]["export"];
 document.getElementById("nordpass-export-btn-text").innerText = lang[localStorage.lang]["export"];
@@ -122,7 +122,7 @@ function import_lastpass(){
     for(let i = 1, j = 0; i < ido.length; i++){
         let data_line = ido[i].split(',');
         
-        let website = data_line[0].replace("http://", "").replace("https://", "").replace("www.", "");
+        let website = data_line[0].replace("http://", "").replace("https://", "").replace("www.", "").replace(" ", "-");
         if(website.slice(-1) == '/') website = website.slice(0, -1);
         let username = data_line[1];
         let password = data_line[2];
@@ -190,12 +190,12 @@ function import_bitwarden(){
     for(let i = 0, j = 0; i < ido["items"].length; i++){
         if(ido["items"][i]["type"] != 1) continue;
 
-        let website = ido["items"][i]["name"].replace(" ", "-");
+        let website = ido["items"][i]["name"];
         if(typeof(ido["items"][i]["login"]["uris"]) != 'undefined' && typeof(ido["items"][i]["login"]["uris"][0]) != 'undefined' && typeof(ido["items"][i]["login"]["uris"][0]["uri"]) != 'undefined'){
             website = ido["items"][i]["login"]["uris"][0]["uri"];
         }
         
-        website = website.replace("http://", "").replace("https://", "").replace("www.", "");
+        website = website.replace("http://", "").replace("https://", "").replace("www.", "").replace(" ", "-");
         if(website.slice(-1) == '/') website = website.slice(0, -1);
         let username = ido["items"][i]["login"]["username"];
         let password = ido["items"][i]["login"]["password"];

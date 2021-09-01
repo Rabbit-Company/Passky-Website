@@ -106,25 +106,19 @@ function getDate(date){
 
 function isPasswordWebsiteValid(website){
     if(website == null || typeof(website) == 'undefined') return false;
-    if(website.length == 0) return false;
     if(!(website.length >= 5 && website.length <= 255) || website.includes(" ")) return false;
-    if(website.includes("'") || website.includes('"') || website.includes("\\")) return false;
     return true;
 }
 
 function isPasswordUsernameValid(username){
     if(username == null || typeof(username) == 'undefined') return false;
-    if(username.length == 0) return false;
-    if(!(username.length >= 3 && username.length <= 255) || username.includes(" ")) return false;
-    if(username.includes("'") || username.includes('"') || username.includes("\\")) return false;
+    if(!(username.length >= 3 && username.length <= 255)) return false;
     return true;
 }
 
 function isPasswordPasswordValid(password){
     if(password == null || typeof(password) == 'undefined') return false;
-    if(password.length == 0) return false;
-    if(!(password.length >= 8 && password.length <= 255) || password.includes(" ")) return false;
-    if(password.includes("'") || password.includes('"') || password.includes("\\")) return false;
+    if(!(password.length >= 5 && password.length <= 255)) return false;
     return true;
 }
 
