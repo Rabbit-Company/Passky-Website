@@ -40,11 +40,13 @@ if(typeof(localStorage.yubico) == 'undefined' || localStorage.yubico == null || 
     let yubico = localStorage.yubico.split(";");
     if(yubico.length >= 5) hide("add-yubico-btn");
 
-    let html = "";
-    for(let i = 0; i < yubico.length; i++){
-        html += "<li class='passwordsBorderColor py-4 flex'><img class='h-10 w-10 rounded-full' src='images/yubikey.png' alt='Yubico Key'><div class='ml-3'><p class='secondaryColor text-sm font-medium'>" + yubico[i] + "</p></div></li>";
+    if(localStorage.yubico != "null"){
+        let html = "";
+        for(let i = 0; i < yubico.length; i++){
+            html += "<li class='passwordsBorderColor py-4 flex'><img class='h-10 w-10 rounded-full' src='images/yubikey.png' alt='Yubico Key'><div class='ml-3'><p class='secondaryColor text-sm font-medium'>" + yubico[i] + "</p></div></li>";
+        }
+        document.getElementById('yubico-list').innerHTML = html;
     }
-    document.getElementById('yubico-list').innerHTML = html;
 }
 
 
