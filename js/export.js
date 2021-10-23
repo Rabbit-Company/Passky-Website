@@ -167,7 +167,7 @@ function export_lastpass(){
         exportedPasswords[i].username = passwords[i]["username"];
         exportedPasswords[i].password = CryptoJS.AES.decrypt(passwords[i]["password"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
         exportedPasswords[i].totp = null;
-        exportedPasswords[i].extra = CryptoJS.AES.decrypt(passwords[i]["message"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
+        exportedPasswords[i].extra = (passwords[i]["message"] != null) ? CryptoJS.AES.decrypt(passwords[i]["message"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8) : "";
         exportedPasswords[i].name = passwords[i]["website"];
         exportedPasswords[i].grouping = null;
         exportedPasswords[i].fav = 0;
