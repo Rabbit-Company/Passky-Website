@@ -51,7 +51,7 @@ function import_passky(){
         let website = ido["passwords"][i]["website"];
         let username = ido["passwords"][i]["username"];
         let password = (encrypted) ? CryptoJS.AES.decrypt(ido["passwords"][i]["password"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8) : ido["passwords"][i]["password"];
-        let message = (encrypted) ? CryptoJS.AES.decrypt(ido["passwords"][i]["message"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8) : ido["passwords"][i]["message"];
+        let message = (encrypted && ido["passwords"][i]["message"] != null) ? CryptoJS.AES.decrypt(ido["passwords"][i]["message"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8) : ido["passwords"][i]["message"];
         if(message == null) message = "";
 
         if(!isPasswordWebsiteValid(website)) continue;
