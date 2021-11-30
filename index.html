@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/tailwind.min.css">
     <link rel="stylesheet" href="css/index.css">
     <link id="css-theme" type="text/css" rel="stylesheet" href="css/themes/dark.css">
+    <link rel="manifest" href="manifest.json">
     <script src="js/lang.js"></script>
     <script src="js/header.js"></script>
   </head>
@@ -100,6 +101,13 @@
        </form>
       </div>
     </div>
+    <script>
+      if('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('service-worker.js');
+        });
+      }
+    </script>
     <script src="js/aes.js"></script>
     <script src="js/default-functions.js"></script>
     <script src="js/sha512.js"></script>
