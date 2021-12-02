@@ -5,6 +5,7 @@
     "start_url": "/",
     "scope": ".",
     "description": "Passky is simple, modern, lightweight, open source and secure password manager.",
+    "categories": ["productivity", "security", "utilities"],
     "icons": [
         {
             "src": "images/icons/icon-48x48.png",
@@ -50,6 +51,14 @@
             "src": "images/icons/icon-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
+
+        },
+        {
+            "src": "images/icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+
         }
     ],
     "theme_color": "#0D1117",
