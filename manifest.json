@@ -58,11 +58,28 @@
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"
-
         }
     ],
     "theme_color": "#0D1117",
     "background_color": "#DFE5EB",
     "display": "standalone",
-    "orientation": "portrait"
+    "orientation": "portrait",
+    "iarc_rating_id": "1ff144b5-7bfc-4207-abed-0e549cb80406",
+    "related_applications": [
+        {
+          "platform": "play",
+          "url": "https://play.google.com/store/apps/details?id=com.rabbitcompany.passky",
+          "id": "com.rabbitcompany.passky"
+        },
+        {
+          "platform": "chrome_web_store",
+          "url": "https://chrome.google.com/webstore/detail/passky/ngncpgfjhnkgfcjamgljadegplonbihi",
+          "id": "ngncpgfjhnkgfcjamgljadegplonbihi"
+        },
+        {
+            "platform": "windows",
+            "url": "https://www.microsoft.com/en-us/p/passky/9nrcp6hppb82",
+            "id": "9nrcp6hppb82"
+        }
+    ]
 }
