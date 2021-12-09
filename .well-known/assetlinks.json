@@ -1,0 +1,8 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+        "namespace": "android_app",
+        "package_name": "com.rabbitcompany.passky",
+        "sha256_cert_fingerprints": ["9E:C4:4C:2C:EF:2F:99:9A:30:34:39:C1:2B:33:FF:73:0C:18:B0:DE:20:68:D4:60:87:CE:83:2A:D9:6C:22:9B"]
+    }
+}]
