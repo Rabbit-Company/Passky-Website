@@ -60,6 +60,48 @@
             "purpose": "maskable"
         }
     ],
+    "screenshots": [
+        {
+          "src": "images/screenshots/1.jpg",
+          "sizes": "1080x2400",
+          "type": "image/jpg"
+        },
+        {
+            "src": "images/screenshots/2.jpg",
+            "sizes": "1080x2400",
+            "type": "image/jpg"
+        },
+        {
+            "src": "images/screenshots/3.jpg",
+            "sizes": "1080x2400",
+            "type": "image/jpg"
+        },
+        {
+            "src": "images/screenshots/4.jpg",
+            "sizes": "1080x2400",
+            "type": "image/jpg"
+        },
+        {
+            "src": "images/screenshots/5.jpg",
+            "sizes": "1080x2400",
+            "type": "image/jpg"
+        },
+        {
+            "src": "images/screenshots/6.jpg",
+            "sizes": "1080x2400",
+            "type": "image/jpg"
+        },
+        {
+            "src": "images/screenshots/7.jpg",
+            "sizes": "1080x2400",
+            "type": "image/jpg"
+        },
+        {
+            "src": "images/screenshots/8.jpg",
+            "sizes": "1080x2400",
+            "type": "image/jpg"
+        }
+    ],
     "theme_color": "#0D1117",
     "background_color": "#DFE5EB",
     "display": "standalone",
