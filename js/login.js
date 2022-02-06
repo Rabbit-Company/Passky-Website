@@ -137,7 +137,7 @@ function login_check(){
             }
 
             if(!validJSON(xhr.responseText)){
-                setText(1, lang[readData('lang')]["server_unreachable"]);
+                changeDialog(1, lang[readData('lang')]["server_unreachable"]);
                 show('dialog');
                 return;
             }
@@ -212,11 +212,11 @@ function forget_username(){
             }
 
             if(!validJSON(xhr.responseText)){
-                setText(1, lang[readData('lang')]["server_unreachable"]);
+                changeDialog(1, lang[readData('lang')]["server_unreachable"]);
                 show('dialog');
                 return;
             }
-            
+
             var json = JSON.parse(xhr.responseText);
 
             if(typeof json['error'] === 'undefined'){
