@@ -406,6 +406,11 @@ function addPassword(){
                 return;
             }
 
+            if(!validJSON(xhr.responseText)){
+                changeDialog(2, lang[readData('lang')]["server_unreachable"]);
+                return;
+            }
+
             const json = JSON.parse(xhr.responseText);
 
             if(typeof json['error'] === 'undefined'){
@@ -470,6 +475,11 @@ function editPassword(password_id){
                 return;
             }
 
+            if(!validJSON(xhr.responseText)){
+                changeDialog(2, lang[readData('lang')]["server_unreachable"]);
+                return;
+            }
+
             const json = JSON.parse(xhr.responseText);
 
             if(typeof json['error'] === 'undefined'){
@@ -505,6 +515,11 @@ function deletePassword(password_id){
                 return;
             }
             
+            if(!validJSON(xhr.responseText)){
+                changeDialog(2, lang[readData('lang')]["server_unreachable"]);
+                return;
+            }
+
             const json = JSON.parse(xhr.responseText);
 
             if(typeof json['error'] === 'undefined'){

@@ -80,6 +80,12 @@ function deleteAccount(){
         if(xhr.readyState === 4){
             if(xhr.status != 200) return;
             
+            if(!validJSON(xhr.responseText)){
+                changeDialog(2, lang[readData('lang')]["server_unreachable"]);
+                show('dialog');
+                return;
+            }
+
             const json = JSON.parse(xhr.responseText);
 
             if(json['error'] != 0){
@@ -108,6 +114,12 @@ function enable2fa(){
         if(xhr.readyState === 4){
             if(xhr.status != 200) return;
             
+            if(!validJSON(xhr.responseText)){
+                changeDialog(2, lang[readData('lang')]["server_unreachable"]);
+                show('dialog');
+                return;
+            }
+
             const json = JSON.parse(xhr.responseText);
             
             if(json['error'] != 0){
@@ -146,6 +158,12 @@ function disable2fa(){
         if(xhr.readyState === 4){
             if(xhr.status != 200) return;
             
+            if(!validJSON(xhr.responseText)){
+                changeDialog(2, lang[readData('lang')]["server_unreachable"]);
+                show('dialog');
+                return;
+            }
+
             const json = JSON.parse(xhr.responseText);
             
             if(json['error'] != 0){
@@ -188,6 +206,12 @@ function addYubiKey(id){
         if(xhr.readyState === 4){
             if(xhr.status != 200) return;
             
+            if(!validJSON(xhr.responseText)){
+                changeDialog(2, lang[readData('lang')]["server_unreachable"]);
+                show('dialog');
+                return;
+            }
+
             const json = JSON.parse(xhr.responseText);
             
             if(json['error'] != 0){
@@ -238,6 +262,12 @@ function removeYubiKey(id){
         if(xhr.readyState === 4){
             if(xhr.status != 200) return;
             
+            if(!validJSON(xhr.responseText)){
+                changeDialog(2, lang[readData('lang')]["server_unreachable"]);
+                show('dialog');
+                return;
+            }
+
             const json = JSON.parse(xhr.responseText);
             
             if(json['error'] != 0){

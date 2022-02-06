@@ -31,7 +31,7 @@ function import_passky(){
     if(!isSessionValid()) window.location.href = 'index.html';
 
     let imported_data = document.getElementById("import-data").value;
-    if(!isJsonValid(imported_data)){
+    if(!validJSON(imported_data)){
         changeDialog(2, 1, 0);
         return;
     }
@@ -122,7 +122,7 @@ function import_bitwarden(){
     if(!isSessionValid()) window.location.href = 'index.html';
 
     let imported_data = document.getElementById("import-data").value;
-    if(!isJsonValid(imported_data)){
+    if(!validJSON(imported_data)){
         changeDialog(2, 1, 2);
         return;
     }
@@ -426,6 +426,11 @@ function import_data(passwords){
             if(xhr.status != 200){
                 changeDialog(0, lang[readData('lang')]["server_unreachable"]);
                 show('dialog');
+                return;
+            }
+
+            if(!validJSON(xhr.responseText)){
+                changeDialog(0, lang[readData('lang')]["server_unreachable"]);
                 return;
             }
 

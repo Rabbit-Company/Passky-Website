@@ -76,6 +76,12 @@ function onBtnClick(){
                 return;
             }
 
+            if(!validJSON(xhr.responseText)){
+                setText('error-dialog-modal-text', lang[readData('lang')]["server_unreachable"]);
+                show('error-dialog');
+                return;
+            }
+
             var json = JSON.parse(xhr.responseText);
 
             if(typeof json['error'] === 'undefined'){
