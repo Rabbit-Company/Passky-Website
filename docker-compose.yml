@@ -1,0 +1,8 @@
+version: '3'
+services:
+  passky-web:
+    container_name: passky-web
+    image: 'zigazajc007/passky-web:latest'
+    restart: always
+    ports:
+      - 8081:80
