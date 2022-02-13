@@ -68,5 +68,14 @@ If you’re ready to try Passky out at no cost, you can get started by visiting 
 #### Passky.org
 1. You can manage passwords right thru https://passky.org website
 #### Self-hosted
-1. Drag and drop all files to public_html folder (Root folder of your domain or sub-domain) on your hosting provider
+##### Hosting Provider
+1. Drag and drop all files inside "website" folder to "public_html" folder (Root folder of your domain or sub-domain) on your hosting provider
 2. Now you can visit your domain and you would see Passky login page
+##### Docker Compose
+```yaml
+# Download docker-compose.yml file from GitHub
+wget https://raw.githubusercontent.com/Rabbit-Company/Passky-Website/main/docker-compose.yml
+# Start the container
+docker-compose up -d
+# Your website should be now deployed on port 8081. This can be changed in docker-compose.yml file.
+```
