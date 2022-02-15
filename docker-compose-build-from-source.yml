@@ -4,6 +4,6 @@ services:
     container_name: passky-web
     build:
       context: .
-    restart: always
+    restart: unless-stopped
     ports:
       - 8081:80
