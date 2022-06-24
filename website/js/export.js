@@ -311,6 +311,14 @@ function import_csv(id){
 			messageID = 8;
 			titleID = 1;
 		break;
+		case 8:
+			//Firefox
+			websiteID = 0;
+			usernameID = 1;
+			passwordID = 2;
+			messageID = 9;
+			titleID = 0;
+		break;
 	}
 
 	let passwords = [];
@@ -443,6 +451,11 @@ function changeDialog(style, text, text2){
 					document.getElementById('import-data').placeholder = "Paste data from 1Password's exported csv file.";
 					document.getElementById('dialog-button').onclick = () => import_csv(7);
 				break;
+				case 8:
+					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","Firefox");
+					document.getElementById('import-data').placeholder = "Paste data from Firefox's exported csv file.";
+					document.getElementById('dialog-button').onclick = () => import_csv(8);
+				break;
 			}
 		break;
 		case 2:
@@ -566,4 +579,9 @@ document.getElementById("dashlane-import-btn").addEventListener("click", () => {
 
 document.getElementById("dashlane-export-btn").addEventListener("click", () => {
 	export_dashlane();
+});
+
+document.getElementById("firefox-import-btn").addEventListener("click", () => {
+	changeDialog(1, 8);
+	show('dialog');
 });
