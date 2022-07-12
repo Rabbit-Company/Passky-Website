@@ -1,127 +1,132 @@
 {
-    "name": "Passky",
-    "short_name": "Passky",
-    "id": "/",
-    "start_url": "/",
-    "scope": ".",
-    "description": "Passky is simple, modern, lightweight, open source and secure password manager.",
-    "categories": ["productivity", "security", "utilities"],
-    "icons": [
-        {
-            "src": "images/icons/icon-48x48.png",
-            "sizes": "48x48",
-            "type": "image/png"
-        },
-        {
-            "src": "images/icons/icon-72x72.png",
-            "sizes": "72x72",
-            "type": "image/png"
-        },
-        {
-            "src": "images/icons/icon-96x96.png",
-            "sizes": "96x96",
-            "type": "image/png"
-        },
-        {
-            "src": "images/icons/icon-128x128.png",
-            "sizes": "128x128",
-            "type": "image/png"
-        },
-        {
-            "src": "images/icons/icon-144x144.png",
-            "sizes": "144x144",
-            "type": "image/png"
-        },
-        {
-            "src": "images/icons/icon-152x152.png",
-            "sizes": "152x152",
-            "type": "image/png"
-        },
-        {
-            "src": "images/icons/icon-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "images/icons/icon-384x384.png",
-            "sizes": "384x384",
-            "type": "image/png"
-        },
-        {
-            "src": "images/icons/icon-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png"
+	"name": "Passky",
+	"short_name": "Passky",
+	"id": "/",
+	"start_url": "/",
+	"scope": ".",
+	"description": "Passky is simple, modern, lightweight, open source and secure password manager.",
+	"categories": ["productivity", "security", "utilities"],
+	"icons": [
+		{
+			"src": "images/icons/icon-48x48.png",
+			"sizes": "48x48",
+			"type": "image/png"
+		},
+		{
+			"src": "images/icons/icon-72x72.png",
+			"sizes": "72x72",
+			"type": "image/png"
+		},
+		{
+			"src": "images/icons/icon-96x96.png",
+			"sizes": "96x96",
+			"type": "image/png"
+		},
+		{
+			"src": "images/icons/icon-128x128.png",
+			"sizes": "128x128",
+			"type": "image/png"
+		},
+		{
+			"src": "images/icons/icon-144x144.png",
+			"sizes": "144x144",
+			"type": "image/png"
+		},
+		{
+			"src": "images/icons/icon-152x152.png",
+			"sizes": "152x152",
+			"type": "image/png"
+		},
+		{
+			"src": "images/icons/icon-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "images/icons/icon-384x384.png",
+			"sizes": "384x384",
+			"type": "image/png"
+		},
+		{
+			"src": "images/icons/icon-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
 
-        },
-        {
-            "src": "images/icons/icon-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "maskable"
-        }
-    ],
-    "screenshots": [
-        {
-          "src": "images/screenshots/1.jpg",
-          "sizes": "1080x2400",
-          "type": "image/jpg"
-        },
-        {
-            "src": "images/screenshots/2.jpg",
-            "sizes": "1080x2400",
-            "type": "image/jpg"
-        },
-        {
-            "src": "images/screenshots/3.jpg",
-            "sizes": "1080x2400",
-            "type": "image/jpg"
-        },
-        {
-            "src": "images/screenshots/4.jpg",
-            "sizes": "1080x2400",
-            "type": "image/jpg"
-        },
-        {
-            "src": "images/screenshots/5.jpg",
-            "sizes": "1080x2400",
-            "type": "image/jpg"
-        },
-        {
-            "src": "images/screenshots/6.jpg",
-            "sizes": "1080x2400",
-            "type": "image/jpg"
-        },
-        {
-            "src": "images/screenshots/7.jpg",
-            "sizes": "1080x2400",
-            "type": "image/jpg"
-        },
-        {
-            "src": "images/screenshots/8.jpg",
-            "sizes": "1080x2400",
-            "type": "image/jpg"
-        }
-    ],
-    "theme_color": "#0D1117",
-    "background_color": "#DFE5EB",
-    "display": "standalone",
-    "orientation": "portrait",
-    "iarc_rating_id": "1ff144b5-7bfc-4207-abed-0e549cb80406",
-    "related_applications": [
-        {
-          "platform": "play",
-          "url": "https://play.google.com/store/apps/details?id=com.rabbitcompany.passky",
-          "id": "com.rabbitcompany.passky"
-        },
-        {
-          "platform": "chrome_web_store",
-          "url": "https://chrome.google.com/webstore/detail/passky/ngncpgfjhnkgfcjamgljadegplonbihi",
-          "id": "ngncpgfjhnkgfcjamgljadegplonbihi"
-        },
-        {
-            "platform": "windows",
-            "url": "https://www.microsoft.com/en-us/p/passky/9nrcp6hppb82",
-            "id": "9nrcp6hppb82"
-        }
-    ]
+		},
+		{
+			"src": "images/icons/icon-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "maskable"
+		}
+	],
+	"screenshots": [
+		{
+		  "src": "images/screenshots/1.jpg",
+		  "sizes": "1080x2400",
+		  "type": "image/jpg"
+		},
+		{
+			"src": "images/screenshots/2.jpg",
+			"sizes": "1080x2400",
+			"type": "image/jpg"
+		},
+		{
+			"src": "images/screenshots/3.jpg",
+			"sizes": "1080x2400",
+			"type": "image/jpg"
+		},
+		{
+			"src": "images/screenshots/4.jpg",
+			"sizes": "1080x2400",
+			"type": "image/jpg"
+		},
+		{
+			"src": "images/screenshots/5.jpg",
+			"sizes": "1080x2400",
+			"type": "image/jpg"
+		},
+		{
+			"src": "images/screenshots/6.jpg",
+			"sizes": "1080x2400",
+			"type": "image/jpg"
+		},
+		{
+			"src": "images/screenshots/7.jpg",
+			"sizes": "1080x2400",
+			"type": "image/jpg"
+		},
+		{
+			"src": "images/screenshots/8.jpg",
+			"sizes": "1080x2400",
+			"type": "image/jpg"
+		}
+	],
+	"theme_color": "#0D1117",
+	"background_color": "#0D1117",
+	"display": "standalone",
+	"orientation": "portrait",
+	"iarc_rating_id": "1ff144b5-7bfc-4207-abed-0e549cb80406",
+	"related_applications": [
+		{
+		  "platform": "play",
+		  "url": "https://play.google.com/store/apps/details?id=com.rabbitcompany.passky",
+		  "id": "com.rabbitcompany.passky"
+		},
+		{
+		  "platform": "chrome_web_store",
+		  "url": "https://chrome.google.com/webstore/detail/passky/ngncpgfjhnkgfcjamgljadegplonbihi",
+			"id": "ngncpgfjhnkgfcjamgljadegplonbihi"
+		},
+		{
+			"platform": "windows",
+			"url": "https://www.microsoft.com/en-us/p/passky/9nrcp6hppb82",
+			"id": "9nrcp6hppb82"
+		},
+		{
+			"platform": "f-droid",
+			"url": "https://f-droid.org/en/packages/com.rabbitcompany.passky",
+			"id": "com.rabbitcompany.passky"
+		}
+	]
 }
