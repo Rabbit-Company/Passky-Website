@@ -91,7 +91,7 @@ function randRange(min, max) {
 	var range = max - min;
 	var requestBytes = Math.ceil(Math.log2(range) / 8);
 	if (!requestBytes) return min;
-		
+
 	var maxNum = Math.pow(256, requestBytes);
 	var ar = new Uint8Array(requestBytes);
 
@@ -148,4 +148,11 @@ function isSessionValid(){
 function logout(){
 	clearStorage();
 	window.location.href = 'index.html';
+}
+
+function startAuthenticator(){
+	if (!isSessionValid()) logout();
+	window.setInterval(function() {
+		if (!isSessionValid()) logout();
+	}, 1500);
 }
