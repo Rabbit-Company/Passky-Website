@@ -84,6 +84,10 @@ document.getElementById("search").addEventListener("keyup", () => {
 	filterPasswords();
 });
 
+document.getElementById("logo").addEventListener("click", () => {
+	refreshPasswords();
+});
+
 document.getElementById("dialog-button-cancel").addEventListener("click", () => {
 	hide('dialog');
 });

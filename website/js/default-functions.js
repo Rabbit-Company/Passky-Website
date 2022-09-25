@@ -110,13 +110,13 @@ function refreshPasswords(){
 		if(response['error'] != 0 && response['error'] != 8) return;
 
 		if(response['error'] == 0){
-				writeData('passwords', JSON.stringify(response['passwords']));
+			writeData('passwords', JSON.stringify(response['passwords']));
 		}else{
-				writeData('passwords', '{}');
+			writeData('passwords', '{}');
 		}
 
 		window.location.href = 'passwords.html';
-	}).catch(err);
+	}).catch();
 
 }
 
