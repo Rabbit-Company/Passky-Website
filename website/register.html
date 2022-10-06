@@ -86,17 +86,26 @@
 						</div>
 						<div>
 							<label for="password" class="sr-only">Password</label>
-							<div class="relative rounded-md shadow-sm">
-								<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+							<div class="flex rounded-md shadow-sm">
+								<div class="relative flex flex-grow items-stretch focus-within:z-10">
+									<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+										<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 secondaryColor" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+											<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+											<circle cx="8" cy="15" r="4"></circle>
+											<line x1="10.85" y1="12.15" x2="19" y2="4"></line>
+											<line x1="18" y1="5" x2="20" y2="7"></line>
+											<line x1="15" y1="8" x2="17" y2="10"></line>
+										</svg>
+									</div>
+									<input id="password" name="password" type="password" autocomplete="new-password" required class="tertiaryBackgroundColor tertiaryColor primaryBorderColor appearance-none rounded-none block w-full pl-10 px-3 py-2 border focus:outline-none sm:text-sm" placeholder="Password">
+								</div>
+								<button id="password-hider" type="button" class="relative -ml-px inline-flex items-center space-x-2 border tertiaryBackgroundColor tertiaryColor primaryBorderColor px-4 py-2 text-sm font-medium focus:outline-none">
 									<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 secondaryColor" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
 										<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-										<circle cx="8" cy="15" r="4"></circle>
-										<line x1="10.85" y1="12.15" x2="19" y2="4"></line>
-										<line x1="18" y1="5" x2="20" y2="7"></line>
-										<line x1="15" y1="8" x2="17" y2="10"></line>
-									</svg>
-								</div>
-								<input id="password" name="password" type="password" autocomplete="new-password" required class="tertiaryBackgroundColor tertiaryColor primaryBorderColor appearance-none rounded-none block w-full pl-10 px-3 py-2 border focus:outline-none focus:z-10 sm:text-sm" placeholder="Password">
+										<circle cx="12" cy="12" r="2"></circle>
+										<path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"></path>
+								 </svg>
+								</button>
 							</div>
 						</div>
 						<div class="bg-gradient-to-r from-red-500 to-green-500 primaryBorderColor appearance-none rounded-b-md relative block w-full border overflow-hidden">

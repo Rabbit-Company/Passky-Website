@@ -34,6 +34,15 @@ document.getElementById("password").addEventListener("input", () => {
 	document.getElementById("entropy").style.width = entropy + "%";
 });
 
+document.getElementById("password-hider").addEventListener("click", () => {
+	let password = document.getElementById("password");
+	if(password.type === "password"){
+		password.type = "text";
+	}else{
+		password.type = "password";
+	}
+});
+
 function onBtnClick(){
 
 	const url = document.getElementById("passky-server").value;
