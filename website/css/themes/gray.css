@@ -97,6 +97,10 @@ textarea {
 	border-color: #D1D5DB !important;
 }
 
+input[type="checkbox"] {
+	accent-color: #4F46E5;
+}
+
 /*
   Main menu
 */

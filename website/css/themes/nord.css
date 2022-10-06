@@ -101,6 +101,10 @@ svg {
 	stroke: #88c0d0 !important;
 }
 
+input[type="checkbox"] {
+	accent-color: #88c0d0;
+}
+
 /*
 	Main menu
 */
