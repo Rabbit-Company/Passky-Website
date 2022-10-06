@@ -121,11 +121,11 @@ function refreshPasswords(){
 }
 
 function encryptPassword(password){
-	return CryptoJS.AES.encrypt(password, readData('token') + navigator.geolocation + readData('loginTime') + readData('url') + readData('username')).toString();
+	return XChaCha20.encrypt(password, readData('token') + navigator.geolocation + readData('loginTime') + readData('url') + readData('username'));
 }
 
 function decryptPassword(password){
-	return CryptoJS.AES.decrypt(password, readData('token') + navigator.geolocation + readData('loginTime') + readData('url') + readData('username')).toString(CryptoJS.enc.Utf8);
+	return XChaCha20.decrypt(password, readData('token') + navigator.geolocation + readData('loginTime') + readData('url') + readData('username'));
 }
 
 function clearStorage(){

@@ -4,7 +4,7 @@ initStorageCache.then(() => {
 
 	if(readData('url') !== null && typeof(readData('url')) !== 'undefined') document.getElementById('passky-server').value = readData('url');
 	if(readData('username') !== null && typeof(readData('username')) !== 'undefined') document.getElementById('username').value = readData('username');
-		
+
 	//Languages
 	document.getElementById("passky-server").placeholder = lang[readData('lang')]["server"];
 	document.getElementById("username").placeholder = lang[readData('lang')]["username"];
@@ -35,10 +35,10 @@ function changeDialog(style, text){
 			//Error dialog
 			document.getElementById('dialog-icon').className = "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10";
 			document.getElementById('dialog-icon').innerHTML = "<svg class='h-6 w-6 text-red-600' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' aria-hidden='true'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z' /></svg>";
-		
+
 			document.getElementById('dialog-title').innerText = lang[readData('lang')]["error"];
 			document.getElementById('dialog-text').innerText = text;
-		
+
 			document.getElementById('dialog-button-cancel').style.display = 'none';
 
 			document.getElementById('dialog-button').className = "dangerButton inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium focus:outline-none sm:w-auto sm:text-sm";
@@ -49,10 +49,10 @@ function changeDialog(style, text){
 			//Forgot username
 			document.getElementById('dialog-icon').className = "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10";
 			document.getElementById('dialog-icon').innerHTML = "<svg class='h-6 w-6 text-blue-600' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' aria-hidden='true'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><circle cx='8' cy='15' r='4' /><line x1='10.85' y1='12.15' x2='19' y2='4' /><line x1='18' y1='5' x2='20' y2='7' /><line x1='15' y1='8' x2='17' y2='10' /></svg>";
-		
+
 			document.getElementById('dialog-title').innerText = lang[readData('lang')]["forgot_username"];
 			document.getElementById('dialog-text').innerHTML = "<input id='fu_server' name='fu_server' list='servers' type='text' autocomplete='server' class='tertiaryBackgroundColor tertiaryColor primaryBorderColor appearance-none rounded-t-md relative block w-full px-3 py-2 border focus:outline-none focus:z-10 sm:text-sm' placeholder='Server'><input id='fu_email' name='fu_email' type='email' autocomplete='email' class='tertiaryBackgroundColor tertiaryColor primaryBorderColor appearance-none rounded-b-md relative block w-full px-3 py-2 border focus:outline-none focus:z-10 sm:text-sm' placeholder='Email'>";
-		
+
 			document.getElementById("fu_server").placeholder = lang[readData('lang')]["server"];
 			document.getElementById("fu_email").placeholder = lang[readData('lang')]["email"];
 
@@ -70,11 +70,11 @@ function changeDialog(style, text){
 			//Email sent successfully
 			document.getElementById('dialog-icon').className = "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10";
 			document.getElementById('dialog-icon').innerHTML = "<svg class='h-6 w-6 text-green-600' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' aria-hidden='true'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 13l4 4L19 7' /></svg>";
-		
+
 			document.getElementById('dialog-title').innerText = lang[readData('lang')]["success"];
 
 			document.getElementById('dialog-text').innerText = lang[readData('lang')]["email_sent_success"];
-		
+
 			document.getElementById('dialog-button-cancel').style.display = 'none';
 
 			document.getElementById('dialog-button').className = "successButton inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium focus:outline-none sm:w-auto sm:text-sm";
@@ -92,7 +92,7 @@ function login_check(){
 	const otp = document.getElementById("otp").value.replace(/\s/g, '');
 
 	Passky.getToken(url, username, password, otp).then(response => {
-    
+
 		if(typeof response['error'] === 'undefined'){
 			changeDialog(1, lang[readData('lang')]["server_unreachable"]);
 			show('dialog');
@@ -123,6 +123,7 @@ function login_check(){
 		window.location.href = 'passwords.html';
 
 	}).catch(err => {
+		console.log(err);
 		switch(err){
 			case 1000:
 				changeDialog(1, lang[readData('lang')]["server_unreachable"]);

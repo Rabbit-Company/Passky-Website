@@ -26,8 +26,8 @@ initStorageCache.then(() => {
 			document.getElementById("stats-passwords").innerText = ((passwords.length > 0) ? passwords.length : 0) + " / " + maxPasswords;
 			let html_passwords = "";
 			for (let i = 0; i < passwords.length; i++) {
-				const website = CryptoJS.AES.decrypt(passwords[i].website, decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
-				const username = CryptoJS.AES.decrypt(passwords[i].username, decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
+				const website = XChaCha20.decrypt(passwords[i].website, decryptPassword(readData('password')));
+				const username = XChaCha20.decrypt(passwords[i].username, decryptPassword(readData('password')));
 
 				html_passwords += "<tr class='passwordsBorderColor'><td class='px-8 py-4 max-w-xs whitespace-nowrap overflow-hidden'><div class='flex items-center'><div class='flex-shrink-0 h-10 w-10'>";
 				//Icon

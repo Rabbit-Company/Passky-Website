@@ -63,10 +63,10 @@ function export_passky(){
 	let passwords = JSON.parse(readData('passwords'));
 	for(let i = 0; i < passwords.length; i++){
 		delete passwords[i]['id'];
-		passwords[i]['website'] = CryptoJS.AES.decrypt(passwords[i]['website'], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
-		passwords[i]['username'] = CryptoJS.AES.decrypt(passwords[i]['username'], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
-		passwords[i]['password'] = CryptoJS.AES.decrypt(passwords[i]['password'], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
-		passwords[i]['message'] = CryptoJS.AES.decrypt(passwords[i]['message'], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
+		passwords[i]['website'] = XChaCha20.decrypt(passwords[i]['website'], decryptPassword(readData('password')));
+		passwords[i]['username'] = XChaCha20.decrypt(passwords[i]['username'], decryptPassword(readData('password')));
+		passwords[i]['password'] = XChaCha20.decrypt(passwords[i]['password'], decryptPassword(readData('password')));
+		passwords[i]['message'] = XChaCha20.decrypt(passwords[i]['message'], decryptPassword(readData('password')));
 	}
 
 	let export_passky = { encrypted : false, passwords : passwords };
@@ -129,14 +129,14 @@ function export_keepassxc(){
 	let exportedPasswords = [];
 	let passwords = JSON.parse(readData('passwords'));
 	for(let i = 0; i < passwords.length; i++){
-		const website = CryptoJS.AES.decrypt(passwords[i]["website"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
+		const website = XChaCha20.decrypt(passwords[i]["website"], decryptPassword(readData('password')));
 		exportedPasswords[i] = {};
 		exportedPasswords[i].Group = "Root";
 		exportedPasswords[i].Title = website;
-		exportedPasswords[i].Username = CryptoJS.AES.decrypt(passwords[i]["username"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
-		exportedPasswords[i].Password = CryptoJS.AES.decrypt(passwords[i]["password"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
+		exportedPasswords[i].Username = XChaCha20.decrypt(passwords[i]["username"], decryptPassword(readData('password')));
+		exportedPasswords[i].Password = XChaCha20.decrypt(passwords[i]["password"], decryptPassword(readData('password')));
 		exportedPasswords[i].URL = website;
-		exportedPasswords[i].Notes = CryptoJS.AES.decrypt(passwords[i]["message"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
+		exportedPasswords[i].Notes = XChaCha20.decrypt(passwords[i]["message"], decryptPassword(readData('password')));
 		exportedPasswords[i].TOTP = null;
 		exportedPasswords[i].Icon = 0;
 		exportedPasswords[i]["Last Modified"] = new Date().toISOString();
@@ -152,13 +152,13 @@ function export_nordpass(){
 	let exportedPasswords = [];
 	let passwords = JSON.parse(readData('passwords'));
 	for(let i = 0; i < passwords.length; i++){
-		const website = CryptoJS.AES.decrypt(passwords[i]["website"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
+		const website = XChaCha20.decrypt(passwords[i]["website"], decryptPassword(readData('password')));
 		exportedPasswords[i] = {};
 		exportedPasswords[i].name = website;
 		exportedPasswords[i].url = website;
-		exportedPasswords[i].username = CryptoJS.AES.decrypt(passwords[i]["username"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
-		exportedPasswords[i].password = CryptoJS.AES.decrypt(passwords[i]["password"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
-		exportedPasswords[i].note = CryptoJS.AES.decrypt(passwords[i]["message"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
+		exportedPasswords[i].username = XChaCha20.decrypt(passwords[i]["username"], decryptPassword(readData('password')));
+		exportedPasswords[i].password = XChaCha20.decrypt(passwords[i]["password"], decryptPassword(readData('password')));
+		exportedPasswords[i].note = XChaCha20.decrypt(passwords[i]["message"], decryptPassword(readData('password')));
 		exportedPasswords[i].cardholdername = null;
 		exportedPasswords[i].cardnumber = null;
 		exportedPasswords[i].cvc = null;
@@ -184,14 +184,14 @@ function export_keeper(){
 	let exportedPasswords = [];
 	let passwords = JSON.parse(readData('passwords'));
 	for(let i = 0; i < passwords.length; i++){
-		const website = CryptoJS.AES.decrypt(passwords[i]["website"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
+		const website = XChaCha20.decrypt(passwords[i]["website"], decryptPassword(readData('password')));
 		exportedPasswords[i] = {};
 		exportedPasswords[i].Folder = null;
 		exportedPasswords[i].Title = website;
-		exportedPasswords[i].Login = CryptoJS.AES.decrypt(passwords[i]["username"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
-		exportedPasswords[i].Password = CryptoJS.AES.decrypt(passwords[i]["password"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
+		exportedPasswords[i].Login = XChaCha20.decrypt(passwords[i]["username"], decryptPassword(readData('password')));
+		exportedPasswords[i].Password = XChaCha20.decrypt(passwords[i]["password"], decryptPassword(readData('password')));
 		exportedPasswords[i].URL = website;
-		exportedPasswords[i].Notes = CryptoJS.AES.decrypt(passwords[i]["message"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
+		exportedPasswords[i].Notes = XChaCha20.decrypt(passwords[i]["message"], decryptPassword(readData('password')));
 	}
 
 	downloadTxt($.csv.fromObjects(exportedPasswords), "keeper_" + getDate(new Date()) + ".csv");
@@ -204,13 +204,13 @@ function export_lastpass(){
 	let exportedPasswords = [];
 	let passwords = JSON.parse(readData('passwords'));
 	for(let i = 0; i < passwords.length; i++){
-		const website = CryptoJS.AES.decrypt(passwords[i]["website"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
+		const website = XChaCha20.decrypt(passwords[i]["website"], decryptPassword(readData('password')));
 		exportedPasswords[i] = {};
 		exportedPasswords[i].url = website;
-		exportedPasswords[i].username = CryptoJS.AES.decrypt(passwords[i]["username"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
-		exportedPasswords[i].password = CryptoJS.AES.decrypt(passwords[i]["password"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
+		exportedPasswords[i].username = XChaCha20.decrypt(passwords[i]["username"], decryptPassword(readData('password')));
+		exportedPasswords[i].password = XChaCha20.decrypt(passwords[i]["password"], decryptPassword(readData('password')));
 		exportedPasswords[i].totp = null;
-		exportedPasswords[i].extra = CryptoJS.AES.decrypt(passwords[i]["message"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
+		exportedPasswords[i].extra = XChaCha20.decrypt(passwords[i]["message"], decryptPassword(readData('password')));
 		exportedPasswords[i].name = website;
 		exportedPasswords[i].grouping = null;
 		exportedPasswords[i].fav = 0;
@@ -226,14 +226,14 @@ function export_dashlane(){
 	let exportedPasswords = [];
 	let passwords = JSON.parse(readData('passwords'));
 	for(let i = 0; i < passwords.length; i++){
-		const website = CryptoJS.AES.decrypt(passwords[i]["website"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
+		const website = XChaCha20.decrypt(passwords[i]["website"], decryptPassword(readData('password')));
 		exportedPasswords[i] = {};
-		exportedPasswords[i].username = CryptoJS.AES.decrypt(passwords[i]["username"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
+		exportedPasswords[i].username = XChaCha20.decrypt(passwords[i]["username"], decryptPassword(readData('password')));
 		exportedPasswords[i].username2 = null;
 		exportedPasswords[i].username3 = null;
 		exportedPasswords[i].title = website;
-		exportedPasswords[i].password = CryptoJS.AES.decrypt(passwords[i]["password"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
-		exportedPasswords[i].note = CryptoJS.AES.decrypt(passwords[i]["message"], decryptPassword(readData('password'))).toString(CryptoJS.enc.Utf8);
+		exportedPasswords[i].password = XChaCha20.decrypt(passwords[i]["password"], decryptPassword(readData('password')));
+		exportedPasswords[i].note = XChaCha20.decrypt(passwords[i]["message"], decryptPassword(readData('password')));
 		exportedPasswords[i].url = website;
 		exportedPasswords[i].category = null;
 		exportedPasswords[i].otpSecret = null;
