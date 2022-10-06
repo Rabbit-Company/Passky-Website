@@ -27,6 +27,13 @@ document.getElementById("btn_signin").addEventListener("click", () => {
 	window.location.href = "index.html";
 });
 
+document.getElementById("password").addEventListener("input", () => {
+	let password = document.getElementById("password").value;
+	let entropy = 100 - (PasswordEntropy.calculate(password) / 0.8);
+	if(entropy < 6) entropy = 0;
+	document.getElementById("entropy").style.width = entropy + "%";
+});
+
 function onBtnClick(){
 
 	const url = document.getElementById("passky-server").value;
