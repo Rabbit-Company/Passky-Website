@@ -34,17 +34,17 @@
 
 		static pWebsite(website){
 			if(typeof(website) == 'undefined' || website == null) return false;
-			return (website.length >= 3 && website.length <= 150) && !website.includes(" ");
+			return (website.length >= 2 && website.length <= 150);
 		}
 
 		static pUsername(username){
 			if(typeof(username) == 'undefined' || username == null) return false;
-			return username.length >= 3 && username.length <= 150;
+			return username.length >= 2 && username.length <= 150;
 		}
 
 		static pPassword(password){
 			if(typeof(password) == 'undefined' || password == null) return false;
-			return password.length >= 3 && password.length <= 150;
+			return password.length >= 2 && password.length <= 150;
 		}
 
 		static pMessage(message){
