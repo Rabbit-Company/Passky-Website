@@ -805,10 +805,6 @@ video {
   width: 1rem;
 }
 
-.w-1 {
-  width: 0.25rem;
-}
-
 .w-9 {
   width: 2.25rem;
 }
@@ -1059,6 +1055,11 @@ video {
 
 .border {
   border-width: 1px;
+}
+
+.border-x {
+  border-left-width: 1px;
+  border-right-width: 1px;
 }
 
 .border-b-2 {
