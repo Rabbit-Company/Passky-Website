@@ -353,7 +353,13 @@ function import_csv(id){
 
 function import_data(passwords, encrypted = false){
 
+	changeDialog(4, passwords.length);
+	show("dialog");
+
 	Passky.importPasswords(readData('url'), readData('username'), readData('token'), passwords, encrypted, decryptPassword(readData("password"))).then(response => {
+
+		document.getElementById('dialog-button').style.display = "";
+		document.getElementById('dialog-button-cancel').style.display = "";
 
 		if(typeof response['error'] === 'undefined'){
 			changeDialog(0, lang[readData('lang')]["server_unreachable"]);
@@ -491,6 +497,17 @@ function changeDialog(style, text, text2){
 			document.getElementById('dialog-button').className = "successButton inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium focus:outline-none sm:w-auto sm:text-sm";
 			document.getElementById('dialog-button').innerText = lang[readData('lang')]["okay"];
 			document.getElementById('dialog-button').onclick = () => refreshPasswords();
+		break;
+		case 4:
+			//Importing...
+			document.getElementById('dialog-icon').className = "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10";
+			document.getElementById('dialog-icon').innerHTML = "<svg class='h-6 w-6 text-blue-600 animate-spin' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' aria-hidden='true'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><path d='M12 3a9 9 0 1 0 9 9'></path></svg>";
+
+			document.getElementById('dialog-title').innerText = "Importing";
+			document.getElementById('dialog-text').innerHTML = "Importing {amount} passwords...".replace("{amount}", "<b>" + text + "</b>");
+
+			document.getElementById('dialog-button').style.display = "none";
+			document.getElementById('dialog-button-cancel').style.display = "none";
 		break;
 		default:
 			//Error
