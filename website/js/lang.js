@@ -80,7 +80,7 @@ const lang = {
 		"backup_codes": "Backup codes:",
 		"yubikey_added_successfully": "Your Yubikey has been added successfully",
 		"yubikey_removed_successfully": "Your Yubikey has been removed successfully",
-		"yubikey_insert_device": "1. Insert your Yubikey to your device.",
+		"yubikey_insert_device": "1. Insert your Yubikey to your device",
 		"yubikey_focus_input": "2. Click on OTP input",
 		"yubikey_press_button": "3. Press on gold button located on your Yubikey",
 		"auto_search": "Auto Search",
