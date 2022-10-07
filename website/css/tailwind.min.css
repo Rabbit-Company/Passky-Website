@@ -607,6 +607,10 @@ video {
   left: 0px;
 }
 
+.left-\[75\%\] {
+  left: 75%;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -753,6 +757,10 @@ video {
   height: 1.25rem;
 }
 
+.h-1\.5 {
+  height: 0.375rem;
+}
+
 .h-1 {
   height: 0.25rem;
 }
@@ -799,6 +807,10 @@ video {
 
 .w-5 {
   width: 1.25rem;
+}
+
+.w-\[1px\] {
+  width: 1px;
 }
 
 .w-4 {
