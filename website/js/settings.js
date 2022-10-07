@@ -11,10 +11,14 @@ initStorageCache.then(() => {
 	document.getElementById("settings-link-mobile").innerText = lang[readData('lang')]["settings"];
 	document.getElementById("signout-link-mobile").innerText = lang[readData('lang')]["signout"];
 
+	document.getElementById("label-language").innerText = lang[readData('lang')]["language"];
+	document.getElementById("info-language").innerHTML = lang[readData('lang')]["missing_language"].replace("{name}", "<a class='primaryColor' href='https://crowdin.com/project/passky' target='_blank'>Crowdin</a>");
 	document.getElementById("label-theme").innerText = lang[readData('lang')]["theme"];
 	document.getElementById("label-session-duration").innerText = lang[readData('lang')]["session_duration"];
-
+	document.getElementById("label-website-icons").innerText = lang[readData('lang')]["website_icons"];
+	document.getElementById("info-website-icons").innerText = lang[readData('lang')]["website_icons_info"];
 	document.getElementById("label-auto-search").innerText = lang[readData('lang')]["auto_search"];
+	document.getElementById("info-auto-search").innerText = lang[readData('lang')]["only_browser_extension"];
 
 	document.getElementById("add-yubico-btn").innerText = lang[readData('lang')]["add"];
 	document.getElementById("remove-yubico-btn").innerText = lang[readData('lang')]["remove"];

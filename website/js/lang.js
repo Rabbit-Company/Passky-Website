@@ -35,6 +35,7 @@ const lang = {
 		"export": "Export",
 		"passwords": "Passwords",
 		"import_export": "Import & Export",
+		"language": "Language",
 		"theme": "Theme",
 		"search": "Search",
 		"length": "Length",
@@ -42,6 +43,10 @@ const lang = {
 		"minutes": "minutes",
 		"optional_note": "Optional Note",
 		"session_duration": "Session Duration",
+		"website_icons": "Website Icons",
+		"website_icons_info": "Enabling website icons might reduce your privacy.",
+		"only_browser_extension": "Only available in the browser extension.",
+		"missing_language": "Missing language? Translate it on {name}.",
 		"forgot_username": "Forgot username?",
 		"email_sent_success": "Email sent successfully",
 		"add_password": "Add password",
@@ -78,7 +83,10 @@ const lang = {
 		"yubikey_insert_device": "1. Insert your Yubikey to your device.",
 		"yubikey_focus_input": "2. Click on OTP input",
 		"yubikey_press_button": "3. Press on gold button located on your Yubikey",
-		"auto_search": "Auto Search"
+		"auto_search": "Auto Search",
+		"total_passwords": "Total Passwords",
+		"decryption_time": "Decryption Time",
+		"client_version": "Client Version"
 	},
 	"ja": {
 		"server": "サーバ",

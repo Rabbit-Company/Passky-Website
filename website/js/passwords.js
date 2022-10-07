@@ -11,6 +11,10 @@ initStorageCache.then(() => {
 	document.getElementById("settings-link-mobile").innerText = lang[readData('lang')]["settings"];
 	document.getElementById("signout-link-mobile").innerText = lang[readData('lang')]["signout"];
 
+	document.getElementById("total-passwords").innerText = lang[readData('lang')]["total_passwords"];
+	document.getElementById("decryption-time").innerText = lang[readData('lang')]["decryption_time"];
+	document.getElementById("client-version").innerText = lang[readData('lang')]["client_version"];
+
 	document.getElementById("search").placeholder = lang[readData('lang')]["search"];
 	document.getElementById("add-password-btn").innerText = lang[readData('lang')]["add_password"];
 
@@ -368,7 +372,6 @@ function addPassword() {
 		changeDialog(3, 0);
 
 	}).catch(err => {
-		console.log("Passwod error!");
 		switch(err){
 			case 1001:
 				changeDialog(2, lang[readData('lang')]["url_invalid"]);
