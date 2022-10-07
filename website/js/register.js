@@ -29,8 +29,8 @@ document.getElementById("btn_signin").addEventListener("click", () => {
 
 document.getElementById("password").addEventListener("input", () => {
 	let password = document.getElementById("password").value;
-	let entropy = 100 - (PasswordEntropy.calculate(password) / 0.8);
-	if(entropy < 6) entropy = 0;
+	let entropy = 100 - (PasswordEntropy.calculate(password));
+	if(entropy <= 1) entropy = 0;
 	document.getElementById("entropy").style.width = entropy + "%";
 });
 
@@ -51,6 +51,12 @@ function onBtnClick(){
 	const username = document.getElementById("username").value.toLowerCase();
 	const email = document.getElementById("email").value;
 	const password = document.getElementById("password").value;
+
+	if(PasswordEntropy.calculate(password) < 75){
+		setText('error-dialog-modal-text', errors[readData('lang')]["5"]);
+		show('error-dialog');
+		return;
+	}
 
 	Passky.createAccount(url, username, password, email).then(response => {
 
@@ -75,7 +81,7 @@ function onBtnClick(){
 		document.getElementById('dialog-icon').innerHTML = "<svg class='h-6 w-6 text-green-600' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' aria-hidden='true'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 13l4 4L19 7' /></svg>";
 		document.getElementById('btn-dialog').className = "successButton inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium sm:text-sm"
 		document.getElementById('btn-dialog').onclick = function(){
-				window.location.href = 'index.html';
+			window.location.href = 'index.html';
 		}
 		show('error-dialog');
 

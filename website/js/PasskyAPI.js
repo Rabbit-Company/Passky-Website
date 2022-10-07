@@ -9,7 +9,7 @@
 
 		static password(password){
 			if(typeof(password) == 'undefined' || password == null) return false;
-			return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&,_\(\)\=\-\.])[A-Za-z\d@$!%*#?&,_\(\)\=\-\.]{8,255}$/i.test(password);
+			return password.length >= 8;
 		}
 
 		static url(url){
@@ -34,17 +34,17 @@
 
 		static pWebsite(website){
 			if(typeof(website) == 'undefined' || website == null) return false;
-			return (website.length >= 2 && website.length <= 150);
+			return (website.length >= 2 && website.length <= 100);
 		}
 
 		static pUsername(username){
 			if(typeof(username) == 'undefined' || username == null) return false;
-			return username.length >= 2 && username.length <= 150;
+			return username.length >= 2 && username.length <= 100;
 		}
 
 		static pPassword(password){
 			if(typeof(password) == 'undefined' || password == null) return false;
-			return password.length >= 2 && password.length <= 150;
+			return password.length >= 2 && password.length <= 100;
 		}
 
 		static pMessage(message){
