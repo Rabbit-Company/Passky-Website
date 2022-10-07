@@ -23,6 +23,8 @@ initStorageCache.then(() => {
 	document.getElementById("dialog-button-cancel").innerText = lang[readData('lang')]["cancel"];
 });
 
+let passwordManagers = ["Passky","Lastpass","Bitwarden","Dashlane","NordPass","KeePassXC","Keeper","1Password","FireFox","Chromium"];
+
 function import_passky(){
 
 	if(!isSessionValid()) window.location.href = 'index.html';
@@ -382,6 +384,8 @@ function import_data(passwords, encrypted = false){
 		}
 
 	}).catch(err => {
+		document.getElementById('dialog-button').style.display = "";
+		document.getElementById('dialog-button-cancel').style.display = "";
 		switch(err){
 			case 1000:
 				changeDialog(0, lang[readData('lang')]["server_unreachable"]);
@@ -409,6 +413,20 @@ function import_data(passwords, encrypted = false){
 	});
 }
 
+function changeImportDialog(name, id){
+	document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}", name);
+	if(id == 0){
+		document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}", name).replace("{type}", "json");
+		document.getElementById('dialog-button').onclick = () => import_passky();
+	}else if(id == 2){
+		document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}", name).replace("{type}", "json");
+		document.getElementById('dialog-button').onclick = () => import_bitwarden();
+	}else{
+		document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}", name).replace("{type}", "csv");
+		document.getElementById('dialog-button').onclick = () => import_csv(id);
+	}
+}
+
 function changeDialog(style, text, text2){
 	switch(style){
 		case 1:
@@ -421,58 +439,7 @@ function changeDialog(style, text, text2){
 			document.getElementById('dialog-button').className = "primaryButton inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium focus:outline-none sm:w-auto sm:text-sm";
 			document.getElementById('dialog-button').innerText = lang[readData('lang')]["import"];
 
-			switch(text){
-				case 0:
-					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","Passky");
-					document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}","Passky").replace("{type}", "json");
-					document.getElementById('dialog-button').onclick = () => import_passky();
-				break;
-				case 1:
-					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","Lastpass");
-					document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}","Lastpass").replace("{type}", "csv");
-					document.getElementById('dialog-button').onclick = () => import_csv(1);
-				break;
-				case 2:
-					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","Bitwarden");
-					document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}","Bitwarden").replace("{type}", "json");
-					document.getElementById('dialog-button').onclick = () => import_bitwarden();
-				break;
-				case 3:
-					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","Dashlane");
-					document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}","Dashlane").replace("{type}", "csv");
-					document.getElementById('dialog-button').onclick = () => import_csv(3);
-				break;
-				case 4:
-					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","NordPass");
-					document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}","NordPass").replace("{type}", "csv");
-					document.getElementById('dialog-button').onclick = () => import_csv(4);
-				break;
-				case 5:
-					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","KeePassXC");
-					document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}","KeePassXC").replace("{type}", "csv");
-					document.getElementById('dialog-button').onclick = () => import_csv(5);
-				break;
-				case 6:
-					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","Keeper");
-					document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}","Keeper").replace("{type}", "csv");
-					document.getElementById('dialog-button').onclick = () => import_csv(6);
-				break;
-				case 7:
-					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","1Password");
-					document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}","1Password").replace("{type}", "csv");
-					document.getElementById('dialog-button').onclick = () => import_csv(7);
-				break;
-				case 8:
-					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","Firefox");
-					document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}","Firefox").replace("{type}", "csv");
-					document.getElementById('dialog-button').onclick = () => import_csv(8);
-				break;
-				case 9:
-					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","Chromium");
-					document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}","Chromium").replace("{type}", "csv");
-					document.getElementById('dialog-button').onclick = () => import_csv(9);
-				break;
-			}
+			changeImportDialog(passwordManagers[text], text);
 		break;
 		case 2:
 			//Import Error
