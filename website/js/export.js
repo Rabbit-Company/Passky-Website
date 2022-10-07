@@ -424,52 +424,52 @@ function changeDialog(style, text, text2){
 			switch(text){
 				case 0:
 					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","Passky");
-					document.getElementById('import-data').placeholder = "Paste data from Passky's exported json file.";
+					document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}","Passky").replace("{type}", "json");
 					document.getElementById('dialog-button').onclick = () => import_passky();
 				break;
 				case 1:
 					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","Lastpass");
-					document.getElementById('import-data').placeholder = "Paste data from Lastpass's exported csv file.";
+					document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}","Lastpass").replace("{type}", "csv");
 					document.getElementById('dialog-button').onclick = () => import_csv(1);
 				break;
 				case 2:
 					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","Bitwarden");
-					document.getElementById('import-data').placeholder = "Paste data from Bitwarden's exported json file.";
+					document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}","Bitwarden").replace("{type}", "json");
 					document.getElementById('dialog-button').onclick = () => import_bitwarden();
 				break;
 				case 3:
 					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","Dashlane");
-					document.getElementById('import-data').placeholder = "Paste data from Dashlane's exported csv file.";
+					document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}","Dashlane").replace("{type}", "csv");
 					document.getElementById('dialog-button').onclick = () => import_csv(3);
 				break;
 				case 4:
 					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","NordPass");
-					document.getElementById('import-data').placeholder = "Paste data from NordPass's exported csv file.";
+					document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}","NordPass").replace("{type}", "csv");
 					document.getElementById('dialog-button').onclick = () => import_csv(4);
 				break;
 				case 5:
 					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","KeePassXC");
-					document.getElementById('import-data').placeholder = "Paste data from KeePassXC's exported csv file.";
+					document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}","KeePassXC").replace("{type}", "csv");
 					document.getElementById('dialog-button').onclick = () => import_csv(5);
 				break;
 				case 6:
 					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","Keeper");
-					document.getElementById('import-data').placeholder = "Paste data from Keeper's exported csv file.";
+					document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}","Keeper").replace("{type}", "csv");
 					document.getElementById('dialog-button').onclick = () => import_csv(6);
 				break;
 				case 7:
 					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","1Password");
-					document.getElementById('import-data').placeholder = "Paste data from 1Password's exported csv file.";
+					document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}","1Password").replace("{type}", "csv");
 					document.getElementById('dialog-button').onclick = () => import_csv(7);
 				break;
 				case 8:
 					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","Firefox");
-					document.getElementById('import-data').placeholder = "Paste data from Firefox's exported csv file.";
+					document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}","Firefox").replace("{type}", "csv");
 					document.getElementById('dialog-button').onclick = () => import_csv(8);
 				break;
 				case 9:
 					document.getElementById('dialog-title').innerText = lang[readData('lang')]["import_from"].replace("{name}","Chromium");
-					document.getElementById('import-data').placeholder = "Paste data from Chromium's exported csv file.";
+					document.getElementById('import-data').placeholder = lang[readData('lang')]["import_paste"].replace("{name}","Chromium").replace("{type}", "csv");
 					document.getElementById('dialog-button').onclick = () => import_csv(9);
 				break;
 			}
@@ -503,8 +503,8 @@ function changeDialog(style, text, text2){
 			document.getElementById('dialog-icon').className = "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10";
 			document.getElementById('dialog-icon').innerHTML = "<svg class='h-6 w-6 text-blue-600 animate-spin' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' aria-hidden='true'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><path d='M12 3a9 9 0 1 0 9 9'></path></svg>";
 
-			document.getElementById('dialog-title').innerText = "Importing";
-			document.getElementById('dialog-text').innerHTML = "Importing {amount} passwords...".replace("{amount}", "<b>" + text + "</b>");
+			document.getElementById('dialog-title').innerText = lang[readData('lang')]["importing"];
+			document.getElementById('dialog-text').innerHTML = lang[readData('lang')]["importing_passwords"].replace("{amount}", "<b>" + text + "</b>");
 
 			document.getElementById('dialog-button').style.display = "none";
 			document.getElementById('dialog-button-cancel').style.display = "none";
