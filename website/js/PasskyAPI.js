@@ -49,7 +49,7 @@
 
 		static pMessage(message){
 			if(typeof(message) == 'undefined' || message == null) return false;
-			return message.length >= 0 && message.length <= 10000;
+			return message.length >= 0 && message.length <= 5000;
 		}
 
 		static positiveInteger(number){
