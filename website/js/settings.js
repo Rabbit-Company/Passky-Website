@@ -23,6 +23,10 @@ initStorageCache.then(() => {
 	document.getElementById("add-yubico-btn").innerText = lang[readData('lang')]["add"];
 	document.getElementById("remove-yubico-btn").innerText = lang[readData('lang')]["remove"];
 
+	document.getElementById("label-upgrade-account").innerText = lang[readData('lang')]["upgrade_account"];
+	document.getElementById("validate-license-btn").innerText = lang[readData('lang')]["validate"];
+	document.getElementById("license-key").placeholder = lang[readData('lang')]["license_key"];
+
 	document.getElementById("delete-account-title").innerText = lang[readData('lang')]["delete_account"];
 	document.getElementById("delete-account-text").innerText = lang[readData('lang')]["delete_account_info"];
 	document.getElementById("delete-account-btn").innerText = lang[readData('lang')]["delete_account"];
@@ -58,11 +62,11 @@ initStorageCache.then(() => {
 	}
 
 	if(readData('premiumExpires') != "null"){
-		document.getElementById("account-type").innerText = "Premium";
-		document.getElementById("account-expiration").innerText = readData('premiumExpires');
+		document.getElementById("account-type").innerHTML = lang[readData('lang')]["account"] + ": <b>" + lang[readData('lang')]["premium"] + "</b>";
+		document.getElementById("account-expiration").innerHTML = lang[readData('lang')]["expiration"] + ": <b>" + readData('premiumExpires') + "</b>";
 	}else{
-		document.getElementById("account-type").innerText = "Free";
-		document.getElementById("account-expiration").innerText = "Never";
+		document.getElementById("account-type").innerHTML = lang[readData('lang')]["account"] + ": <b>" + lang[readData('lang')]["free"] + "</b>";
+		document.getElementById("account-expiration").innerHTML = lang[readData('lang')]["expiration"] + ": <b>" + lang[readData('lang')]["never"] + "</b>";
 	}
 
 	if (readData('yubico') == "null" || readData('yubico') == '') {

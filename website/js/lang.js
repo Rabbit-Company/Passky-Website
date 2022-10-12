@@ -87,6 +87,14 @@ const lang = {
 		"total_passwords": "Total Passwords",
 		"decryption_time": "Decryption Time",
 		"client_version": "Client Version",
+		"upgrade_account": "Upgrade Account",
+		"validate": "Validate",
+		"license_key": "License Key",
+		"account": "Account",
+		"expiration": "Expiration",
+		"free": "Free",
+		"premium": "Premium",
+		"never": "Never",
 		"license_added_successfully": "Your account has been successfully upgraded to Premium and it will last until {date}."
 	},
 	"ja": {
