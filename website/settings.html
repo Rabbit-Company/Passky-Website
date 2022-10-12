@@ -216,6 +216,39 @@
                   </div>
               </div>
             </li>
+						<!-- Upgrade Account -->
+            <li class="secondaryBackgroundColor shadow overflow-hidden rounded-md px-6 py-4">
+              <div>
+                  <label id="label-upgrade-account" class="secondaryColor block text-sm font-medium sm:mt-px sm:pt-2">
+                    Upgrade Account
+                  </label>
+                  <div class="mt-5 flex items-center">
+										<div class="flex-initial w-80">
+											<div class="relative rounded-md shadow-sm">
+												<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+													<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 secondaryColor" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+														<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+														<circle cx="8" cy="15" r="4"></circle>
+														<line x1="10.85" y1="12.15" x2="19" y2="4"></line>
+														<line x1="18" y1="5" x2="20" y2="7"></line>
+														<line x1="15" y1="8" x2="17" y2="10"></line>
+													</svg>
+												</div>
+												<input id="license-key" name="license-key" type="text" autocomplete="off" required class="tertiaryBackgroundColor tertiaryColor primaryBorderColor appearance-none rounded-l-md block w-full pl-10 px-4 py-2 border focus:outline-none focus:z-10 sm:text-sm" placeholder="License Key">
+											</div>
+										</div>
+                    <button id="validate-license-btn" type="button" class="flex-initial w-20 successButton font-bold inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-r-md focus:outline-none sm:text-sm">
+                      Validate
+                    </button>
+                  </div>
+									<label id="info-upgrade-account" class="secondaryColor block text-sm font-medium sm:mt-px sm:pt-2">
+										<ul>
+											<li>Account: <b id="account-type">Free</b></li>
+											<li>Expiration: <b id="account-expiration">Never</b></li>
+										</ul>
+									</label>
+              </div>
+            </li>
             <!-- Delete account -->
             <li class="secondaryBackgroundColor shadow overflow-hidden rounded-md px-6 py-4">
               <div>

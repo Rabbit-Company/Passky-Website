@@ -57,6 +57,14 @@ initStorageCache.then(() => {
 		document.getElementById("toggle-auto-search").className = "dangerButton font-bold inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md focus:outline-none sm:text-sm";
 	}
 
+	if(readData('premiumExpires') != "null"){
+		document.getElementById("account-type").innerText = "Premium";
+		document.getElementById("account-expiration").innerText = readData('premiumExpires');
+	}else{
+		document.getElementById("account-type").innerText = "Free";
+		document.getElementById("account-expiration").innerText = "Never";
+	}
+
 	if (readData('yubico') == "null" || readData('yubico') == '') {
 		hide("remove-yubico-btn");
 	} else {
@@ -466,4 +474,40 @@ document.getElementById("add-yubico-btn").addEventListener("click", () => {
 document.getElementById("remove-yubico-btn").addEventListener("click", () => {
 	changeDialog(8);
 	show('dialog');
+});
+
+document.getElementById("validate-license-btn").addEventListener('click', () => {
+	let license = document.getElementById('license-key').value;
+
+	Passky.upgradeAccount(readData('url'), readData('username'), readData('token'), license).then(response => {
+
+		if (response['error'] != 0) {
+			changeDialog(2, errors[readData('lang')][response['error']]);
+			show('dialog');
+			return;
+		}
+
+		writeData('premiumExpires', response['premium_expires']);
+		changeDialog(7, lang[readData('lang')]["license_added_successfully"].replace("{date}", response['premium_expires']));
+		show('dialog');
+	}).catch(err => {
+		switch(err){
+			case 1001:
+				changeDialog(2, lang[readData('lang')]["url_invalid"]);
+			break;
+			case 1003:
+				changeDialog(2, errors[readData('lang')]["25"]);
+			break;
+			case 1005:
+				changeDialog(2, errors[readData('lang')]["12"]);
+			break;
+			case 1014:
+				changeDialog(2, errors[readData('lang')]["29"]);
+			break;
+			default:
+				changeDialog(2, lang[readData('lang')]["server_unreachable"]);
+			break;
+		}
+		show('dialog');
+	});
 });

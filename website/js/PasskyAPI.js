@@ -62,6 +62,11 @@
 			return id.length == 44;
 		}
 
+		static license(license){
+			if(typeof(license) == 'undefined' || license == null) return false;
+			return license.length == 29;
+		}
+
 		static json(json){
 			try{
 				JSON.parse(json);
@@ -510,6 +515,38 @@
 
 				fetch(server + "?action=forgotUsername", {
 					method: "POST",
+					body: data
+				}).then((result) => {
+					if (result.status != 200) return reject(1000);
+					return result.text();
+				}).then((response) => {
+					try{
+						return resolve(JSON.parse(response));
+					}catch(error){
+						return reject(1000);
+					}
+				}).catch(() => {
+					return reject(1000);
+				});
+			});
+		}
+
+		static upgradeAccount(server, username, token, license){
+			return new Promise((resolve, reject) => {
+				if(!Validate.url(server)) return reject(1001);
+				if(!Validate.username(username)) return reject(1005);
+				if(!Validate.token(token)) return reject(1003);
+				if(!Validate.license(license)) return reject(1014);
+
+				let headers = new Headers();
+				headers.append('Authorization', 'Basic ' + btoa(username + ":" + token));
+
+				let data = new FormData();
+				data.append("license", license);
+
+				fetch(server + "?action=upgradeAccount", {
+					method: "POST",
+					headers: headers,
 					body: data
 				}).then((result) => {
 					if (result.status != 200) return reject(1000);

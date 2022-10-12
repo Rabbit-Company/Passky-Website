@@ -86,7 +86,8 @@ const lang = {
 		"auto_search": "Auto Search",
 		"total_passwords": "Total Passwords",
 		"decryption_time": "Decryption Time",
-		"client_version": "Client Version"
+		"client_version": "Client Version",
+		"license_added_successfully": "Your account has been successfully upgraded to Premium and it will last until {date}."
 	},
 	"ja": {
 		"server": "サーバ",
@@ -1992,6 +1993,8 @@ const errors = {
 		"26": "Two-factor authentication is already enabled.",
 		"27": "Two-factor authentication is not enabled.",
 		"28": "Mail is not enabled on this server.",
+		"29": "License key is invalid!",
+		"30": "This license key has already been used.",
 		"300": "Website is too long!",
 		"301": "Username is too long!",
 		"302": "Password is too long!",
