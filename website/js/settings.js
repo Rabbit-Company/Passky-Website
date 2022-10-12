@@ -492,6 +492,7 @@ document.getElementById("validate-license-btn").addEventListener('click', () => 
 		}
 
 		writeData('premiumExpires', response['premium_expires']);
+		writeData('maxPasswords', response['max_passwords']);
 		changeDialog(7, lang[readData('lang')]["license_added_successfully"].replace("{date}", response['premium_expires']));
 		show('dialog');
 	}).catch(err => {
