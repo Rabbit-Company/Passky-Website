@@ -24,28 +24,39 @@ loadLang().then(() => {
 
 		let start = new Date().getTime();
 		if (readData('passwords') !== null && typeof(readData('passwords')) !== 'undefined') {
-			const passwords = JSON.parse(readData('passwords'));
+			let passwords = JSON.parse(readData('passwords'));
 			const websiteIcons = readData('websiteIcons');
 			const maxPasswords = readData('maxPasswords');
-			let amount = (passwords.length > 0) ? passwords.length : 0;
-			document.getElementById("stats-passwords").innerText = ((maxPasswords < 0) ? amount : amount + " / " + maxPasswords);
-
-			//Page settings
-			const page = (parms.get("page") != null && IsNumeric(parms.get("page")) && parseFloat(parms.get("page")) >= 1) ? parseFloat(parms.get("page")) : 1;
-			const limit = 25;
-			const startFrom = (page - 1) * limit;
-			const totalPages = Math.ceil(amount / limit);
-			if(totalPages != 0 && page > totalPages) window.location.href = 'passwords.html?page=' + totalPages;
-			const stopOn = (startFrom+limit > amount) ? amount : startFrom+limit;
 
 			//Search
 			let search = null;
 			if (parms.get("search") != null && parms.get("search").length >= 1) {
+				fhide('pagination');
 				search = parms.get("search");
+				document.getElementById("search").value = search;
+				let tempArray = [];
+				for(let i = 0; i < passwords.length; i++){
+					const website = XChaCha20.decrypt(passwords[i].website, decryptPassword(readData('password')));
+					const username = XChaCha20.decrypt(passwords[i].username, decryptPassword(readData('password')));
+
+					if(website.includes(search) || username.includes(search)) tempArray.push(passwords[i]);
+				}
+				passwords = tempArray;
 			}
 
+			let amount = (passwords.length > 0) ? passwords.length : 0;
+			document.getElementById("stats-passwords").innerText = ((maxPasswords < 0) ? amount : amount + " / " + maxPasswords);
+
+			//Page settings
+			let page = (parms.get("page") != null && IsNumeric(parms.get("page")) && parseFloat(parms.get("page")) >= 1) ? parseFloat(parms.get("page")) : 1;
+			let limit = 25;
+			let startFrom = (page - 1) * limit;
+			let totalPages = Math.ceil(amount / limit);
+			if(totalPages != 0 && page > totalPages) window.location.href = 'passwords.html?page=' + totalPages;
+			let stopOn = (startFrom+limit > amount) ? amount : startFrom+limit;
+
 			//Pagination
-			if(search != null || totalPages <= 1) hide('pagination');
+			if(search != null || totalPages <= 1) fhide('pagination');
 			document.getElementById("label-startFrom").innerText = startFrom+1;
 			document.getElementById("label-stopOn").innerText = stopOn;
 			document.getElementById("label-totalPasswords").innerText = amount;
@@ -148,8 +159,10 @@ loadLang().then(() => {
 	}
 });
 
-document.getElementById("search").addEventListener("keyup", () => {
-	filterPasswords();
+document.getElementById("search").addEventListener("keypress", (event) => {
+	if (event.key !== "Enter") return;
+	event.preventDefault();
+	window.location.assign("?search=" + document.getElementById("search").value);
 });
 
 document.getElementById("page").addEventListener("keypress", (event) => {
@@ -561,24 +574,4 @@ function deletePassword(password_id) {
 			break;
 		}
 	});
-}
-
-function filterPasswords() {
-	let input, filter, table, tr, td, i, txtValue;
-	input = document.getElementById("search");
-	filter = input.value.toUpperCase();
-	table = document.getElementById("table-passwords");
-	tr = table.getElementsByTagName("tr");
-
-	for (i = 0; i < tr.length; i++) {
-		td = tr[i].getElementsByTagName("td")[0];
-		if (td) {
-			txtValue = td.textContent || td.innerText;
-			if (txtValue.toUpperCase().indexOf(filter) > -1) {
-				tr[i].style.display = "";
-			} else {
-				tr[i].style.display = "none";
-			}
-		}
-	}
 }
