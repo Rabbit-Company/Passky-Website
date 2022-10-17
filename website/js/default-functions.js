@@ -1,3 +1,10 @@
+var parms = new URLSearchParams(window.location.search);
+const IsNumeric = (num) => /^-{0,1}\d*\.{0,1}\d+$/.test(num);
+
+function fhide(element){
+	document.getElementById(element).style.display = 'none';
+}
+
 function hide(element){
 	document.getElementById(element).style.visibility = 'hidden';
 }
@@ -37,10 +44,10 @@ function toggleMenu(){
 function toggleButton(id){
 	let button = document.getElementById(id);
 	if(button.className.includes('successButton')){
-		button.innerText = lang[readData('lang')]["disable"];
+		button.innerText = lang["disable"];
 		button.className = "dangerButton font-bold inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md focus:outline-none sm:text-sm";
 	}else{
-		button.innerText = lang[readData('lang')]["enable"];
+		button.innerText = lang["enable"];
 		button.className = "successButton font-bold inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md focus:outline-none sm:text-sm";
 	}
 }

@@ -33,6 +33,7 @@ function deleteData(key){
 const initStorageCache = getAllStorageData().then(items => {
 	Object.assign(storageData, items);
 	setTheme();
+	loadLang();
 });
 
 function getAllStorageData() {
@@ -65,6 +66,20 @@ function setTheme(){
 
 	if(!(["dark", "tokyoNight", "monokai", "solarizedDark", "light", "blue", "nord", "dracula", "gray"].includes(readData('theme')))) writeData('theme', 'dark');
 	document.getElementById("css-theme").href = "css/themes/" + readData('theme') + ".css";
+}
+
+function loadLang(){
+	return new Promise((resolve, reject) => {
+		fetch("lang/" + readData('lang') + "/lang.json")
+		.then(response => {
+			if (response.ok) return response.json();
+		}).then(json => {
+			lang = json;
+			resolve(json);
+		}).catch(err => {
+			reject(lang);
+		});
+	});
 }
 
 document.onkeydown = function(e) {
