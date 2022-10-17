@@ -49,7 +49,7 @@ loadLang().then(() => {
 
 			//Page settings
 			let page = (parms.get("page") != null && IsNumeric(parms.get("page")) && parseFloat(parms.get("page")) >= 1) ? parseFloat(parms.get("page")) : 1;
-			let limit = 25;
+			let limit = (search == null) ? 25 : amount;
 			let startFrom = (page - 1) * limit;
 			let totalPages = Math.ceil(amount / limit);
 			if(totalPages != 0 && page > totalPages) window.location.href = 'passwords.html?page=' + totalPages;
