@@ -1,4 +1,4 @@
-loadLang().then(() => {
+loadData().then(() => {
 
 	if(readData('url') !== null && typeof(readData('url')) !== 'undefined') document.getElementById('passky-server').value = readData('url');
 

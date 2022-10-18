@@ -1,4 +1,4 @@
-loadLang().then(() => {
+loadData().then(() => {
 	startAuthenticator();
 
 	document.getElementById("passwords-link").innerText = lang["passwords"];

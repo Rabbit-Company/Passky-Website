@@ -30,6 +30,19 @@ function deleteData(key){
 	delete storageData[key];
 }
 
+function getAllStorageData() {
+	return new Promise((resolve, reject) => {
+		try{
+			chrome.storage.local.get(null, (items) => {
+				if (chrome.runtime.lastError) return reject(chrome.runtime.lastError);
+				resolve(items);
+			});
+		}catch{
+			resolve({ ...localStorage });
+		}
+	});
+}
+
 function detectLanguage(){
 	for(const language of navigator.languages){
 		if(Object.keys(lang).includes(language)){
@@ -49,9 +62,12 @@ function setTheme(){
 	document.getElementById("css-theme").href = "css/themes/" + readData('theme') + ".css";
 }
 
-function loadLang(){
+function loadData(){
 	return new Promise((resolve, reject) => {
-		initStorageCache.then(() => {
+		getAllStorageData().then(items => {
+			Object.assign(storageData, items);
+			setTheme();
+
 			let url = "lang/" + readData('lang') + "/lang.json";
 			try{
 				url = chrome.runtime.getURL(url);
@@ -68,24 +84,6 @@ function loadLang(){
 		});
 	});
 }
-
-function getAllStorageData() {
-	return new Promise((resolve, reject) => {
-		try{
-			chrome.storage.local.get(null, (items) => {
-				if (chrome.runtime.lastError) return reject(chrome.runtime.lastError);
-				resolve(items);
-			});
-		}catch{
-			resolve({ ...localStorage });
-		}
-	});
-}
-
-const initStorageCache = getAllStorageData().then(items => {
-	Object.assign(storageData, items);
-	setTheme();
-});
 
 document.onkeydown = function(e) {
 	if(e.key == "F12") return false;

@@ -1,4 +1,4 @@
-loadLang().then(() => {
+loadData().then(() => {
 
 	if(isSessionValid()) window.location.href = 'passwords.html';
 
