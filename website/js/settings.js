@@ -27,6 +27,10 @@ loadData().then(() => {
 	document.getElementById("validate-license-btn").innerText = lang["validate"];
 	document.getElementById("license-key").placeholder = lang["license_key"];
 
+	document.getElementById("delete-passwords-title").innerText = lang["delete_passwords"];
+	document.getElementById("delete-passwords-text").innerText = lang["delete_passwords_info"];
+	document.getElementById("delete-passwords-btn").innerText = lang["delete_passwords"];
+
 	document.getElementById("delete-account-title").innerText = lang["delete_account"];
 	document.getElementById("delete-account-text").innerText = lang["delete_account_info"];
 	document.getElementById("delete-account-btn").innerText = lang["delete_account"];
@@ -87,6 +91,38 @@ loadData().then(() => {
 	let minutes = document.getElementsByClassName("addMinutes");
 	for (let i = 0; i < minutes.length; i++) minutes[i].innerText = minutes[i].innerText + " " + lang["minutes"];
 });
+
+function deletePasswords() {
+
+	Passky.deletePasswords(readData('url'), readData('username'), readData('token')).then(response => {
+
+		if (response['error'] != 0) {
+			changeDialog(2, lang[response['error']]);
+			show('dialog');
+			return;
+		}
+
+		refreshPasswords();
+
+	}).catch(err => {
+		switch(err){
+			case 1001:
+				changeDialog(2, lang["url_invalid"]);
+			break;
+			case 1003:
+				changeDialog(2, lang["25"]);
+			break;
+			case 1005:
+				changeDialog(2, lang["12"]);
+			break;
+			default:
+				changeDialog(2, lang["server_unreachable"]);
+			break;
+		}
+		show('dialog');
+	});
+
+}
 
 function deleteAccount() {
 
@@ -403,6 +439,20 @@ function changeDialog(style, text) {
 			document.getElementById('dialog-button').innerText = lang["remove"];
 			document.getElementById('dialog-button').onclick = () => removeYubiKey(document.getElementById('yubico-otp').value);
 			break;
+		case 9:
+			//Delete passwords dialog
+			document.getElementById('dialog-icon').className = "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10";
+			document.getElementById('dialog-icon').innerHTML = "<svg class='h-6 w-6 text-red-600' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' aria-hidden='true'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z' /></svg>";
+
+			document.getElementById('dialog-title').innerText = lang["delete_passwords"];
+			document.getElementById('dialog-text').innerText = lang["delete_passwords_confirmation"];
+
+			document.getElementById('dialog-button-cancel').style.display = 'initial';
+
+			document.getElementById('dialog-button').className = "dangerButton inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium focus:outline-none sm:w-auto sm:text-sm";
+			document.getElementById('dialog-button').innerText = lang["delete"];
+			document.getElementById('dialog-button').onclick = () => deletePasswords();
+			break;
 	}
 }
 
@@ -419,6 +469,11 @@ document.getElementById("settings-theme").addEventListener("change", () => {
 document.getElementById("settings-session").addEventListener("change", () => {
 	writeData('sessionDuration', document.getElementById("settings-session").value);
 	location.reload();
+});
+
+document.getElementById("delete-passwords-btn").addEventListener("click", () => {
+	changeDialog(9);
+	show('dialog');
 });
 
 document.getElementById("delete-account-btn").addEventListener("click", () => {

@@ -122,7 +122,7 @@ function refreshPasswords(){
 			writeData('passwords', '{}');
 		}
 
-		window.location.href = 'passwords.html';
+		location.assign('passwords.html');
 	}).catch();
 
 }
@@ -154,7 +154,7 @@ function isSessionValid(){
 
 function logout(){
 	clearStorage();
-	window.location.href = 'index.html';
+	location.assign('index.html');
 }
 
 function startAuthenticator(){

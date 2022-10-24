@@ -360,6 +360,33 @@
 			});
 		}
 
+		static deletePasswords(server, username, token){
+			return new Promise((resolve, reject) => {
+				if(!Validate.url(server)) return reject(1001);
+				if(!Validate.username(username)) return reject(1005);
+				if(!Validate.token(token)) return reject(1003);
+
+				let headers = new Headers();
+				headers.append('Authorization', 'Basic ' + btoa(username + ":" + token));
+
+				fetch(server + "?action=deletePasswords", {
+					method: "POST",
+					headers: headers
+				}).then((result) => {
+					if (result.status != 200) return reject(1000);
+					return result.text();
+				}).then((response) => {
+					try{
+						return resolve(JSON.parse(response));
+					}catch(error){
+						return reject(1000);
+					}
+				}).catch(() => {
+					return reject(1000);
+				});
+			});
+		}
+
 		static deleteAccount(server, username, token){
 			return new Promise((resolve, reject) => {
 				if(!Validate.url(server)) return reject(1001);
