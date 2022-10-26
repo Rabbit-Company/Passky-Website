@@ -2,7 +2,10 @@ loadData().then(() => {
 
 	if(isSessionValid()) window.location.href = 'passwords.html';
 
-	if(readData('url') !== null && typeof(readData('url')) !== 'undefined') document.getElementById('passky-server').value = readData('url');
+	if(readData('url') !== null && typeof(readData('url')) !== 'undefined'){
+		document.getElementById('passky-server').value = readData('url');
+		toggleServerPicker();
+	}
 	if(readData('username') !== null && typeof(readData('username')) !== 'undefined') document.getElementById('username').value = readData('username');
 
 	//Languages
@@ -28,6 +31,22 @@ document.getElementById("forgot_username").addEventListener("click", () => {
 	changeDialog(2);
 	show("dialog");
 });
+
+document.getElementById("server-picker").addEventListener("click", () => {
+	toggleServerPicker();
+});
+
+function toggleServerPicker(){
+	if(isfHidden('passky-server')){
+		fhide('passky-server2');
+		fshow('passky-server', 'block');
+		document.getElementById("server-picker").innerHTML = "<svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5 secondaryColor' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><circle cx='6' cy='10' r='2'></circle><path d='M6 6v2'></path><path d='M6 12v8'></path><circle cx='12' cy='16' r='2'></circle><path d='M12 4v4'></path><path d='M12 12v2'></path><path d='M12 18v2'></path><circle cx='18' cy='7' r='2'></circle><path d='M18 4v1'></path><path d='M18 9v5'></path><path d='M18 18v2'></path><path d='M3 3l18 18'></path></svg>";
+	}else{
+		fhide('passky-server');
+		fshow('passky-server2', 'block');
+		document.getElementById("server-picker").innerHTML = "<svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5 secondaryColor' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><rect x='4' y='8' width='4' height='4'></rect><line x1='6' y1='4' x2='6' y2='8'></line><line x1='6' y1='12' x2='6' y2='20'></line><rect x='10' y='14' width='4' height='4'></rect><line x1='12' y1='4' x2='12' y2='14'></line><line x1='12' y1='18' x2='12' y2='20'></line><rect x='16' y='5' width='4' height='4'></rect><line x1='18' y1='4' x2='18' y2='5'></line><line x1='18' y1='9' x2='18' y2='20'></line></svg>";
+	}
+}
 
 function changeDialog(style, text){
 	switch(style){
@@ -86,10 +105,14 @@ function changeDialog(style, text){
 
 function login_check(){
 
-	const url = document.getElementById("passky-server").value;
+	let url = document.getElementById("passky-server").value;
 	const username = document.getElementById("username").value.toLowerCase();
 	const password = document.getElementById("password").value;
 	const otp = document.getElementById("otp").value.replace(/\s/g, '');
+
+	if(isfHidden('passky-server')){
+		url = document.getElementById('passky-server2').value;
+	}
 
 	Passky.getToken(url, username, password, otp).then(response => {
 
@@ -124,7 +147,6 @@ function login_check(){
 		window.location.href = 'passwords.html';
 
 	}).catch(err => {
-		console.log(err);
 		switch(err){
 			case 1000:
 				changeDialog(1, lang["server_unreachable"]);
