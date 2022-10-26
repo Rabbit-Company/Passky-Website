@@ -5,6 +5,10 @@ function fhide(element){
 	document.getElementById(element).style.display = 'none';
 }
 
+function fshow(element, method){
+	document.getElementById(element).style.display = method;
+}
+
 function hide(element){
 	document.getElementById(element).style.visibility = 'hidden';
 }
@@ -15,6 +19,10 @@ function show(element){
 
 function isHidden(element){
 	return (document.getElementById(element).style.visibility == 'hidden');
+}
+
+function isfHidden(element){
+	return (document.getElementById(element).style.display == 'none');
 }
 
 function setText(element, text){
