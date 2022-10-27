@@ -67,7 +67,7 @@ loadData().then(() => {
 		let stopOn = (startFrom+limit > amount) ? amount : startFrom+limit;
 
 		//Pagination
-		if(search != null || totalPages <= 1) fhide('pagination');
+		if(search == null && totalPages > 1) fshow('pagination', 'block');
 		document.getElementById("label-startFrom").innerText = startFrom+1;
 		document.getElementById("label-stopOn").innerText = stopOn;
 		document.getElementById("label-totalPasswords").innerText = amount;
