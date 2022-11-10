@@ -83,7 +83,7 @@
 				if(!Validate.url(server)) return reject(1001);
 
 				fetch(server + "?action=getInfo").then((result) => {
-					if (result.status != 200) return reject(1000);
+					if (result.status != 200 && result.status != 429) return reject(1000);
 						return result.text();
 					}).then((response) => {
 						try{
@@ -102,7 +102,7 @@
 				if(!Validate.url(server)) return reject(1001);
 
 				fetch(server + "?action=getStats").then((result) => {
-					if (result.status != 200) return reject(1000);
+					if (result.status != 200 && result.status != 429) return reject(1000);
 						return result.text();
 					}).then((response) => {
 						try{
@@ -134,7 +134,7 @@
 					headers: headers,
 					body: data
 				}).then((result) => {
-					if (result.status != 200) return reject(1000);
+					if (result.status != 200 && result.status != 429) return reject(1000);
 					return result.text();
 				}).then((response) => {
 					try{
@@ -167,7 +167,7 @@
 					headers: headers,
 					body: data
 				}).then((result) => {
-					if (result.status != 200) return reject(1000);
+					if (result.status != 200 && result.status != 429) return reject(1000);
 					return result.text();
 				}).then((response) => {
 					try{
@@ -204,7 +204,7 @@
 					method: "POST",
 					headers: headers
 				}).then((result) => {
-					if (result.status != 200) return reject(1000);
+					if (result.status != 200 && result.status != 429) return reject(1000);
 					return result.text();
 				}).then((response) => {
 					try{
@@ -263,7 +263,7 @@
 					headers: headers,
 					body: data
 				}).then((result) => {
-					if (result.status != 200) return reject(1000);
+					if (result.status != 200 && result.status != 429) return reject(1000);
 					return result.text();
 				}).then((response) => {
 					try{
@@ -314,7 +314,7 @@
 					headers: headers,
 					body: data
 				}).then((result) => {
-					if (result.status != 200) return reject(1000);
+					if (result.status != 200 && result.status != 429) return reject(1000);
 					return result.text();
 				}).then((response) => {
 					try{
@@ -346,7 +346,7 @@
 					headers: headers,
 					body: data
 				}).then((result) => {
-					if (result.status != 200) return reject(1000);
+					if (result.status != 200 && result.status != 429) return reject(1000);
 					return result.text();
 				}).then((response) => {
 					try{
@@ -373,7 +373,7 @@
 					method: "POST",
 					headers: headers
 				}).then((result) => {
-					if (result.status != 200) return reject(1000);
+					if (result.status != 200 && result.status != 429) return reject(1000);
 					return result.text();
 				}).then((response) => {
 					try{
@@ -400,7 +400,7 @@
 					method: "POST",
 					headers: headers
 				}).then((result) => {
-					if (result.status != 200) return reject(1000);
+					if (result.status != 200 && result.status != 429) return reject(1000);
 					return result.text();
 				}).then((response) => {
 					try{
@@ -427,7 +427,7 @@
 					method: "POST",
 					headers: headers
 				}).then((result) => {
-					if (result.status != 200) return reject(1000);
+					if (result.status != 200 && result.status != 429) return reject(1000);
 					return result.text();
 				}).then((response) => {
 					try{
@@ -454,7 +454,7 @@
 					method: "POST",
 					headers: headers
 				}).then((result) => {
-					if (result.status != 200) return reject(1000);
+					if (result.status != 200 && result.status != 429) return reject(1000);
 					return result.text();
 				}).then((response) => {
 					try{
@@ -486,7 +486,7 @@
 					headers: headers,
 					body: data
 				}).then((result) => {
-					if (result.status != 200) return reject(1000);
+					if (result.status != 200 && result.status != 429) return reject(1000);
 					return result.text();
 				}).then((response) => {
 					try{
@@ -518,7 +518,7 @@
 					headers: headers,
 					body: data
 				}).then((result) => {
-					if (result.status != 200) return reject(1000);
+					if (result.status != 200 && result.status != 429) return reject(1000);
 					return result.text();
 				}).then((response) => {
 					try{
@@ -544,7 +544,7 @@
 					method: "POST",
 					body: data
 				}).then((result) => {
-					if (result.status != 200) return reject(1000);
+					if (result.status != 200 && result.status != 429) return reject(1000);
 					return result.text();
 				}).then((response) => {
 					try{
@@ -576,7 +576,7 @@
 					headers: headers,
 					body: data
 				}).then((result) => {
-					if (result.status != 200) return reject(1000);
+					if (result.status != 200 && result.status != 429) return reject(1000);
 					return result.text();
 				}).then((response) => {
 					try{
@@ -637,7 +637,7 @@
 					headers: headers,
 					body: data
 				}).then((result) => {
-					if (result.status != 200) return reject(1000);
+					if (result.status != 200 && result.status != 429) return reject(1000);
 					return result.text();
 				}).then((response) => {
 					try{
