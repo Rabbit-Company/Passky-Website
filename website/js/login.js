@@ -2,10 +2,17 @@ loadData().then(() => {
 
 	if(isSessionValid()) window.location.href = 'passwords.html';
 
-	if(readData('url') !== null && typeof(readData('url')) !== 'undefined'){
-		document.getElementById('passky-server').value = readData('url');
-		toggleServerPicker();
+	let server = readData('url');
+	if(server !== null && typeof(server) !== 'undefined'){
+		let servers = [...document.getElementById('passky-server2').options].map(v => v.value);
+		if(servers.includes(server)){
+			document.getElementById('passky-server2').value = server;
+		}else{
+			document.getElementById('passky-server').value = server;
+			toggleServerPicker();
+		}
 	}
+
 	if(readData('username') !== null && typeof(readData('username')) !== 'undefined') document.getElementById('username').value = readData('username');
 
 	//Languages
