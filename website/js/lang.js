@@ -147,6 +147,7 @@ var lang = {
 	"deleting_passwords": "Deleting passwords...",
 	"deleting_account": "Deleting account...",
 	"signing_in": "Signing in...",
+	"signing_up": "Signing up...",
 	"sending_email": "Sending email...",
 	"enabling_2fa": "Enabling 2FA...",
 	"disabling_2fa": "Disabling 2FA...",
