@@ -9,7 +9,7 @@ loadData().then(() => {
 			document.getElementById('passky-server2').value = server;
 		}else{
 			document.getElementById('passky-server').value = server;
-			toggleServerPicker();
+			toggleServerPicker('passky-server', 'passky-server2', 'server-picker');
 		}
 	}
 
@@ -40,18 +40,18 @@ document.getElementById("forgot_username").addEventListener("click", () => {
 });
 
 document.getElementById("server-picker").addEventListener("click", () => {
-	toggleServerPicker();
+	toggleServerPicker('passky-server', 'passky-server2', 'server-picker');
 });
 
-function toggleServerPicker(){
-	if(isfHidden('passky-server')){
-		fhide('passky-server2');
-		fshow('passky-server', 'block');
-		document.getElementById("server-picker").innerHTML = "<svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5 secondaryColor' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><circle cx='6' cy='10' r='2'></circle><path d='M6 6v2'></path><path d='M6 12v8'></path><circle cx='12' cy='16' r='2'></circle><path d='M12 4v4'></path><path d='M12 12v2'></path><path d='M12 18v2'></path><circle cx='18' cy='7' r='2'></circle><path d='M18 4v1'></path><path d='M18 9v5'></path><path d='M18 18v2'></path><path d='M3 3l18 18'></path></svg>";
+function toggleServerPicker(id, id2, buttonID){
+	if(isfHidden(id)){
+		fhide(id2);
+		fshow(id, 'block');
+		document.getElementById(buttonID).innerHTML = "<svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5 secondaryColor' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><circle cx='6' cy='10' r='2'></circle><path d='M6 6v2'></path><path d='M6 12v8'></path><circle cx='12' cy='16' r='2'></circle><path d='M12 4v4'></path><path d='M12 12v2'></path><path d='M12 18v2'></path><circle cx='18' cy='7' r='2'></circle><path d='M18 4v1'></path><path d='M18 9v5'></path><path d='M18 18v2'></path><path d='M3 3l18 18'></path></svg>";
 	}else{
-		fhide('passky-server');
-		fshow('passky-server2', 'block');
-		document.getElementById("server-picker").innerHTML = "<svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5 secondaryColor' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><rect x='4' y='8' width='4' height='4'></rect><line x1='6' y1='4' x2='6' y2='8'></line><line x1='6' y1='12' x2='6' y2='20'></line><rect x='10' y='14' width='4' height='4'></rect><line x1='12' y1='4' x2='12' y2='14'></line><line x1='12' y1='18' x2='12' y2='20'></line><rect x='16' y='5' width='4' height='4'></rect><line x1='18' y1='4' x2='18' y2='5'></line><line x1='18' y1='9' x2='18' y2='20'></line></svg>";
+		fhide(id);
+		fshow(id2, 'block');
+		document.getElementById(buttonID).innerHTML = "<svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5 secondaryColor' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><rect x='4' y='8' width='4' height='4'></rect><line x1='6' y1='4' x2='6' y2='8'></line><line x1='6' y1='12' x2='6' y2='20'></line><rect x='10' y='14' width='4' height='4'></rect><line x1='12' y1='4' x2='12' y2='14'></line><line x1='12' y1='18' x2='12' y2='20'></line><rect x='16' y='5' width='4' height='4'></rect><line x1='18' y1='4' x2='18' y2='5'></line><line x1='18' y1='9' x2='18' y2='20'></line></svg>";
 	}
 }
 
@@ -77,12 +77,25 @@ function changeDialog(style, text){
 			document.getElementById('dialog-icon').innerHTML = "<svg class='h-6 w-6 text-blue-600' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' aria-hidden='true'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><circle cx='8' cy='15' r='4' /><line x1='10.85' y1='12.15' x2='19' y2='4' /><line x1='18' y1='5' x2='20' y2='7' /><line x1='15' y1='8' x2='17' y2='10' /></svg>";
 
 			document.getElementById('dialog-title').innerText = lang["forgot_username"];
-			document.getElementById('dialog-text').innerHTML = "<div class='relative rounded-md shadow-sm'><div class='pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3'><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5 secondaryColor' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><rect x='3' y='4' width='18' height='8' rx='3'></rect><rect x='3' y='12' width='18' height='8' rx='3'></rect><line x1='7' y1='8' x2='7' y2='8.01'></line><line x1='7' y1='16' x2='7' y2='16.01'></line><path d='M11 8h6'></path><path d='M11 16h6'></path></svg></div><input id='fu_server' name='fu_server' list='servers' type='text' autocomplete='server' class='tertiaryBackgroundColor tertiaryColor primaryBorderColor appearance-none rounded-t-md block pl-10 w-full px-3 py-2 border focus:outline-none focus:z-10 sm:text-sm' placeholder='Server'></div><div class='relative rounded-md shadow-sm'><div class='pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3'><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5 secondaryColor' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><rect x='3' y='5' width='18' height='14' rx='2'></rect><polyline points='3 7 12 13 21 7'></polyline></svg></div><input id='fu_email' name='fu_email' type='email' autocomplete='email' class='tertiaryBackgroundColor tertiaryColor primaryBorderColor appearance-none rounded-b-md block w-full pl-10 px-3 py-2 border focus:outline-none focus:z-10 sm:text-sm' placeholder='Email'></div>";
+			document.getElementById('dialog-text').innerHTML = "<div class='flex rounded-md shadow-sm'><div class='relative flex flex-grow items-stretch focus-within:z-10'><div class='pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3'><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5 secondaryColor' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><rect x='3' y='4' width='18' height='8' rx='3'></rect><rect x='3' y='12' width='18' height='8' rx='3'></rect><line x1='7' y1='8' x2='7' y2='8.01'></line><line x1='7' y1='16' x2='7' y2='16.01'></line><path d='M11 8h6'></path><path d='M11 16h6'></path></svg></div><select id='fu_server2' class='tertiaryBackgroundColor tertiaryColor primaryBorderColor appearance-none block w-full pl-10 px-3 py-2 border rounded-tl-md focus:outline-none sm:text-sm'><option value='https://eu.passky.org' selected>Europe</option><option value='https://us.passky.org'>America</option></select><input id='fu_server' name='fu_server' type='text' autocomplete='server' style='display: none;' class='tertiaryBackgroundColor tertiaryColor primaryBorderColor appearance-none block w-full pl-10 px-3 py-2 border rounded-tl-md focus:outline-none sm:text-sm' placeholder='Server'></div><button id='fu_server-picker' type='button' class='relative -ml-px inline-flex items-center space-x-2 border rounded-tr-md tertiaryBackgroundColor tertiaryColor primaryBorderColor px-4 py-2 text-sm font-medium focus:outline-none'><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5 secondaryColor' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><rect x='4' y='8' width='4' height='4'></rect><line x1='6' y1='4' x2='6' y2='8'></line><line x1='6' y1='12' x2='6' y2='20'></line><rect x='10' y='14' width='4' height='4'></rect><line x1='12' y1='4' x2='12' y2='14'></line><line x1='12' y1='18' x2='12' y2='20'></line><rect x='16' y='5' width='4' height='4'></rect><line x1='18' y1='4' x2='18' y2='5'></line><line x1='18' y1='9' x2='18' y2='20'></line> </svg></button></div><div class='relative rounded-md shadow-sm'><div class='pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3'><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5 secondaryColor' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><rect x='3' y='5' width='18' height='14' rx='2'></rect><polyline points='3 7 12 13 21 7'></polyline></svg></div><input id='fu_email' name='fu_email' type='email' autocomplete='email' class='tertiaryBackgroundColor tertiaryColor primaryBorderColor appearance-none rounded-b-md block w-full pl-10 px-3 py-2 border focus:outline-none focus:z-10 sm:text-sm' placeholder='Email'></div>";
 
 			document.getElementById("fu_server").placeholder = lang["server"];
 			document.getElementById("fu_email").placeholder = lang["email"];
 
-			if(readData('url') !== null && typeof(readData('url')) !== 'undefined') document.getElementById("fu_server").value = readData('url');
+			document.getElementById("fu_server-picker").addEventListener("click", () => {
+				toggleServerPicker('fu_server', 'fu_server2', 'fu_server-picker');
+			});
+
+			let server = readData('url');
+			if(server !== null && typeof(server) !== 'undefined'){
+				let servers = [...document.getElementById('fu_server2').options].map(v => v.value);
+				if(servers.includes(server)){
+					document.getElementById('fu_server2').value = server;
+				}else{
+					document.getElementById('fu_server').value = server;
+					toggleServerPicker('fu_server', 'fu_server2', 'fu_server-picker');
+				}
+			}
 
 			document.getElementById('dialog-button-cancel').style.display = 'initial';
 
@@ -194,8 +207,12 @@ function login_check(){
 
 function forget_username(){
 
-	const url = document.getElementById("fu_server").value;
+	let url = document.getElementById("fu_server").value;
 	const email = document.getElementById("fu_email").value;
+
+	if(isfHidden('fu_server')){
+		url = document.getElementById('fu_server2').value;
+	}
 
 	changeDialog(4, "sending_email");
 	show('dialog');
