@@ -94,17 +94,21 @@ loadData().then(() => {
 
 function deletePasswords() {
 
+	changeDialog(10, "deleting_passwords");
+	show('dialog');
+
 	Passky.deletePasswords(readData('url'), readData('username'), readData('token')).then(response => {
 
 		if (response['error'] != 0) {
+			showDialogButtons();
 			changeDialog(2, lang[response['error']]);
-			show('dialog');
 			return;
 		}
 
 		refreshPasswords();
 
 	}).catch(err => {
+		showDialogButtons();
 		switch(err){
 			case 1001:
 				changeDialog(2, lang["url_invalid"]);
@@ -119,24 +123,27 @@ function deletePasswords() {
 				changeDialog(2, lang["server_unreachable"]);
 			break;
 		}
-		show('dialog');
 	});
 
 }
 
 function deleteAccount() {
 
+	changeDialog(10, "deleting_account");
+	show('dialog');
+
 	Passky.deleteAccount(readData('url'), readData('username'), readData('token')).then(response => {
 
 		if (response['error'] != 0) {
+			showDialogButtons();
 			changeDialog(2, lang[response['error']]);
-			show('dialog');
 			return;
 		}
 
 		logout();
 
 	}).catch(err => {
+		showDialogButtons();
 		switch(err){
 			case 1001:
 				changeDialog(2, lang["url_invalid"]);
@@ -151,18 +158,21 @@ function deleteAccount() {
 				changeDialog(2, lang["server_unreachable"]);
 			break;
 		}
-		show('dialog');
 	});
 
 }
 
 function enable2fa() {
 
+	changeDialog(10, "enabling_2fa");
+	show('dialog');
+
 	Passky.enable2FA(readData('url'), readData('username'), readData('token')).then(response => {
+
+		showDialogButtons();
 
 		if (response['error'] != 0) {
 			changeDialog(2, lang[response['error']]);
-			show('dialog');
 			return;
 		}
 
@@ -176,9 +186,9 @@ function enable2fa() {
 
 		changeDialog(3, html);
 		new QRCode(document.getElementById("qrcode"), response['qrcode']);
-		show('dialog');
 
 	}).catch(err => {
+		showDialogButtons();
 		switch(err){
 			case 1001:
 				changeDialog(2, lang["url_invalid"]);
@@ -193,18 +203,20 @@ function enable2fa() {
 				changeDialog(2, lang["server_unreachable"]);
 			break;
 		}
-		show('dialog');
 	});
 
 }
 
 function disable2fa() {
 
+	changeDialog(10, "disabling_2fa");
+	show('dialog');
+
 	Passky.disable2FA(readData('url'), readData('username'), readData('token')).then(response => {
 
 		if (response['error'] != 0) {
+			showDialogButtons();
 			changeDialog(2, lang[response['error']]);
-			show('dialog');
 			return;
 		}
 
@@ -212,6 +224,7 @@ function disable2fa() {
 		location.reload();
 
 	}).catch(err => {
+		showDialogButtons();
 		switch(err){
 			case 1001:
 				changeDialog(2, lang["url_invalid"]);
@@ -226,7 +239,6 @@ function disable2fa() {
 				changeDialog(2, lang["server_unreachable"]);
 			break;
 		}
-		show('dialog');
 	});
 
 }
@@ -239,11 +251,15 @@ function addYubiKey(id) {
 		return;
 	}
 
+	changeDialog(10, "adding_yubikey");
+	show('dialog');
+
 	Passky.addYubiKey(readData('url'), readData('username'), readData('token'), id).then(response => {
+
+		showDialogButtons();
 
 		if (response['error'] != 0) {
 			changeDialog(2, lang[response['error']]);
-			show('dialog');
 			return;
 		}
 
@@ -256,9 +272,9 @@ function addYubiKey(id) {
 		let html = lang["yubikey_added_successfully"] + "</br></br>" + lang["backup_codes"] + " <b>" + backupCodes + "</b>";
 
 		changeDialog(7, html);
-		show('dialog');
 
 	}).catch(err => {
+		showDialogButtons();
 		switch(err){
 			case 1001:
 				changeDialog(2, lang["url_invalid"]);
@@ -276,7 +292,6 @@ function addYubiKey(id) {
 				changeDialog(2, lang["server_unreachable"]);
 			break;
 		}
-		show('dialog');
 	});
 
 }
@@ -289,20 +304,24 @@ function removeYubiKey(id) {
 		return;
 	}
 
+	changeDialog(10, "removing_yubikey");
+	show('dialog');
+
 	Passky.removeYubiKey(readData('url'), readData('username'), readData('token'), id).then(response => {
+
+		showDialogButtons();
 
 		if (response['error'] != 0) {
 			changeDialog(2, lang[response['error']]);
-			show('dialog');
 			return;
 		}
 
 		writeData('yubico', String(response['yubico']));
 
 		changeDialog(7, lang["yubikey_removed_successfully"]);
-		show('dialog');
 
 	}).catch(err => {
+		showDialogButtons();
 		switch(err){
 			case 1001:
 				changeDialog(2, lang["url_invalid"]);
@@ -320,7 +339,6 @@ function removeYubiKey(id) {
 				changeDialog(2, lang["server_unreachable"]);
 			break;
 		}
-		show('dialog');
 	});
 
 }
@@ -453,6 +471,16 @@ function changeDialog(style, text) {
 			document.getElementById('dialog-button').innerText = lang["delete"];
 			document.getElementById('dialog-button').onclick = () => deletePasswords();
 			break;
+		case 10:
+			//Loading...
+			document.getElementById('dialog-icon').className = "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10";
+			document.getElementById('dialog-icon').innerHTML = "<svg class='h-6 w-6 text-blue-600 animate-spin' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' aria-hidden='true'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><path d='M12 3a9 9 0 1 0 9 9'></path></svg>";
+
+			document.getElementById('dialog-title').innerText = lang["please_wait"];
+			document.getElementById('dialog-text').innerHTML = lang[text];
+
+			hideDialogButtons();
+			break;
 	}
 }
 
@@ -538,19 +566,23 @@ document.getElementById("remove-yubico-btn").addEventListener("click", () => {
 document.getElementById("validate-license-btn").addEventListener('click', () => {
 	let license = document.getElementById('license-key').value;
 
+	changeDialog(10, "validating_license");
+	show('dialog');
+
 	Passky.upgradeAccount(readData('url'), readData('username'), readData('token'), license).then(response => {
+
+		showDialogButtons();
 
 		if (response['error'] != 0) {
 			changeDialog(2, lang[response['error']]);
-			show('dialog');
 			return;
 		}
 
 		writeData('premiumExpires', response['premium_expires']);
 		writeData('maxPasswords', response['max_passwords']);
 		changeDialog(7, lang["license_added_successfully"].replace("{date}", response['premium_expires']));
-		show('dialog');
 	}).catch(err => {
+		showDialogButtons();
 		switch(err){
 			case 1001:
 				changeDialog(2, lang["url_invalid"]);
@@ -568,6 +600,5 @@ document.getElementById("validate-license-btn").addEventListener('click', () => 
 				changeDialog(2, lang["server_unreachable"]);
 			break;
 		}
-		show('dialog');
 	});
 });

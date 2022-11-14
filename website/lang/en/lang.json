@@ -139,5 +139,18 @@
 	"free": "Free",
 	"premium": "Premium",
 	"never": "Never",
-	"license_added_successfully": "Your account has been successfully upgraded to Premium and it will last until {date}."
+	"license_added_successfully": "Your account has been successfully upgraded to Premium and it will last until {date}.",
+	"please_wait": "PLEASE WAIT",
+	"saving_password": "Saving password...",
+	"changing_password": "Changing password...",
+	"deleting_password": "Deleting password...",
+	"deleting_passwords": "Deleting passwords...",
+	"deleting_account": "Deleting account...",
+	"signing_in": "Signing in...",
+	"sending_email": "Sending email...",
+	"enabling_2fa": "Enabling 2FA...",
+	"disabling_2fa": "Disabling 2FA...",
+	"adding_yubikey": "Adding Yubikey...",
+	"removing_yubikey": "Removing Yubikey...",
+	"validating_license": "Validating license key..."
 }

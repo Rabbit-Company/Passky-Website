@@ -118,6 +118,16 @@ function randRange(min, max) {
 	}
 }
 
+function showDialogButtons(){
+	document.getElementById('dialog-button').style.display = "";
+	document.getElementById('dialog-button-cancel').style.display = "";
+}
+
+function hideDialogButtons(){
+	document.getElementById('dialog-button').style.display = "none";
+	document.getElementById('dialog-button-cancel').style.display = "none";
+}
+
 function refreshPasswords(){
 
 	Passky.getPasswords(readData('url'), readData('username'), readData('token')).then(response => {

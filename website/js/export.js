@@ -371,32 +371,26 @@ function import_data(passwords, encrypted = false){
 
 	Passky.importPasswords(readData('url'), readData('username'), readData('token'), passwords, encrypted, decryptPassword(readData("password"))).then(response => {
 
-		document.getElementById('dialog-button').style.display = "";
-		document.getElementById('dialog-button-cancel').style.display = "";
+		showDialogButtons();
 
 		if(typeof response['error'] === 'undefined'){
 			changeDialog(0, lang["server_unreachable"]);
-			show('dialog');
 			return;
 		}
 
 		if(response['error'] != 0){
 			changeDialog(0, lang[response['error']]);
-			show('dialog');
 			return;
 		}
 
 		if(response['import_error'] == 0){
 			changeDialog(3, lang["import_success"].replace("{success_number}", response['import_success']));
-			show('dialog');
 		}else{
 			changeDialog(3, lang["import_errors"].replace("{success_number}", response['import_success']).replace("{error_number}", response['import_error']));
-			show('dialog');
 		}
 
 	}).catch(err => {
-		document.getElementById('dialog-button').style.display = "";
-		document.getElementById('dialog-button-cancel').style.display = "";
+		showDialogButtons();
 		switch(err){
 			case 1000:
 				changeDialog(0, lang["server_unreachable"]);
@@ -420,7 +414,6 @@ function import_data(passwords, encrypted = false){
 				changeDialog(0, lang[err]);
 			break;
 		}
-		show('dialog');
 	});
 }
 
@@ -484,8 +477,7 @@ function changeDialog(style, text, text2){
 			document.getElementById('dialog-title').innerText = lang["importing"];
 			document.getElementById('dialog-text').innerHTML = lang["importing_passwords"].replace("{amount}", "<b>" + text + "</b>");
 
-			document.getElementById('dialog-button').style.display = "none";
-			document.getElementById('dialog-button-cancel').style.display = "none";
+			hideDialogButtons();
 		break;
 		default:
 			//Error

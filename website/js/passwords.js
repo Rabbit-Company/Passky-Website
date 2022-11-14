@@ -384,6 +384,16 @@ function changeDialog(style, text) {
 			document.getElementById('dialog-button').innerText = lang["okay"];
 			document.getElementById('dialog-button').onclick = () => hide('dialog');
 			break;
+		case 8:
+			//Loading...
+			document.getElementById('dialog-icon').className = "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10";
+			document.getElementById('dialog-icon').innerHTML = "<svg class='h-6 w-6 text-blue-600 animate-spin' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' aria-hidden='true'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><path d='M12 3a9 9 0 1 0 9 9'></path></svg>";
+
+			document.getElementById('dialog-title').innerText = lang["please_wait"];
+			document.getElementById('dialog-text').innerHTML = lang[text];
+
+			hideDialogButtons();
+			break;
 		default:
 			//Add password dialog
 			document.getElementById('dialog-icon').className = "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10";
@@ -433,7 +443,11 @@ function addPassword() {
 	const password = document.getElementById("password").value;
 	const message = document.getElementById("message").value;
 
+	changeDialog(8, "saving_password");
+
 	Passky.savePassword(readData('url'), readData('username'), readData('token'), decryptPassword(readData('password')), [website, username, password, message]).then(response => {
+
+		showDialogButtons();
 
 		if (typeof response['error'] === 'undefined') {
 			changeDialog(2, lang["server_unreachable"]);
@@ -448,6 +462,7 @@ function addPassword() {
 		changeDialog(3, 0);
 
 	}).catch(err => {
+		showDialogButtons();
 		switch(err){
 			case 1001:
 				changeDialog(2, lang["url_invalid"]);
@@ -488,7 +503,11 @@ function editPassword(password_id) {
 	const password = document.getElementById("password").value;
 	const message = document.getElementById("message").value;
 
+	changeDialog(8, "changing_password");
+
 	Passky.editPassword(readData('url'), readData('username'), readData('token'), decryptPassword(readData('password')), password_id, [website, username, password, message]).then(response => {
+
+		showDialogButtons();
 
 		if (typeof response['error'] === 'undefined') {
 			changeDialog(2, lang["server_unreachable"]);
@@ -503,6 +522,7 @@ function editPassword(password_id) {
 		changeDialog(3, 1);
 
 	}).catch(err => {
+		showDialogButtons();
 		switch(err){
 			case 1001:
 				changeDialog(2, lang["url_invalid"]);
@@ -537,7 +557,11 @@ function editPassword(password_id) {
 
 function deletePassword(password_id) {
 
+	changeDialog(8, "deleting_password");
+
 	Passky.deletePassword(readData('url'), readData('username'), readData('token'), password_id).then(response => {
+
+		showDialogButtons();
 
 		if (typeof response['error'] === 'undefined') {
 			changeDialog(2, lang["server_unreachable"]);
@@ -552,6 +576,7 @@ function deletePassword(password_id) {
 		changeDialog(3, 2);
 
 	}).catch(err => {
+		showDialogButtons();
 		switch(err){
 			case 1001:
 				changeDialog(2, lang["url_invalid"]);

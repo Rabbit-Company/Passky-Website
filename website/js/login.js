@@ -107,6 +107,16 @@ function changeDialog(style, text){
 			document.getElementById('dialog-button').innerText = lang["okay"];
 			document.getElementById('dialog-button').onclick = () => hide('dialog');
 		break;
+		case 4:
+			//Loading...
+			document.getElementById('dialog-icon').className = "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10";
+			document.getElementById('dialog-icon').innerHTML = "<svg class='h-6 w-6 text-blue-600 animate-spin' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' aria-hidden='true'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><path d='M12 3a9 9 0 1 0 9 9'></path></svg>";
+
+			document.getElementById('dialog-title').innerText = lang["please_wait"];
+			document.getElementById('dialog-text').innerHTML = lang[text];
+
+			hideDialogButtons();
+		break;
 	}
 }
 
@@ -121,17 +131,20 @@ function login_check(){
 		url = document.getElementById('passky-server2').value;
 	}
 
+	changeDialog(4, "signing_in");
+	show('dialog');
+
 	Passky.getToken(url, username, password, otp).then(response => {
 
 		if(typeof response['error'] === 'undefined'){
+			showDialogButtons();
 			changeDialog(1, lang["server_unreachable"]);
-			show('dialog');
 			return;
 		}
 
 		if(response['error'] != 0 && response['error'] != 8){
+			showDialogButtons();
 			changeDialog(1, lang[response['error']]);
-			show('dialog');
 			return;
 		}
 
@@ -154,6 +167,7 @@ function login_check(){
 		window.location.href = 'passwords.html';
 
 	}).catch(err => {
+		showDialogButtons();
 		switch(err){
 			case 1000:
 				changeDialog(1, lang["server_unreachable"]);
@@ -174,7 +188,6 @@ function login_check(){
 				changeDialog(1, lang[err]);
 			break;
 		}
-		show('dialog');
 	});
 
 }
@@ -184,24 +197,27 @@ function forget_username(){
 	const url = document.getElementById("fu_server").value;
 	const email = document.getElementById("fu_email").value;
 
+	changeDialog(4, "sending_email");
+	show('dialog');
+
 	Passky.forgotUsername(url, email).then(response => {
+
+		showDialogButtons();
 
 		if(typeof response['error'] === 'undefined'){
 			changeDialog(1, lang["server_unreachable"]);
-			show('dialog');
 			return;
 		}
 
 		if(response['error'] != 0){
 			changeDialog(1, lang[response['error']]);
-			show('dialog');
 			return;
 		}
 
 		changeDialog(3);
 
 	}).catch(err => {
-		console.log("error code: " + err);
+		showDialogButtons();
 		switch(err){
 			case 1000:
 				changeDialog(1, lang["server_unreachable"]);
@@ -216,6 +232,5 @@ function forget_username(){
 				changeDialog(1, lang[err]);
 			break;
 		}
-		show('dialog');
 	});
 }
