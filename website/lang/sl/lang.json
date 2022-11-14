@@ -139,5 +139,19 @@
 	"free": "Brezplačen",
 	"premium": "Premium",
 	"never": "Nikoli",
-	"license_added_successfully": "Vaš račun je bil uspešno nadgrajen na Premium in bo trajal do {date}."
+	"license_added_successfully": "Vaš račun je bil uspešno nadgrajen na Premium in bo trajal do {date}.",
+	"please_wait": "PROSIM POČAKAJTE",
+	"saving_password": "Shranjujem geslo...",
+	"changing_password": "Spreminjam geslo...",
+	"deleting_password": "Brišem geslo...",
+	"deleting_passwords": "Brišem gesla...",
+	"deleting_account": "Brišem račun...",
+	"signing_in": "Prijavljam...",
+	"signing_up": "Prijavljanje...",
+	"sending_email": "Pošiljanje e-pošte...",
+	"enabling_2fa": "Omogočanje 2FA...",
+	"disabling_2fa": "Onemogočanje 2FA...",
+	"adding_yubikey": "Dodajanje Yubikeya...",
+	"removing_yubikey": "Odstranjevanje Yubikeya...",
+	"validating_license": "Preverjanje licenčnega ključa..."
 }

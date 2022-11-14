@@ -139,5 +139,19 @@
 	"free": "رايگان",
 	"premium": "ویژه (Premium)",
 	"never": "هرگز",
-	"license_added_successfully": "حساب کاربری شما تا تاریخ {date} ارتقا یافته است."
+	"license_added_successfully": "حساب کاربری شما تا تاریخ {date} ارتقا یافته است.",
+	"please_wait": "PLEASE WAIT",
+	"saving_password": "Saving password...",
+	"changing_password": "Changing password...",
+	"deleting_password": "Deleting password...",
+	"deleting_passwords": "Deleting passwords...",
+	"deleting_account": "Deleting account...",
+	"signing_in": "Signing in...",
+	"signing_up": "Signing up...",
+	"sending_email": "Sending email...",
+	"enabling_2fa": "Enabling 2FA...",
+	"disabling_2fa": "Disabling 2FA...",
+	"adding_yubikey": "Adding Yubikey...",
+	"removing_yubikey": "Removing Yubikey...",
+	"validating_license": "Validating license key..."
 }

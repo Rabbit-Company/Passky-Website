@@ -139,5 +139,19 @@
 	"free": "무료",
 	"premium": "프리미엄",
 	"never": "절대",
-	"license_added_successfully": "귀하의 계정은 프리미엄으로 성공적으로 업그레이드되었으며 {date} 까지 유지됩니다."
+	"license_added_successfully": "귀하의 계정은 프리미엄으로 성공적으로 업그레이드되었으며 {date} 까지 유지됩니다.",
+	"please_wait": "PLEASE WAIT",
+	"saving_password": "Saving password...",
+	"changing_password": "Changing password...",
+	"deleting_password": "Deleting password...",
+	"deleting_passwords": "Deleting passwords...",
+	"deleting_account": "Deleting account...",
+	"signing_in": "Signing in...",
+	"signing_up": "Signing up...",
+	"sending_email": "Sending email...",
+	"enabling_2fa": "Enabling 2FA...",
+	"disabling_2fa": "Disabling 2FA...",
+	"adding_yubikey": "Adding Yubikey...",
+	"removing_yubikey": "Removing Yubikey...",
+	"validating_license": "Validating license key..."
 }

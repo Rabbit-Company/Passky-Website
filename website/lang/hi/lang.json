@@ -139,5 +139,19 @@
 	"free": "मुक्त",
 	"premium": "बीमा किस्त",
 	"never": "कभी नहीँ",
-	"license_added_successfully": "आपका खाता सफलतापूर्वक प्रीमियम में अपग्रेड कर दिया गया है और यह {date} तक चलेगा।"
+	"license_added_successfully": "आपका खाता सफलतापूर्वक प्रीमियम में अपग्रेड कर दिया गया है और यह {date} तक चलेगा।",
+	"please_wait": "PLEASE WAIT",
+	"saving_password": "Saving password...",
+	"changing_password": "Changing password...",
+	"deleting_password": "Deleting password...",
+	"deleting_passwords": "Deleting passwords...",
+	"deleting_account": "Deleting account...",
+	"signing_in": "Signing in...",
+	"signing_up": "Signing up...",
+	"sending_email": "Sending email...",
+	"enabling_2fa": "Enabling 2FA...",
+	"disabling_2fa": "Disabling 2FA...",
+	"adding_yubikey": "Adding Yubikey...",
+	"removing_yubikey": "Removing Yubikey...",
+	"validating_license": "Validating license key..."
 }
