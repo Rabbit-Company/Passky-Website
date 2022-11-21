@@ -190,41 +190,8 @@ document.getElementById("signout-link").addEventListener("click", () => {
 });
 
 function updateGeneratedPassword(upper, number, special) {
-	let password = "";
 	let length = document.getElementById('btn-length').value;
-	let lowers = "abcdefghijklmnopqrstuvwxyz";
-	let uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	let numbers = "1234567890";
-	let specials = "!@#$%?&*";
-
-	for (let i = 0; i < length; i++) password += lowers.charAt(randRange(0, lowers.length));
-
-	password = password.split("");
-
-	if (upper) {
-		let upper_amount = Math.floor(length / 2 - Math.random() * (length / 2) + 1);
-		for (let i = 0; i < upper_amount; i++) {
-			password[randRange(0, password.length)] = uppers.charAt(randRange(0, uppers.length));
-		}
-	}
-
-	if (number) {
-		let number_amount = Math.floor(length / 2 - Math.random() * (length / 2) + 1);
-		for (let i = 0; i < number_amount; i++) {
-			password[randRange(0, password.length)] = numbers.charAt(randRange(0, numbers.length));
-		}
-	}
-
-	if (special) {
-		let special_amount = randRange(1, 3);
-		for (let i = 0; i < special_amount; i++) {
-			password[randRange(0, password.length)] = specials.charAt(randRange(0, specials.length));
-		}
-	}
-
-	password = password.join("");
-
-	document.getElementById('generated-password').innerText = password;
+	document.getElementById('generated-password').innerText = PasswordGenerator.generate(length, upper, number, special);
 }
 
 function changeDialog(style, text) {
