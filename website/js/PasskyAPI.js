@@ -127,7 +127,7 @@
 				data.append("email", email);
 
 				let headers = new Headers();
-				headers.append('Authorization', 'Basic ' + btoa(username + ":" + CryptoJS.SHA512(password + username + "passky2020").toString()));
+				headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
 
 				fetch(server + "?action=createAccount", {
 					method: "POST",
@@ -160,7 +160,7 @@
 				data.append("otp", otp);
 
 				let headers = new Headers();
-				headers.append('Authorization', 'Basic ' + btoa(username + ":" + CryptoJS.SHA512(password + username + "passky2020").toString()));
+				headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
 
 				fetch(server + "?action=getToken", {
 					method: "POST",

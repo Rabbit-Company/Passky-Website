@@ -127,7 +127,17 @@ function onBtnClick(){
 	changeDialog(3, "signing_up");
 	show('dialog');
 
-	Passky.createAccount(url, username, password, email).then(response => {
+	const worker = new Worker('js/crypto-worker.js');
+	worker.addEventListener('message', (e) => {
+		worker.terminate();
+		register(url, username, e.data[1], email);
+	});
+
+	worker.postMessage([0, password, username]);
+}
+
+function register(url, username, authPassword, email){
+	Passky.createAccount(url, username, authPassword, email).then(response => {
 
 		showDialogButtons();
 
@@ -169,5 +179,4 @@ function onBtnClick(){
 			break;
 		}
 	});
-
 }

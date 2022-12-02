@@ -147,7 +147,17 @@ function login_check(){
 	changeDialog(4, "signing_in");
 	show('dialog');
 
-	Passky.getToken(url, username, password, otp).then(response => {
+	const worker = new Worker('js/crypto-worker.js');
+	worker.addEventListener('message', (e) => {
+		worker.terminate();
+		signin(url, username, e.data[1], password, otp);
+	});
+
+	worker.postMessage([0, password, username]);
+}
+
+function signin(url, username, authPassword, password, otp){
+	Passky.getToken(url, username, authPassword, otp).then(response => {
 
 		if(typeof response['error'] === 'undefined'){
 			showDialogButtons();
@@ -175,9 +185,17 @@ function login_check(){
 		writeData('maxPasswords', response['max_passwords']);
 		writeData('premiumExpires', response['premium_expires']);
 		writeData('loginTime', new Date().getTime());
-		writeData('password', encryptPassword(password));
 
-		window.location.href = 'passwords.html';
+		changeDialog(4, "decrypting_passwords");
+
+		const worker = new Worker('js/crypto-worker.js');
+		worker.addEventListener('message', (e) => {
+			worker.terminate();
+			writeData('password', encryptPassword(e.data[1]));
+			window.location.href = 'passwords.html';
+		});
+
+		worker.postMessage([1, password, username]);
 
 	}).catch(err => {
 		showDialogButtons();
@@ -202,7 +220,6 @@ function login_check(){
 			break;
 		}
 	});
-
 }
 
 function forget_username(){

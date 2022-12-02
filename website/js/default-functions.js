@@ -144,6 +144,8 @@ function clearStorage(){
 	deleteData('auth');
 	deleteData('yubico');
 	deleteData('loginTime');
+	deleteData('premiumExpires');
+	deleteData('maxPasswords');
 }
 
 function isSessionValid(){

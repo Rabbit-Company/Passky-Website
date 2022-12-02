@@ -153,5 +153,6 @@ var lang = {
 	"disabling_2fa": "Disabling 2FA...",
 	"adding_yubikey": "Adding Yubikey...",
 	"removing_yubikey": "Removing Yubikey...",
-	"validating_license": "Validating license key..."
+	"validating_license": "Validating license key...",
+	"decrypting_passwords": "Decrypting passwords..."
 }

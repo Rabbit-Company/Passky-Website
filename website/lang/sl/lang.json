@@ -153,5 +153,6 @@
 	"disabling_2fa": "Onemogočanje 2FA...",
 	"adding_yubikey": "Dodajanje Yubikeya...",
 	"removing_yubikey": "Odstranjevanje Yubikeya...",
-	"validating_license": "Preverjanje licenčnega ključa..."
+	"validating_license": "Preverjanje licenčnega ključa...",
+	"decrypting_passwords": "Dešifriranje gesel..."
 }
