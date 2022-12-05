@@ -128,8 +128,8 @@ function onBtnClick(){
 	show('dialog');
 
 	let authHash = Blake2b.hash("passky2020-" + password + "-" + username);
-	Argon2id.hashEncoded(authHash, Blake2b.hash("passky2020-" + username), 32, 32, 4, 64).then(hashEncoded => {
-		register(url, username, hashEncoded, email);
+	Argon2id.hash(authHash, Blake2b.hash("passky2020-" + username), 32, 32, 4, 64).then(hash => {
+		register(url, username, hash, email);
 	});
 
 }
