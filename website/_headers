@@ -3,5 +3,5 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
   X-XSS-Protection: 1; mode=block
-  Content-Security-Policy: script-src 'self' 'unsafe-inline' https://storage.googleapis.com/; base-uri 'none'; object-src 'none'; form-action 'self'; frame-ancestors 'none'; worker-src 'self';
+  Content-Security-Policy: script-src 'self' 'unsafe-inline' https://storage.googleapis.com/; base-uri 'none'; object-src 'none'; form-action 'self'; frame-ancestors 'none'; worker-src 'self' blob:;
   Permissions-Policy: interest-cohort=()
