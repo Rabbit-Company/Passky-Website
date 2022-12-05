@@ -127,13 +127,11 @@ function onBtnClick(){
 	changeDialog(3, "signing_up");
 	show('dialog');
 
-	const worker = new Worker('js/crypto-worker.js');
-	worker.addEventListener('message', (e) => {
-		worker.terminate();
-		register(url, username, e.data[1], email);
+	let authHash = Blake2b.hash("passky2020-" + password + "-" + username);
+	Argon2id.hashEncoded(authHash, Blake2b.hash("passky2020-" + username), 32, 32, 4, 64).then(hashEncoded => {
+		register(url, username, hashEncoded, email);
 	});
 
-	worker.postMessage([0, password, username]);
 }
 
 function register(url, username, authPassword, email){

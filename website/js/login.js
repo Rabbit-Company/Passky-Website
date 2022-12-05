@@ -147,13 +147,10 @@ function login_check(){
 	changeDialog(4, "signing_in");
 	show('dialog');
 
-	const worker = new Worker('js/crypto-worker.js');
-	worker.addEventListener('message', (e) => {
-		worker.terminate();
-		signin(url, username, e.data[1], password, otp);
+	let authHash = Blake2b.hash("passky2020-" + password + "-" + username);
+	Argon2id.hashEncoded(authHash, Blake2b.hash("passky2020-" + username), 32, 32, 4, 64).then(hashEncoded => {
+		signin(url, username, hashEncoded, password, otp);
 	});
-
-	worker.postMessage([0, password, username]);
 }
 
 function signin(url, username, authPassword, password, otp){
@@ -188,14 +185,11 @@ function signin(url, username, authPassword, password, otp){
 
 		changeDialog(4, "decrypting_passwords");
 
-		const worker = new Worker('js/crypto-worker.js');
-		worker.addEventListener('message', (e) => {
-			worker.terminate();
-			writeData('password', encryptPassword(e.data[1]));
+		let passHash = Blake2b.hash(username + "-" + password + "-passky2020");
+		Argon2id.hash(passHash, Blake2b.hash(username + "-passky2020"), 32, 32, 4, 64).then(hash => {
+			writeData('password', encryptPassword(hash));
 			window.location.href = 'passwords.html';
 		});
-
-		worker.postMessage([1, password, username]);
 
 	}).catch(err => {
 		showDialogButtons();
