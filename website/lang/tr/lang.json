@@ -154,5 +154,5 @@
 	"adding_yubikey": "Yubikey ekleniyor...",
 	"removing_yubikey": "Yubikey kaldırılıyor...",
 	"validating_license": "Lisans anahtarı doğrulanıyor...",
-	"decrypting_passwords": "Decrypting passwords..."
+	"decrypting_passwords": "Parolaların şifresi çözülüyor..."
 }
