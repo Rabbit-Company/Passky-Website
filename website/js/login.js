@@ -144,6 +144,12 @@ function login_check(){
 		url = document.getElementById('passky-server2').value;
 	}
 
+	if(PasswordEntropy.calculate(password) < 75){
+		changeDialog(1, lang["2"]);
+		show('dialog');
+		return;
+	}
+
 	changeDialog(4, "signing_in");
 	show('dialog');
 
