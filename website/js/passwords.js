@@ -46,6 +46,7 @@ loadData().then(() => {
 			search = parms.get("search");
 			document.getElementById("search").value = search;
 			let tempArray = [];
+			search = search.toLowerCase();
 			for(let i = 0; i < passwords.length; i++){
 				const website = XChaCha20.decrypt(passwords[i].website, decryptPassword(readData('password')));
 				const username = XChaCha20.decrypt(passwords[i].username, decryptPassword(readData('password')));
