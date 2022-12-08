@@ -154,5 +154,5 @@
 	"adding_yubikey": "Đang thêm Yubikey...",
 	"removing_yubikey": "Đang xóa Yubikey...",
 	"validating_license": "Đang xác thực khóa cấp phép...",
-	"decrypting_passwords": "Decrypting passwords..."
+	"decrypting_passwords": "Giải mã mật khẩu..."
 }

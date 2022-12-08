@@ -68,7 +68,7 @@
 	"importing": "İçeri aktarılıyor",
 	"importing_passwords": "{amount} parola içe aktarılıyor...",
 	"import_from": "{name}'dan içe aktar",
-	"import_paste": "Paste {type} data from {name} password manager.",
+	"import_paste": "{name} şifre yöneticisinden {type} verilerini yapıştırın.",
 	"import_invalid": "İçe aktarmanızdaki veriler geçersiz!",
 	"import_success": "{success_number} parolaları başarıyla içe aktarıldı!",
 	"import_errors": "{success_number} parolaları başarıyla içe aktarıldı, ancak {error_number} parola içe aktarılamadı!",
