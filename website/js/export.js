@@ -100,12 +100,12 @@ function import_bitwarden(){
 
 	let ido = JSON.parse(imported_data);
 
-	if(ido["encrypted"] == null || typeof(ido["encrypted"]) == 'undefined' || ido["encrypted"] == true){
+	if(typeof(ido["encrypted"]) == 'undefined' || ido["encrypted"] == null || ido["encrypted"] == true){
 		changeDialog(2, 1, 2);
 		return;
 	}
 
-	if(ido["items"] == null || typeof(ido["items"]) == 'undefined'){
+	if(typeof(ido["items"]) == 'undefined' || ido["items"] == null){
 		changeDialog(2, 1, 2);
 		return;
 	}
@@ -366,6 +366,7 @@ function import_csv(id){
 
 function import_data(passwords, encrypted = false){
 
+	console.log("Password count: " + passwords.length);
 	changeDialog(4, passwords.length);
 	show("dialog");
 
