@@ -596,6 +596,8 @@
 				if(!Validate.username(username)) return reject(1005);
 				if(!Validate.token(token)) return reject(1003);
 
+				console.log("53344");
+
 				if(!encrypted){
 					if(!Validate.password(password)) return reject(1006);
 
@@ -608,7 +610,11 @@
 					}
 				}
 
+				console.log("93432");
+
 				let importPasswords = [];
+
+				console.log("Length: " + Object.keys(passwords).length);
 
 				for(let i = 0, j = 0; i < Object.keys(passwords).length; i++){
 					if(!(passwords[i].website.length >= 35 && passwords[i].website.length <= 255) || passwords[i].website.indexOf(' ') !== -1) continue;
