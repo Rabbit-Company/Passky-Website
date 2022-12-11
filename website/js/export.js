@@ -371,14 +371,18 @@ function import_data(passwords, encrypted = false){
 
 	Passky.importPasswords(readData('url'), readData('username'), readData('token'), passwords, encrypted, decryptPassword(readData("password"))).then(response => {
 
+		console.log("0000");
+
 		showDialogButtons();
 
-		if(typeof response['error'] === 'undefined'){
+		if(typeof(response['error']) == 'undefined'){
+			console.log("5324");
 			changeDialog(0, lang["server_unreachable"]);
 			return;
 		}
 
 		if(response['error'] != 0){
+			console.log("9842: " + response['error']);
 			changeDialog(0, lang[response['error']]);
 			return;
 		}
@@ -391,6 +395,7 @@ function import_data(passwords, encrypted = false){
 
 	}).catch(err => {
 		showDialogButtons();
+		console.log("3124: " + err);
 		switch(err){
 			case 1000:
 				changeDialog(0, lang["server_unreachable"]);
