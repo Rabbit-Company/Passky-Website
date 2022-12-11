@@ -600,8 +600,9 @@
 
 				if(!encrypted){
 					if(!Validate.password(password)) return reject(1006);
-
+					console.log("94943");
 					for(let i = 0; i < Object.keys(passwords).length; i++){
+						console.log("Index: " + i);
 						passwords[i].website = XChaCha20.encrypt(passwords[i].website, password);
 						passwords[i].username = XChaCha20.encrypt(passwords[i].username, password);
 						passwords[i].password = XChaCha20.encrypt(passwords[i].password, password);
