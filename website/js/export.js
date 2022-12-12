@@ -118,18 +118,22 @@ function import_bitwarden(){
 		if(typeof(ido["items"][i]["login"]["uris"]) != 'undefined' && typeof(ido["items"][i]["login"]["uris"][0]) != 'undefined' && typeof(ido["items"][i]["login"]["uris"][0]["uri"]) != 'undefined'){
 			website = ido["items"][i]["login"]["uris"][0]["uri"];
 		}
-
+		if(typeof(website) == 'undefined' || website == null) continue;
 		website = website.replace("http://", "").replace("https://", "").replace("www.", "").replace(" ", "-");
 		if(website.slice(-1) == '/') website = website.slice(0, -1);
 		let username = ido["items"][i]["login"]["username"];
 		let password = ido["items"][i]["login"]["password"];
 		let message = ido["items"][i]["login"]["notes"];
 
+		if(typeof(username) == 'undefined' || username == null) continue;
+		if(typeof(password) == 'undefined' || password == null) continue;
+		if(typeof(message) == 'undefined' || message == null) message = "";
+
 		passwords[j] = {};
-		passwords[j]["website"] = website;
-		passwords[j]["username"] = username;
-		passwords[j]["password"] = password;
-		passwords[j]["message"] = message;
+		passwords[j]["website"] = website.toString();
+		passwords[j]["username"] = username.toString();
+		passwords[j]["password"] = password.toString();
+		passwords[j]["message"] = message.toString();
 		j++;
 	}
 
@@ -366,24 +370,19 @@ function import_csv(id){
 
 function import_data(passwords, encrypted = false){
 
-	console.log("Password count: " + passwords.length);
 	changeDialog(4, passwords.length);
 	show("dialog");
 
 	Passky.importPasswords(readData('url'), readData('username'), readData('token'), passwords, encrypted, decryptPassword(readData("password"))).then(response => {
 
-		console.log("0000");
-
 		showDialogButtons();
 
 		if(typeof(response['error']) == 'undefined'){
-			console.log("5324");
 			changeDialog(0, lang["server_unreachable"]);
 			return;
 		}
 
 		if(response['error'] != 0){
-			console.log("9842: " + response['error']);
 			changeDialog(0, lang[response['error']]);
 			return;
 		}
@@ -396,7 +395,6 @@ function import_data(passwords, encrypted = false){
 
 	}).catch(err => {
 		showDialogButtons();
-		console.log("3124: " + err);
 		switch(err){
 			case 1000:
 				changeDialog(0, lang["server_unreachable"]);
