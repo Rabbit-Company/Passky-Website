@@ -345,7 +345,9 @@ function import_csv(id){
 
 	let passwords = [];
 	for(let i = 1, j = 0; i < ido.length; i++){
-		let website = ido[i][websiteID].replace("http://", "").replace("https://", "").replace("www.", "").replace(" ", "-");
+		let website = ido[i][websiteID];
+		if(typeof(website) == 'undefined' || website == null) website = ido[i][titleID];
+		website = website.replace("http://", "").replace("https://", "").replace("www.", "").replace(" ", "-");
 		if(website.slice(-1) == '/') website = website.slice(0, -1);
 
 		if(!Validate.pWebsite(website)){
@@ -357,11 +359,15 @@ function import_csv(id){
 		let password = ido[i][passwordID];
 		let message = ido[i][messageID];
 
+		if(typeof(username) == 'undefined' || username == null) continue;
+		if(typeof(password) == 'undefined' || password == null) continue;
+		if(typeof(message) == 'undefined' || message == null) message = "";
+
 		passwords[j] = {};
-		passwords[j]["website"] = website;
-		passwords[j]["username"] = username;
-		passwords[j]["password"] = password;
-		passwords[j]["message"] = message;
+		passwords[j]["website"] = website.toString();
+		passwords[j]["username"] = username.toString();
+		passwords[j]["password"] = password.toString();
+		passwords[j]["message"] = message.toString();
 		j++;
 	}
 
