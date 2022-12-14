@@ -192,7 +192,27 @@ document.getElementById("signout-link").addEventListener("click", () => {
 
 function updateGeneratedPassword(upper, number, special) {
 	let length = document.getElementById('btn-length').value;
-	document.getElementById('generated-password').innerText = PasswordGenerator.generate(length, upper, number, special);
+	let password = PasswordGenerator.generate(length, upper, number, special);
+	let entropy = 100 - (PasswordEntropy.calculate(password));
+	if(entropy <= 1) entropy = 0;
+
+	document.getElementById('pass-length').innerText = length;
+	document.getElementById("entropy").style.width = entropy + "%";
+	document.getElementById('generated-password').value = password;
+}
+
+function togglePasswordHider(){
+	try{
+		let pg = document.getElementById('generated-password');
+		let ph = document.getElementById('password-hider');
+		if(pg.type === 'password'){
+			pg.type = 'text';
+			ph.innerHTML = "<svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5 secondaryColor' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><line x1='3' y1='3' x2='21' y2='21'></line><path d='M10.584 10.587a2 2 0 0 0 2.828 2.83'></path><path d='M9.363 5.365a9.466 9.466 0 0 1 2.637 -.365c4 0 7.333 2.333 10 7c-.778 1.361 -1.612 2.524 -2.503 3.488m-2.14 1.861c-1.631 1.1 -3.415 1.651 -5.357 1.651c-4 0 -7.333 -2.333 -10 -7c1.369 -2.395 2.913 -4.175 4.632 -5.341'></path></svg>";
+		}else{
+			pg.type = 'password';
+			ph.innerHTML = "<svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5 secondaryColor' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><circle cx='12' cy='12' r='2'></circle><path d='M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7'></path></svg>";
+		}
+	}catch{}
 }
 
 function changeDialog(style, text) {
@@ -268,7 +288,7 @@ function changeDialog(style, text) {
 
 			document.getElementById('dialog-title').innerText = lang["password_generator"];
 
-			document.getElementById('dialog-text').innerHTML = "<div class='flex items-center justify-between'><span class='flex-grow flex flex-col'><span class='tertiaryColor text-sm font-medium'>A-Z</span></span><button type='button' id='btn-upper' class='flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none' role='switch' aria-checked='false'><span aria-hidden='true' class='secondaryBackgroundColor pointer-events-none absolute w-full h-full rounded-md'></span><span id='btn-upper-color' aria-hidden='true' class='primaryBackgroundColor pointer-events-none absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200'></span><span id='btn-upper-animation' aria-hidden='true' class='secondaryBackgroundColor translate-x-0 pointer-events-none absolute left-0 inline-block h-5 w-5 border border-gray-200 rounded-full shadow transform ring-0 transition-transform ease-in-out duration-200'></span></button></div><div class='flex items-center justify-between'><span class='flex-grow flex flex-col'><span class='tertiaryColor text-sm font-medium'>0-9</span></span><button type='button' id='btn-numbers' class='flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none' role='switch' aria-checked='false'><span aria-hidden='true' class='secondaryBackgroundColor pointer-events-none absolute w-full h-full rounded-md'></span><span id='btn-numbers-color' aria-hidden='true' class='primaryBackgroundColor pointer-events-none absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200'></span><span id='btn-numbers-animation' aria-hidden='true' class='secondaryBackgroundColor translate-x-0 pointer-events-none absolute left-0 inline-block h-5 w-5 border border-gray-200 rounded-full shadow transform ring-0 transition-transform ease-in-out duration-200'></span></button></div><div class='flex items-center justify-between'><span class='flex-grow flex flex-col'><span class='tertiaryColor text-sm font-medium'>!@#$%?&*</span></span><button type='button' id='btn-special' class='flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none' role='switch' aria-checked='false'><span aria-hidden='true' class='secondaryBackgroundColor pointer-events-none absolute w-full h-full rounded-md'></span><span id='btn-special-color' aria-hidden='true' class='primaryBackgroundColor pointer-events-none absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200'></span><span id='btn-special-animation' aria-hidden='true' class='secondaryBackgroundColor translate-x-0 pointer-events-none absolute left-0 inline-block h-5 w-5 border border-gray-200 rounded-full shadow transform ring-0 transition-transform ease-in-out duration-200'></span></button></div><div class='flex items-center justify-between'><span class='flex-grow flex flex-col'><span class='tertiaryColor text-sm font-medium'>" + lang["length"] + "</span></span><input type='range' id='btn-length' min='8' max='30' value='15' class='primaryBackgroundColor flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none'></div><div class='flex items-center justify-between'><span class='secondaryColor flex-grow flex flex-col' id='generated-password'></span></div>";
+			document.getElementById('dialog-text').innerHTML = "<div class='mt-2'><label for='password' class='sr-only'>Password</label><div class='flex rounded-md shadow-sm'><div class='relative flex flex-grow items-stretch focus-within:z-10'><div class='pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3'><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5 secondaryColor' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><circle cx='8' cy='15' r='4'></circle><line x1='10.85' y1='12.15' x2='19' y2='4'></line><line x1='18' y1='5' x2='20' y2='7'></line><line x1='15' y1='8' x2='17' y2='10'></line></svg></div><input id='generated-password' name='password' type='password' autocomplete='new-password' required class='tertiaryBackgroundColor tertiaryColor primaryBorderColor appearance-none rounded-tl-md block w-full pl-10 px-3 py-2 border focus:outline-none sm:text-sm' placeholder='Password'></div><button id='password-hider' type='button' class='relative -ml-px inline-flex items-center space-x-2 border tertiaryBackgroundColor tertiaryColor primaryBorderColor rounded-tr-md px-4 py-2 text-sm font-medium focus:outline-none'><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5 secondaryColor' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><circle cx='12' cy='12' r='2'></circle><path d='M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7'></path> </svg></button></div></div><div class='bg-gradient-to-r from-red-500 to-green-500 primaryBorderColor appearance-none rounded-b-md relative block w-full border overflow-hidden'><div id='entropy' class='h-1.5 tertiaryBackgroundColor tertiaryColor float-right' style='width: 100%'></div></div><div class='mt-2'><div class='flex items-center justify-between'><span class='text-sm font-medium'>" + lang["length"] + "</span><span id='pass-length' class='text-sm font-medium'>15</span></div><input type='range' id='btn-length' min='8' max='30' value='15' class='primaryBackgroundColor rounded-full h-5 w-full cursor-pointer focus:outline-none'></div><div class='flex items-center justify-between text-left'><span class='flex-grow flex flex-col'><span class='text-sm font-medium'>A-Z</span></span><button type='button' id='btn-upper' class='flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none' role='switch' aria-checked='false'><span aria-hidden='true' class='secondaryBackgroundColor pointer-events-none absolute w-full h-full rounded-md'></span><span id='btn-upper-color' aria-hidden='true' class='primaryBackgroundColor pointer-events-none absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200'></span><span id='btn-upper-animation' aria-hidden='true' class='secondaryBackgroundColor translate-x-0 pointer-events-none absolute left-0 inline-block h-5 w-5 border border-gray-200 rounded-full shadow transform ring-0 transition-transform ease-in-out duration-200'></span></button></div><div class='flex items-center justify-between text-left'><span class='flex-grow flex flex-col'><span class='text-sm font-medium'>0-9</span></span><button type='button' id='btn-numbers' class='flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none' role='switch' aria-checked='false'><span aria-hidden='true' class='secondaryBackgroundColor pointer-events-none absolute w-full h-full rounded-md'></span><span id='btn-numbers-color' aria-hidden='true' class='primaryBackgroundColor pointer-events-none absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200'></span><span id='btn-numbers-animation' aria-hidden='true' class='secondaryBackgroundColor translate-x-0 pointer-events-none absolute left-0 inline-block h-5 w-5 border border-gray-200 rounded-full shadow transform ring-0 transition-transform ease-in-out duration-200'></span></button></div><div class='flex items-center justify-between text-left'><span class='flex-grow flex flex-col'><span class='text-sm font-medium'>!@#$%?&*</span></span><button type='button' id='btn-special' class='flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none' role='switch' aria-checked='false'><span aria-hidden='true' class='secondaryBackgroundColor pointer-events-none absolute w-full h-full rounded-md'></span><span id='btn-special-color' aria-hidden='true' class='primaryBackgroundColor pointer-events-none absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200'></span><span id='btn-special-animation' aria-hidden='true' class='secondaryBackgroundColor translate-x-0 pointer-events-none absolute left-0 inline-block h-5 w-5 border border-gray-200 rounded-full shadow transform ring-0 transition-transform ease-in-out duration-200'></span></button></div>";
 
 			document.getElementById('dialog-button').className = "primaryButton inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium focus:outline-none sm:w-auto sm:text-sm";
 
@@ -295,17 +315,17 @@ function changeDialog(style, text) {
 
 			if (pg_data[0] == null) {
 				document.getElementById('dialog-button').innerText = lang["copy"];
-				document.getElementById('dialog-button').onclick = () => copyToClipboard(document.getElementById('generated-password').innerText);
+				document.getElementById('dialog-button').onclick = () => copyToClipboard(document.getElementById('generated-password').value);
 			} else if (pg_data[0] == "-1") {
 				document.getElementById('dialog-button').innerText = lang["use"];
 				document.getElementById('dialog-button').onclick = () => {
-					text = pg_data[0] + ";;;" + pg_data[1] + ";;;" + pg_data[2] + ";;;" + document.getElementById('generated-password').innerText + ";;;" + pg_data[4];
+					text = pg_data[0] + ";;;" + pg_data[1] + ";;;" + pg_data[2] + ";;;" + document.getElementById('generated-password').value + ";;;" + pg_data[4];
 					changeDialog(0, text);
 				}
 			} else {
 				document.getElementById('dialog-button').innerText = lang["use"];
 				document.getElementById('dialog-button').onclick = () => {
-					text = pg_data[0] + ";;;" + pg_data[1] + ";;;" + pg_data[2] + ";;;" + document.getElementById('generated-password').innerText + ";;;" + pg_data[4];
+					text = pg_data[0] + ";;;" + pg_data[1] + ";;;" + pg_data[2] + ";;;" + document.getElementById('generated-password').value + ";;;" + pg_data[4];
 					changeDialog(4, text);
 				}
 			}
@@ -315,6 +335,8 @@ function changeDialog(style, text) {
 			animateButton('btn-upper', btn_upper_enabled);
 			animateButton('btn-numbers', btn_numbers_enabled);
 			animateButton('btn-special', btn_special_enabled);
+
+			document.getElementById('password-hider').onclick = () => togglePasswordHider();
 			break;
 		case 6:
 			//Delete password dialog
