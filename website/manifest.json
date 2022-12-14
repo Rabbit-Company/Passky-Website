@@ -100,6 +100,10 @@
 			"src": "images/screenshots/8.jpg",
 			"sizes": "1080x2400",
 			"type": "image/jpg"
+		},
+		{
+			"src": "images/logo.svg",
+			"sizes": "any"
 		}
 	],
 	"theme_color": "#0D1117",
@@ -128,5 +132,7 @@
 			"url": "https://f-droid.org/en/packages/com.rabbitcompany.passky",
 			"id": "com.rabbitcompany.passky"
 		}
-	]
+	],
+  "dir": "ltr",
+  "lang": "en"
 }
