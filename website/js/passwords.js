@@ -94,25 +94,25 @@ loadData().then(() => {
 			}else{
 				html_passwords += "<svg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><circle cx='12' cy='12' r='9' /><line x1='3.6' y1='9' x2='20.4' y2='9' /><line x1='3.6' y1='15' x2='20.4' y2='15' /><path d='M11.5 3a17 17 0 0 0 0 18' /><path d='M12.5 3a17 17 0 0 1 0 18' /></svg>";
 			}
-			html_passwords += "</div><div class='ml-4'><div class='tertiaryColor text-sm font-medium max-w-[16rem] sm:max-w-[21rem] md:max-w-[27rem] lg:max-w-[35rem] xl:max-w-[45rem] 2xl:max-w-[45rem] overflow-hidden text-ellipsis'>";
+			html_passwords += "</div><div class='ml-4'><div class='tertiaryColor text-sm font-medium max-w-[14rem] sm:max-w-[16rem] md:max-w-[24rem] lg:max-w-[34rem] xl:max-w-[50rem] 2xl:max-w-[54rem] overflow-hidden text-ellipsis'>";
 			//Url
 			html_passwords += website;
-			html_passwords += "</div><div class='secondaryColor text-sm max-w-[16rem] sm:max-w-[21rem] md:max-w-[27rem] lg:max-w-[35rem] xl:max-w-[45rem] 2xl:max-w-[45rem] overflow-hidden text-ellipsis'>";
+			html_passwords += "</div><div class='secondaryColor text-sm max-w-[14rem] sm:max-w-[16rem] md:max-w-[24rem] lg:max-w-[34rem] xl:max-w-[50rem] 2xl:max-w-[54rem] overflow-hidden text-ellipsis'>";
 			//Username
 			html_passwords += username;
-			html_passwords += "</div></div></div></td><td class='px-1 py-4 whitespace-nowrap'>";
+			html_passwords += "</div></div></div></td><td class='px-1 py-4 w-16 whitespace-nowrap'>";
 			//Copy username
 			html_passwords += "<span id='copy-username-" + id + "' role='button'>";
-			html_passwords += "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><circle cx='12' cy='7' r='4' /><path d='M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2' /></svg></span></td><td class='px-1 py-4 whitespace-nowrap'>";
+			html_passwords += "<svg class='m-auto' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><circle cx='12' cy='7' r='4' /><path d='M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2' /></svg></span></td><td class='px-1 py-4 w-16 whitespace-nowrap'>";
 			//Copy password
 			html_passwords += "<span id='copy-password-" + id + "' role='button'>";
-			html_passwords += "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><circle cx='8' cy='15' r='4' /><line x1='10.85' y1='12.15' x2='19' y2='4' /><line x1='18' y1='5' x2='20' y2='7' /><line x1='15' y1='8' x2='17' y2='10' /></svg></span></td><td class='px-1 py-4 whitespace-nowrap'>";
+			html_passwords += "<svg class='m-auto' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><circle cx='8' cy='15' r='4' /><line x1='10.85' y1='12.15' x2='19' y2='4' /><line x1='18' y1='5' x2='20' y2='7' /><line x1='15' y1='8' x2='17' y2='10' /></svg></span></td><td class='px-1 py-4 w-16 whitespace-nowrap'>";
 			//Edit Password
 			html_passwords += "<span id='edit-password-" + id + "' role='button'>";
-			html_passwords += "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3' /><path d='M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3' /><line x1='16' y1='5' x2='19' y2='8' /></svg></span></td><td class='px-1 py-4 whitespace-nowrap'>";
+			html_passwords += "<svg class='m-auto' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3' /><path d='M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3' /><line x1='16' y1='5' x2='19' y2='8' /></svg></span></td><td class='px-1 py-4 w-16 whitespace-nowrap'>";
 			//Delete Password
 			html_passwords += "<span id='delete-password-" + id + "' role='button'>";
-			html_passwords += "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M19 19h-11l-4 -4a1 1 0 0 1 0 -1.41l10 -10a1 1 0 0 1 1.41 0l5 5a1 1 0 0 1 0 1.41l-9 9' /><line x1='18' y1='12.3' x2='11.7' y2='6' /></svg></span></td></tr>";
+			html_passwords += "<svg class='m-auto' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M19 19h-11l-4 -4a1 1 0 0 1 0 -1.41l10 -10a1 1 0 0 1 1.41 0l5 5a1 1 0 0 1 0 1.41l-9 9' /><line x1='18' y1='12.3' x2='11.7' y2='6' /></svg></span></td></tr>";
 		}
 
 		document.getElementById("table-data").innerHTML = html_passwords;
