@@ -1,4 +1,4 @@
-name: CI to Docker hub 
+name: CI to Docker hub
 
 on:
   push:
@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout 
+      - name: Checkout
         uses: actions/checkout@v3
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
-  
+
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v2
@@ -33,4 +33,4 @@ jobs:
           context: .
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: rabbitcompany/passky-web:latest
+          tags: rabbitcompany/passky-client:latest

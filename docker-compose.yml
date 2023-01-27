@@ -1,8 +1,8 @@
 version: '3'
 services:
-  passky-web:
-    container_name: passky-web
-    image: 'rabbitcompany/passky-web:latest'
+  passky-client:
+    container_name: passky-client
+    image: 'rabbitcompany/passky-client:latest'
     restart: unless-stopped
     ports:
       - 8081:80

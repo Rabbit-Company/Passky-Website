@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <title>Passky</title>
     <link rel="shortcut icon" type="image/png" href="images/logo.png"/>
-    <link rel="apple-touch-icon" href="images/icons/apple-touch-icon.png" />
+		<link rel="apple-touch-icon" href="images/icons/apple-touch-icon.png" />
     <link rel="apple-touch-icon" sizes="57x57" href="images/icons/apple-touch-icon-57x57.png" />
     <link rel="apple-touch-icon" sizes="72x72" href="images/icons/apple-touch-icon-72x72.png" />
     <link rel="apple-touch-icon" sizes="76x76" href="images/icons/apple-touch-icon-76x76.png" />
@@ -98,7 +98,7 @@
 										<line x1="15" y1="8" x2="17" y2="10"></line>
 									</svg>
 								</div>
-								<input id="password" name="password" type="password" autocomplete="current-password" required class="tertiaryBackgroundColor tertiaryColor primaryBorderColor appearance-none rounded-none block w-full pl-10 px-3 py-2 border focus:outline-none focus:z-10 sm:text-sm" placeholder="Password">
+								<input id="password" name="password" type="password" autocomplete="off" required class="tertiaryBackgroundColor tertiaryColor primaryBorderColor appearance-none rounded-none block w-full pl-10 px-3 py-2 border focus:outline-none focus:z-10 sm:text-sm" placeholder="Password">
 							</div>
             </div>
             <div>
@@ -162,7 +162,7 @@
 			</div>
 		</div>
 
-    <script>
+		<script>
       if('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('service-worker.js');
@@ -173,7 +173,6 @@
     <script src="js/default-functions.js"></script>
 		<script src="js/PasswordEntropy.min.js"></script>
     <script src="js/PasskyAPI.js"></script>
-		<script src="js/Argon2idWorker.min.js"></script>
 		<script src="js/Argon2id.min.js"></script>
     <script src="js/login.js"></script>
   </body>
