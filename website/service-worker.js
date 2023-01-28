@@ -1,6 +1,6 @@
 // This is the "Offline copy of assets" service worker
 
-const timestamp = 1674895075;
+const timestamp = 1674926220;
 const CACHE = "pwabuilder-offline";
 
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.5.4/workbox-sw.js');
