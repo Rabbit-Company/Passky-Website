@@ -116,18 +116,18 @@
 			});
 		}
 
-		static createAccount(server, username, password, email){
+		static createAccount(server, username, authPassword, email){
 			return new Promise((resolve, reject) => {
 				if(!Validate.url(server)) return reject(1001);
 				if(!Validate.email(email)) return reject(1007);
 				if(!Validate.username(username)) return reject(1005);
-				if(!Validate.password(password)) return reject(1006);
+				if(!Validate.password(authPassword)) return reject(1006);
 
 				let data = new FormData();
 				data.append("email", email);
 
 				let headers = new Headers();
-				headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
+				headers.append('Authorization', 'Basic ' + btoa(username + ":" + authPassword));
 
 				fetch(server + "?action=createAccount", {
 					method: "POST",
@@ -149,18 +149,18 @@
 			});
 		}
 
-		static getToken(server, username, password, otp = "", encrypted = true){
+		static getToken(server, username, authPassword, otp = ""){
 			return new Promise((resolve, reject) => {
 				if(!Validate.url(server)) return reject(1001);
 				if(!Validate.username(username)) return reject(1005);
-				if(!Validate.password(password)) return reject(1006);
+				if(!Validate.password(authPassword)) return reject(1006);
 				if(!Validate.otp(otp)) return reject(1002);
 
 				let data = new FormData();
 				data.append("otp", otp);
 
 				let headers = new Headers();
-				headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
+				headers.append('Authorization', 'Basic ' + btoa(username + ":" + authPassword));
 
 				fetch(server + "?action=getToken", {
 					method: "POST",
@@ -172,14 +172,6 @@
 				}).then((response) => {
 					try{
 						let data = JSON.parse(response);
-						if(!encrypted && data.passwords != null){
-							for(let i = 0; i < data.passwords.length; i++){
-								data.passwords[i].website = XChaCha20.decrypt(data.passwords[i].website, password);
-								data.passwords[i].username = XChaCha20.decrypt(data.passwords[i].username, password);
-								data.passwords[i].password = XChaCha20.decrypt(data.passwords[i].password, password);
-								data.passwords[i].message = XChaCha20.decrypt(data.passwords[i].message, password);
-							}
-						}
 						return resolve(data);
 					}catch(error){
 						return reject(1000);
