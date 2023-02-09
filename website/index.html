@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#0D1117">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src localhost:* https:; style-src localhost:* https:; img-src localhost:* https:; worker-src localhost:* https:; connect-src localhost:* https://*; child-src 'none';">
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src localhost:* https: 'sha512-ZqbJmdmwWR4o2lepp6GIKjWjRZ5mcwgvvSGgF0RMPXhO1kBcuxo/QX6bDWHAPaUHk1sWWK4zqKVcmgBiAwWXIQ=='; style-src localhost:* https: 'sha512-nyP1EezNW+Mowv0Liyxin+3I9QuHe2hUbyfIX2DwKqr4Bw7qVc15QSwT87iCRWtJC9h6m0zbckMesgtRIQLkEQ=='; img-src localhost:* https:; worker-src localhost:* https:; connect-src localhost:* https://*; child-src 'none';">
     <title>Passky</title>
     <link rel="shortcut icon" type="image/png" href="images/logo.png">
 		<link rel="apple-touch-icon" href="images/icons/apple-touch-icon.png">
@@ -24,6 +24,7 @@
     <link rel="manifest" href="manifest.json">
     <script src="js/lang.js" integrity="sha512-7bNjXdGNbaPPHB3PxuTIqLGAoYM41vI9yqZpSorXJZSltIuNTaEW7V4xPphaQcI5eC7laKuJMy/Jh6kQ5fLfkA==" crossorigin="anonymous"></script>
     <script src="js/header.js" integrity="sha512-5TRYIoT5pOAZwOwj55Ys4pd1DtMnui29cBdOubPR0r7o+30YLQp0GhQEX6i8at6ZRZfZ9EIb46Z4EcGxIqTcbw==" crossorigin="anonymous"></script>
+		<style>#passky-server{ display: none; }</style>
   </head>
 
   <body class="primaryBackgroundColor">
@@ -54,7 +55,7 @@
 										<option value="https://eu.passky.org" selected="">Europe</option>
 										<option value="https://us.passky.org">America</option>
 									</select>
-									<input id="passky-server" name="server" type="text" autocomplete="server" style="display: none;" class="tertiaryBackgroundColor tertiaryColor primaryBorderColor appearance-none block w-full pl-10 px-3 py-2 border rounded-tl-md focus:outline-none sm:text-sm" placeholder="Server">
+									<input id="passky-server" name="server" type="text" autocomplete="server" class="tertiaryBackgroundColor tertiaryColor primaryBorderColor appearance-none block w-full pl-10 px-3 py-2 border rounded-tl-md focus:outline-none sm:text-sm" placeholder="Server">
 								</div>
 								<button id="server-picker" type="button" class="relative -ml-px inline-flex items-center space-x-2 border rounded-tr-md tertiaryBackgroundColor tertiaryColor primaryBorderColor px-4 py-2 text-sm font-medium focus:outline-none">
 									<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 secondaryColor" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
