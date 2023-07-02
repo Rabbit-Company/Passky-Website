@@ -64,6 +64,8 @@
 	"disable": "Désactiver",
 	"remove": "Retirer",
 	"delete": "Supprimer",
+	"delete_checked": "Supprimer la sélection",
+	"delete_checked_password": "Supprimer les mots de passe sélectionnés",
 	"import": "Importer",
 	"importing": "Importation",
 	"importing_passwords": "Importation de {amount} mots de passe...",

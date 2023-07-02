@@ -123,8 +123,8 @@ function refreshPasswords(){
 		}else{
 			writeData('passwords', '{}');
 		}
-
-		location.assign('passwords.html');
+		let page = (parms.get("page") != null && IsNumeric(parms.get("page")) && parseFloat(parms.get("page")) >= 1) ? parseFloat(parms.get("page")) : 1;
+		location.assign('passwords.html?page='+page);
 	}).catch();
 
 }
