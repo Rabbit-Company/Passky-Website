@@ -1,6 +1,8 @@
 loadData().then(() => {
 	startAuthenticator();
 
+	var selectMode = false;
+
 	document.getElementById("passwords-link").innerText = lang["passwords"];
 	document.getElementById("import-export-link").innerText = lang["import_export"];
 	document.getElementById("settings-link").innerText = lang["settings"];
@@ -89,7 +91,7 @@ loadData().then(() => {
 			const website = XChaCha20.decrypt(passwords[i].website, decryptPassword(readData('password')));
 			const username = XChaCha20.decrypt(passwords[i].username, decryptPassword(readData('password')));
 
-			html_passwords += "<tr class='passwordsBorderColor'><td class='px-8 py-4 max-w-xs whitespace-nowrap overflow-hidden'><div class='flex items-center'><div class='flex-shrink-0 h-10 w-10'>";
+			html_passwords += "<tr class='passwordsBorderColor triggerSelectPassword' id='password-container-" + id + "' data-sel=''><td class='px-8 py-4 max-w-xs whitespace-nowrap overflow-hidden'><div class='flex items-center'><div class='flex-shrink-0 h-10 w-10'>";
 			//Icon
 			if(websiteIcons == "true"){
 				html_passwords += "<img id='icon-" + id + "' class='h-10 w-10 rounded-full cursor-pointer' loading='lazy' src='https://www.google.com/s2/favicons?domain=" + website + "' alt=''>";
@@ -114,12 +116,9 @@ loadData().then(() => {
 			html_passwords += "<svg class='m-auto' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3' /><path d='M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3' /><line x1='16' y1='5' x2='19' y2='8' /></svg></span></td><td class='px-1 py-4 w-16 whitespace-nowrap'>";
 			//Delete Password
 			html_passwords += "<span id='delete-password-" + id + "' role='button'>";
-			html_passwords += "<svg class='m-auto' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M19 19h-11l-4 -4a1 1 0 0 1 0 -1.41l10 -10a1 1 0 0 1 1.41 0l5 5a1 1 0 0 1 0 1.41l-9 9' /><line x1='18' y1='12.3' x2='11.7' y2='6' /></svg></span></td><td class='px-1 py-4 w-16 whitespace-nowrap'>";
-			//Check Password
-			html_passwords += "<span id='check-password-" + id + "' role='checkbox'>";
-			html_passwords += "<input type='checkbox' class='w-4 h-4 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600' id='check-password-" + id + "' name='check-password' value='" + id + "' /></span></td></tr>";
+			html_passwords += "<svg class='m-auto' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M19 19h-11l-4 -4a1 1 0 0 1 0 -1.41l10 -10a1 1 0 0 1 1.41 0l5 5a1 1 0 0 1 0 1.41l-9 9' /><line x1='18' y1='12.3' x2='11.7' y2='6' /></svg></span></td></tr>";
 		}
-		html_passwords += "<tr class='passwordsBorderColor'><td class='px-1 py-4 w-16 whitespace-nowrap' colspan='6'>";
+		html_passwords += "<tr class='passwordsBorderColor' id='delete-checked-container'><td class='px-1 py-4 w-16 whitespace-nowrap' colspan='6'>";
 		html_passwords += "<button id='delete-checked' type='button' class='primaryButton relative inline-flex items-center px-2 py-2 border border-transparent shadow-sm text-sm font-medium rounded focus:outline-none float-right'>" + lang["delete_checked"] + "</button></td></tr>";
 
 		document.getElementById("table-data").innerHTML = html_passwords;
@@ -162,13 +161,40 @@ loadData().then(() => {
 				changeDialog(6, id);
 				show('dialog');
 			});
+
+			let passwordContainers = document.querySelectorAll("tr.triggerSelectPassword");
+			if (passwordContainers.length) {
+				for (i = 0; i < passwordContainers.length; i++) {
+					passwordContainers[i].addEventListener("mousedown", () => {
+						if (!selectMode) {
+							timerSelect = setTimeout(() => {
+								selectMode = true;
+								timerSelect = null;
+							}, 2000);
+						}
+					});
+					passwordContainers[i].addEventListener("mouseup", (event) => {
+						if (timerSelect) {
+							clearTimeout(timerSelect);
+							timerSelect = null;
+						} else {
+							event.currentTarget.dataset.sel = (event.currentTarget.dataset.sel == "")?"t":"";
+							if (document.querySelectorAll('tr.triggerSelectPassword[data-sel="t"]').length == 0) {
+								selectMode = false;
+								document.getElementById("delete-checked-container").style.display = "none"
+							} else
+								document.getElementById("delete-checked-container").style.display = "table-row"
+						}
+					});
+				}
+			}
 		}
 	}
 	let end = new Date().getTime();
 	document.getElementById("stats-loading-time").innerText = (end - start) + " ms";
 
 	document.getElementById("delete-checked").addEventListener("click",() => {
-		changeDialog(9,JSON.stringify(Array.from(document.querySelectorAll("input[name='check-password']:checked"),e => e.value)));
+		changeDialog(9,JSON.stringify(Array.from(document.querySelectorAll('tr.triggerSelectPassword[data-sel="t"]'),e => e.id.substring(e.id.lastIndexOf("-")+1))));
 		show('dialog');
 	});
 });
