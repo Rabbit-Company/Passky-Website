@@ -22,8 +22,6 @@ loadData().then(() => {
 
 	document.getElementById("dialog-button-cancel").innerText = lang["cancel"];
 
-	document.getElementById("")
-
 	if (readData('autoSearch') != "false") {
 		try {
 			chrome.tabs.query({
@@ -170,7 +168,7 @@ loadData().then(() => {
 							timerSelect = setTimeout(() => {
 								selectMode = true;
 								timerSelect = null;
-							}, 2000);
+							}, 500);
 						}
 					});
 					passwordContainers[i].addEventListener("mouseup", (event) => {
