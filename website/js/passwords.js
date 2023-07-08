@@ -161,34 +161,33 @@ loadData().then(() => {
 				changeDialog(6, id);
 				show('dialog');
 			});
-
-			let passwordContainers = document.querySelectorAll("tr.triggerSelectPassword");
-			if (passwordContainers.length) {
-				for (i = 0; i < passwordContainers.length; i++) {
-					passwordContainers[i].addEventListener("mousedown", (event) => {
-						if (!selectMode) {
-							event.currentTarget.classList.add("timer");
-							timerSelect = setTimeout(() => {
-								selectMode = true;
-								timerSelect = null;
-							}, 2000);
-						}
-					});
-					passwordContainers[i].addEventListener("mouseup", (event) => {
-						event.currentTarget.classList.remove("timer")
-						if (timerSelect) {
-							clearTimeout(timerSelect);
+		}
+		let passwordContainers = document.querySelectorAll("tr.triggerSelectPassword");
+		if (passwordContainers.length) {
+			for (i = 0; i < passwordContainers.length; i++) {
+				passwordContainers[i].addEventListener("mousedown", (event) => {
+					if (!selectMode) {
+						event.currentTarget.classList.add("timer");
+						timerSelect = setTimeout(() => {
+							selectMode = true;
 							timerSelect = null;
-						} else {
-							event.currentTarget.dataset.sel = (event.currentTarget.dataset.sel == "")?"t":"";
-							if (document.querySelectorAll('tr.triggerSelectPassword[data-sel="t"]').length == 0) {
-								selectMode = false;
-								document.getElementById("delete-checked-container").style.display = "none"
-							} else
-								document.getElementById("delete-checked-container").style.display = "table-row"
-						}
-					});
-				}
+						}, 2000);
+					}
+				});
+				passwordContainers[i].addEventListener("mouseup", (event) => {
+					event.currentTarget.classList.remove("timer")
+					if (timerSelect) {
+						clearTimeout(timerSelect);
+						timerSelect = null;
+					} else {
+						event.currentTarget.dataset.sel = (event.currentTarget.dataset.sel == "")?"t":"";
+						if (document.querySelectorAll('tr.triggerSelectPassword[data-sel="t"]').length == 0) {
+							selectMode = false;
+							document.getElementById("delete-checked-container").style.display = "none"
+						} else
+							document.getElementById("delete-checked-container").style.display = "table-row"
+					}
+				});
 			}
 		}
 	}
