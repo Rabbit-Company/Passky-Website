@@ -165,8 +165,9 @@ loadData().then(() => {
 			let passwordContainers = document.querySelectorAll("tr.triggerSelectPassword");
 			if (passwordContainers.length) {
 				for (i = 0; i < passwordContainers.length; i++) {
-					passwordContainers[i].addEventListener("mousedown", () => {
+					passwordContainers[i].addEventListener("mousedown", (event) => {
 						if (!selectMode) {
+							event.currentTarget.classList.add("timer");
 							timerSelect = setTimeout(() => {
 								selectMode = true;
 								timerSelect = null;
@@ -174,6 +175,7 @@ loadData().then(() => {
 						}
 					});
 					passwordContainers[i].addEventListener("mouseup", (event) => {
+						event.currentTarget.classList.remove("timer")
 						if (timerSelect) {
 							clearTimeout(timerSelect);
 							timerSelect = null;
