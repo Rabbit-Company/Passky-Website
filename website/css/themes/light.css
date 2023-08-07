@@ -192,6 +192,11 @@ tr.triggerSelectPassword[data-sel="t"] {
 	background-color: #f2f2f2;
 }
 
+tr.triggerSelectPassword.timer {
+	background-color:#f2f2f2;
+	transition: background-color 0.5s ease;
+}
+
 /*
   Import and Export buttons
 */
