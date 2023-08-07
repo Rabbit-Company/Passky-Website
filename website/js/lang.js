@@ -64,8 +64,6 @@ var lang = {
 	"disable": "Disable",
 	"remove": "Remove",
 	"delete": "Delete",
-	"delete_checked": "Delete checked",
-	"delete_checked_password": "Delete checked passwords",
 	"import": "Import",
 	"importing": "Importing",
 	"importing_passwords": "Importing {amount} passwords...",

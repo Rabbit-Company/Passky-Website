@@ -117,7 +117,7 @@ loadData().then(() => {
 			html_passwords += "<svg class='m-auto' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M19 19h-11l-4 -4a1 1 0 0 1 0 -1.41l10 -10a1 1 0 0 1 1.41 0l5 5a1 1 0 0 1 0 1.41l-9 9' /><line x1='18' y1='12.3' x2='11.7' y2='6' /></svg></span></td></tr>";
 		}
 		html_passwords += "<tr class='passwordsBorderColor' id='delete-checked-container'><td class='px-1 py-4 w-16 whitespace-nowrap' colspan='6'>";
-		html_passwords += "<button id='delete-checked' type='button' class='primaryButton relative inline-flex items-center px-2 py-2 border border-transparent shadow-sm text-sm font-medium rounded focus:outline-none float-right'>" + lang["delete_checked"] + "</button></td></tr>";
+		html_passwords += "<button id='delete-checked' type='button' class='primaryButton relative inline-flex items-center px-2 py-2 border border-transparent shadow-sm text-sm font-medium rounded focus:outline-none float-right'>" + lang["delete_passwords"] + "</button></td></tr>";
 
 		document.getElementById("table-data").innerHTML = html_passwords;
 
@@ -444,8 +444,8 @@ function changeDialog(style, text) {
 			document.getElementById('dialog-icon').className = "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10";
 			document.getElementById('dialog-icon').innerHTML = "<svg class='h-6 w-6 text-red-600' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' aria-hidden='true'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z' /></svg>";
 
-			document.getElementById('dialog-title').innerText = lang["delete_checked_password"];
-			document.getElementById('dialog-text').innerText = lang["delete_password_confirmation"];
+			document.getElementById('dialog-title').innerText = lang["delete_passwords"];
+			document.getElementById('dialog-text').innerText = lang["delete_passwords_confirmation"];
 
 			document.getElementById('dialog-button-cancel').style.display = 'initial';
 
