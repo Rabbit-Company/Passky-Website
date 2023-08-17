@@ -18,7 +18,7 @@
 
 Passky is a simple, modern, lightweight, open source and secure password manager.
 
-[![Passky - Password manager](https://img.youtube.com/vi/yrk6cHkgVA8/0.jpg)](https://www.youtube.com/watch?v=yrk6cHkgVA8 "Click to watch!")
+[![Passky - Password manager](https://github.com/MaximFiedler/Passky-Website/blob/main/passkey_youtube_video.png)](https://www.youtube.com/watch?v=yrk6cHkgVA8 "Click to watch!")
 
 ## How Much Does it Cost?
 
