@@ -191,6 +191,15 @@ input[type="checkbox"] {
 	border-color: #000000 !important;
 }
 
+tr.triggerSelectPassword[data-sel="t"] {
+	background-color: #36372f;
+}
+
+tr.triggerSelectPassword.timer {
+	background-color:#36372f;
+	transition: background-color 0.5s ease;
+}
+
 /*
 	Import and Export buttons
 */
